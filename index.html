@@ -442,6 +442,236 @@ input:focus,textarea:focus,select:focus{outline:2px solid #e8d3b6;border-color:#
   .pnote{font-size:10px;color:#444}
   .sign{margin-top:36px}
 }
+
+/* ═════════ v3 ═════════ */
+/* মাথার অগ্রিম বোতাম */
+.hbtn{display:inline-flex;align-items:center;gap:5px;height:36px;padding:0 12px 0 10px;border-radius:999px;background:var(--brand-soft);color:#6b4320;font-weight:600;font-size:14px;flex:none}
+.hbtn:hover{background:#ecdcc6}
+@media(max-width:360px){.hbtn span{display:none}.hbtn{padding:0 9px}}
+
+/* ছবিসহ গোল নাম */
+.av.ph{background:#eee}
+.av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+button.av{cursor:pointer}
+.av.xs{width:24px;height:24px;font-size:11px;margin-right:6px}
+.av.xs i{width:8px;height:8px;border-width:1.5px}
+.av.lg{width:46px;height:46px;font-size:18px}
+.av.xl{width:84px;height:84px;font-size:32px}
+.av.xl i{width:18px;height:18px;border-width:3px}
+
+/* চাপা যায় এমন টাইল */
+.stat.tap{text-align:left;width:100%;border:2px solid transparent;transition:border-color .12s,background .12s}
+.stat.tap .stat-l{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.stat.tap .stat-l svg{opacity:.45}
+.stat.tap:hover{background:#fffdf9}
+.stat.k-ok .stat-v{color:var(--ok)}
+.stat.k-warn .stat-v{color:var(--warn)}
+.stat.k-bad .stat-v{color:var(--bad)}
+.stat.k-info .stat-v{color:var(--info)}
+.stat.on.k-ok{border-color:var(--ok);background:var(--ok-soft)}
+.stat.on.k-warn{border-color:#c99a4a;background:var(--warn-soft)}
+.stat.on.k-bad{border-color:#c97a66;background:var(--bad-soft)}
+.stat.on.k-info{border-color:#7f9cc4;background:var(--info-soft)}
+.stat.on .stat-l svg{opacity:.8}
+.list-h{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;margin:0 4px 8px;font-size:14px}
+.list-h.on b{color:var(--brand)}
+.list-h .btn{margin-left:auto}
+
+/* তালিকার সারিতে আলাদা কল বোতাম */
+.list .row.act{padding:0;gap:0}
+.row-tap{display:flex;align-items:center;gap:12px;flex:1;min-width:0;padding:11px 14px;text-align:left}
+.list .row.act:hover{background:#fcfaf6}
+.icon-btn.call{margin-right:8px;color:var(--ok);background:var(--ok-soft);border-radius:50%}
+.list .row.act .row-tap:active{background:#faf6ef}
+@media(max-width:380px){.row-tap{padding:10px 12px;gap:10px}}
+
+/* টাইমলাইনে নামের নিচে সময় */
+.tl-nm{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.tl-sub{font-size:11px;color:#a0958a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.tl-row{padding:3px 0}
+.tl-rv{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
+.tl-rv small{font-size:10.5px;color:#a0958a;white-space:nowrap}
+
+/* চার্টের সহজ ব্যাখ্যা */
+.say{display:flex;gap:8px;align-items:flex-start;background:#fbf6ec;border-radius:10px;padding:8px 10px;margin:2px 0 10px;font-size:13.5px;color:#5a4630;line-height:1.55}
+.say svg{flex:none;margin-top:2px;color:#b07f1a}
+.vl.faded{fill:var(--muted);font-weight:500}
+
+/* এক নজরে */
+.insights{padding:12px 14px 6px}
+.ins-h{display:flex;align-items:center;gap:8px;margin-bottom:4px;color:#8a5a2b}
+.ins-h b{color:var(--ink);font-size:15px}
+.ins{display:flex;align-items:flex-start;gap:10px;width:100%;padding:8px 2px;border-top:1px solid var(--line);font-size:14px;text-align:left;line-height:1.5}
+.ins:first-of-type{border-top:0}
+.ins>svg:first-child{flex:none;margin-top:3px;color:var(--muted)}
+.ins span{flex:1}
+.ins>svg:last-child{flex:none;margin-top:3px;color:#c9bdb0}
+button.ins:hover{background:#fcfaf6}
+
+/* বিভাগের মোট মজুরি */
+.stats.herorow{grid-template-columns:1.7fr repeat(4,1fr)}
+.stat.hero{background:linear-gradient(135deg,#fff 0%,#fbf4ea 100%);box-shadow:inset 3px 0 0 var(--brand),var(--shadow)}
+.stat.hero .stat-v{font-size:30px;color:#5b3a1b}
+@media(max-width:900px){.stats.herorow{grid-template-columns:repeat(2,1fr)}.stats.herorow .stat.hero{grid-column:1/-1}}
+
+/* খোঁজা */
+.search{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #ddd3c6;border-radius:12px;padding:0 12px;margin-bottom:12px;color:var(--muted)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:none;padding:11px 0;font-size:16px;color:var(--ink)}
+.search:focus-within{border-color:#c9a77c;box-shadow:0 0 0 2px #f2e3cc}
+
+/* অগ্রিম */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px;margin:6px 0 4px}
+.ptile{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px 9px;background:var(--card);border:1px solid var(--line);border-radius:12px;text-align:center;min-width:0}
+.ptile:hover,.ptile:active{border-color:#c9a77c;background:#fffaf2}
+.ptile b{font-size:14px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ptile small{font-size:11px;color:var(--muted);line-height:1.3}
+.sel-w{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.sel-w b{display:block;font-size:16px}
+.sel-w small{color:var(--muted);font-size:12.5px}
+.advf{display:flex;flex-direction:column;gap:10px}
+.adv-info{background:var(--card);border-radius:12px;padding:9px 12px;font-size:14px;line-height:1.7}
+.amt-row{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #d8c9b4;border-radius:14px;padding:4px 14px}
+.amt-row:focus-within{border-color:var(--brand)}
+.amt-row .cur{font-size:24px;font-weight:700;color:var(--brand)}
+.amt-row .amt{flex:1;min-width:0;border:0;outline:0;background:none;font-size:26px;font-weight:700;padding:8px 0}
+.pick.chips button{min-height:36px;padding:5px 12px}
+.btn.block{width:100%;min-height:50px;font-size:16px}
+.adv-list .row{padding:9px 12px}
+.adv-list .row b{white-space:nowrap}
+.adv-btn{margin-top:10px}
+
+/* কর্মীর পাতা */
+.pf-head{display:flex;gap:16px;align-items:center;margin:2px 0 12px}
+.pf-photo{position:relative;flex:none}
+.pf-cam{position:absolute;right:-4px;bottom:-2px;width:32px;height:32px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.pf-info{min-width:0;display:flex;flex-direction:column;gap:2px}
+.pf-name{font-size:20px;font-weight:700}
+.pf-name small{font-size:13px;font-weight:400;color:var(--muted)}
+.pf-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.pf-cols{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:4px}
+.pf-cols>.card{margin-bottom:0}
+@media(min-width:700px){.pf-cols{grid-template-columns:1fr 1fr}}
+.docs-h{display:flex;align-items:center;gap:8px;margin-bottom:8px;color:#8a5a2b}
+.docs-h b{color:var(--ink);font-size:15px;flex:1}
+.ph-line{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--line)}
+.ph-line .muted{width:52px;flex:none;font-size:13px}
+.ph-line b{flex:1;font-variant-numeric:tabular-nums;letter-spacing:.3px}
+.ph-line .icon-btn{color:var(--ok)}
+.addr{display:flex;gap:8px;align-items:flex-start;padding:8px 0 2px;font-size:14px}
+.addr svg{flex:none;margin-top:3px;color:var(--muted)}
+.addr small{display:block;font-size:12px;color:var(--muted)}
+
+/* তালা */
+.vault{background:#fbf8f3;border:1px dashed #d8c9b4;border-radius:12px;padding:10px 12px}
+.vault-h{display:flex;align-items:center;gap:8px;margin-bottom:4px;color:#6b4320}
+.vault p{margin:0 0 8px;line-height:1.55}
+.vault-in{padding:8px 0}
+.nid-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0 10px;font-size:14px}
+.nid-row .nid{font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.nid-row .link.sm{margin-left:0}
+.nid-edit{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.nid-edit input{flex:1;min-width:150px;padding:8px 10px;border:1px solid #ddd3c6;border-radius:10px;font-size:16px}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:10px}
+.doc{display:flex;flex-direction:column;gap:4px;background:#fbf8f3;border:1px solid var(--line);border-radius:10px;padding:6px;text-align:center}
+.doc img{width:100%;height:84px;object-fit:cover;border-radius:6px;background:#eee}
+.doc-ph{height:84px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+.doc small{font-size:11.5px;color:var(--ink2)}
+.doc-add{display:flex;flex-wrap:wrap;gap:6px}
+
+/* পুরো পর্দায় ছবি */
+.lbox{position:fixed;inset:0;z-index:80;background:rgba(20,16,12,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 12px 70px;animation:fade .15s}
+.lbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;background:#fff}
+.lbox-top{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 16px;color:#fff}
+.lbox-top small{display:block;font-size:12px;color:#cfc4b6}
+.lbox-top .icon-btn{color:#fff}
+.lbox-top .icon-btn:hover{background:rgba(255,255,255,.12)}
+.lbox-act{position:absolute;bottom:14px;display:flex;gap:10px}
+
+/* তথ্য বদলানো */
+.ed-photo{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.ed-photo-b{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ed-photo-b .fh{flex-basis:100%}
+.ph-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.ph-row select{flex:none;width:92px;padding:9px 6px;border:1px solid #ddd3c6;border-radius:10px;background:#fff;font-size:15px;min-height:44px}
+.ph-row input{flex:1;min-width:0;padding:9px 11px;border:1px solid #ddd3c6;border-radius:10px;background:#fff;font-size:16px;min-height:44px}
+.add-ph{margin-left:0}
+.blockh{display:block;margin:2px 0 4px}
+.field textarea{resize:vertical;min-height:60px}
+.late-t{color:var(--warn);font-weight:600}
+.hbars.stack .hb{grid-template-columns:1fr auto;row-gap:3px;padding:6px 2px}
+.hbars.stack .hb-l{grid-column:1/-1;flex-direction:row;align-items:baseline;gap:8px}
+.hbars.stack .hb-n{white-space:normal}
+.bar-row.in-card{margin:0 0 6px}
+
+/* ═════════ v3.01 ═════════ */
+.late-tag{font-size:11.5px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:6px;padding:0 6px;white-space:nowrap;line-height:1.6}
+.ip{font-family:ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+/* অগ্রিম */
+.wsel{width:100%;padding:10px 11px;border:1px solid #ddd3c6;border-radius:10px;background:#fff;font-size:16px;min-height:46px}
+.adv-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:0 10px;align-items:end}
+.adv-grid .amt-row{padding:0 12px;border-width:1px;border-radius:10px;min-height:46px}
+.adv-grid .amt-row .amt{font-size:22px;padding:6px 0}
+.adv-grid .amt-row .cur{font-size:20px}
+.adv-when{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px;color:var(--ink2);margin:0 0 4px}
+.adv-when svg{color:var(--muted)}
+.advf{display:flex;flex-direction:column;gap:6px;padding-bottom:14px}
+.advf .field{margin-bottom:4px}
+.adv-info{background:var(--bg);border-radius:10px;padding:7px 10px;font-size:13.5px;line-height:1.6}
+.ledger{overflow:hidden}
+.lrow{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid var(--line);font-size:14px}
+.lrow:last-child{border-bottom:0}
+.l-when{width:92px;flex:none;display:flex;flex-direction:column;line-height:1.3}
+.l-when b{font-weight:600;font-size:13.5px}
+.l-when small{font-size:12px;color:var(--muted);white-space:nowrap}
+.l-who{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.35}
+.l-who small{font-size:12.5px;color:var(--muted)}
+.l-amt{white-space:nowrap;font-size:15px}
+.lrow.tot{background:#fbf8f3;font-weight:600}
+.icon-sp{width:32px;flex:none}
+.sec-title.adv-h .btn{font-weight:600}
+/* রেট */
+.rate-box{border:1px solid var(--line);box-shadow:none;margin-bottom:8px}
+.rate-box .pick{margin-bottom:6px}
+.rate-say{font-size:13.5px;color:var(--ink2);line-height:1.65;background:var(--bg);border-radius:10px;padding:8px 10px}
+.rate-hist{margin-bottom:6px}
+.rate-hist .adv-row small,.grid2 .adv-row small{font-weight:600}
+/* তথ্য খোলার সাহায্য */
+.help{margin-top:10px;font-size:13.5px;color:var(--ink2)}
+.help summary{cursor:pointer;font-weight:600;color:var(--brand);padding:4px 0}
+.help ol{margin:6px 0 0;padding-left:20px;line-height:1.75}
+.help code{background:var(--bg);padding:1px 5px;border-radius:5px;font-size:12.5px}
+/* আইডি কার্ড */
+.idc-btn{flex:none;min-height:46px;margin-bottom:12px}
+.bar-row .search{margin-bottom:12px}
+.pickrow{cursor:pointer}
+.pickrow input{width:20px;height:20px;accent-color:var(--brand);flex:none}
+.idc-preview{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:4px 0 12px}
+.idc{width:85.6mm;height:54mm;border-radius:3mm;background:#fff;border:.3mm solid #cdbfae;overflow:hidden;display:flex;flex-direction:column;font-size:2.6mm;color:#2b2622;box-shadow:0 1px 4px rgba(60,40,20,.12);flex:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.idc-top{background:#8a5a2b;color:#fff;padding:2mm 3mm;display:flex;align-items:baseline;justify-content:space-between;gap:2mm}
+.idc-top b{font-size:3.6mm;letter-spacing:.1mm}
+.idc-top small{font-size:2.3mm;opacity:.9}
+.idc-top.thin{padding:1.4mm 3mm}
+.idc-top.thin b{font-size:3mm}
+.idc-body{flex:1;display:flex;gap:3mm;padding:2.5mm 3mm;min-height:0}
+.idc-ph{width:21mm;height:26mm;flex:none;border-radius:1.5mm;overflow:hidden;background:#efe7dc;border:.3mm solid #d8c9b4;display:flex;align-items:center;justify-content:center}
+.idc-ph img{width:100%;height:100%;object-fit:cover}
+.idc-ph span{font-size:10mm;font-weight:700;color:#8a5a2b}
+.idc-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:.6mm}
+.idc-name{font-size:4.2mm;font-weight:700;line-height:1.15}
+.idc-dept{font-size:2.8mm;color:#8a5a2b;font-weight:600;margin-bottom:.8mm}
+.idc-kv{display:flex;gap:1.5mm;font-size:2.6mm;line-height:1.35}
+.idc-kv span{color:#7d7064;flex:none;min-width:12mm}
+.idc-kv b{font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.idc-foot{background:#f3ece2;color:#5b524a;font-size:2.3mm;padding:1.2mm 3mm;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.idc-bk{flex:1;padding:2mm 3mm;display:flex;flex-direction:column;gap:.6mm;min-height:0}
+.idc-bk p{margin:.6mm 0 0;font-size:2.35mm;color:#5b524a;line-height:1.4}
+.idc-sign{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-size:2.3mm;color:#7d7064}
+.idc-sign .sigl{border-top:.25mm solid #7d7064;padding-top:.6mm;min-width:26mm;text-align:center}
+@media print{
+  .print-area.cards{display:block}
+  .idc-pair{display:flex;gap:6mm;margin:0 0 2mm;page-break-inside:avoid;break-inside:avoid}
+  .idc{box-shadow:none;border:.25mm dashed #999}
+}
 </style>
 </head>
 <body>
@@ -776,7 +1006,10 @@ var RH = (function () {
     graceMin: 0,           // দেরির ছাড় (মিনিট)
     single: "full",        // একটাই পাঞ্চ: full | half | zero
     weekEndDay: 4,         // বৃহস্পতিবার বেতন → সপ্তাহ শুক্র–বৃহস্পতি
-    offDay: 5              // শুক্রবার সাপ্তাহিক ছুটি
+    offDay: 5,             // শুক্রবার সাপ্তাহিক ছুটি
+    org: "রূপালী ফার্নিচার", // আইডি কার্ডে প্রতিষ্ঠানের নাম
+    orgAddr: "সিরাজগঞ্জ",     // আইডি কার্ডে ঠিকানা
+    orgPhone: ""            // আইডি কার্ডে ফোন
   };
   var DEPTS = ["ছুতার", "নকশা", "বার্নিশ", "পরিবহন", "অন্যান্য"];
 
@@ -1023,7 +1256,15 @@ var RH = (function () {
     keys.forEach(function (k) { if (k <= dateStr) pick = k; });
     return +rates[pick];
   }
-  function currentRate(worker) { return rateOn(worker, "9999-12-31"); }
+  /* আজ যে রেট চলছে (সামনের তারিখে বাড়ানো রেট এখনো ধরা হয় না) */
+  function currentRate(worker) { return rateOn(worker, today()); }
+  /* রেটের ইতিহাস: [{from, rate, prev, first}] — first = শুরু থেকে */
+  function rateHistory(worker) {
+    var rates = worker && worker.rates;
+    if (!rates) return [];
+    var keys = Object.keys(rates).filter(function (k) { return rates[k] != null && rates[k] !== "" && +rates[k] > 0; }).sort();
+    return keys.map(function (k, i) { return { from: k, rate: +rates[k], prev: i ? +rates[keys[i - 1]] : null, first: i === 0 }; });
+  }
 
   /* ───────── সপ্তাহ ───────── */
   function weekOf(dateStr, s) {
@@ -1126,10 +1367,10 @@ var RH = (function () {
 
   function emptyTot() {
     return { count: 0, hours: 0, liveMin: 0, daysH: 0, present: 0, presentExp: 0, expected: 0, units: 0, att: 0, ot: 0, otMin: 0,
-      late: 0, morningIn: 0, est: 0, early: 0, review: 0, gross: 0, adv: 0, net: 0 };
+      late: 0, morningIn: 0, est: 0, early: 0, review: 0, gross: 0, adv: 0, net: 0, otPay: 0, lateSum: 0, absent: 0 };
   }
   function addTot(t, r) {
-    ["hours", "liveMin", "daysH", "present", "presentExp", "expected", "units", "att", "ot", "otMin", "late", "morningIn", "est", "early", "review", "gross", "adv", "net"]
+    ["hours", "liveMin", "daysH", "present", "presentExp", "expected", "units", "att", "ot", "otMin", "late", "morningIn", "est", "early", "review", "gross", "adv", "net", "otPay", "lateSum", "absent"]
       .forEach(function (k) { t[k] += r[k] || 0; });
     t.count++;
   }
@@ -1145,7 +1386,7 @@ var RH = (function () {
       if (!inPay(w) || !deptMatch(w, dept)) return;
       var row = { pin: pin, name: workerName(w, pin), dept: deptOf(w), w: w, cells: [], hours: 0, liveMin: 0, daysH: 0, present: 0,
         presentExp: 0, expected: 0, units: 0, att: 0, ot: 0, otMin: 0, late: 0, morningIn: 0, inSum: 0, est: 0, early: 0,
-        review: 0, gross: 0, adv: 0, net: 0, rate: rateOn(w, to), rates: [], noRate: false, advList: [] };
+        review: 0, gross: 0, adv: 0, net: 0, otPay: 0, lateSum: 0, absent: 0, rate: rateOn(w, to), rates: [], noRate: false, advList: [] };
       var used = {}, active = false;
       ds.forEach(function (d) {
         var c = cday(ctx, pin, d);
@@ -1161,13 +1402,13 @@ var RH = (function () {
         row.att += c.att; row.ot += c.ot; row.otMin += c.otMin; row.units += c.units;
         if (c.inMin != null && !c.estIn && c.inMin < 12 * 60) {
           row.morningIn++; row.inSum += c.inMin;
-          if (c.lateMin > 0) row.late++;
+          if (c.lateMin > 0) { row.late++; row.lateSum += c.lateMin; }
         }
         if (c.est) row.est++;
         if (c.flags.indexOf("earlyOut") >= 0) row.early++;
         if (c.review) row.review++;
         if (c.units > 0) {
-          if (c.rate == null) row.noRate = true; else { row.gross += c.units * c.rate; used[c.rate] = 1; }
+          if (c.rate == null) row.noRate = true; else { row.gross += c.units * c.rate; row.otPay += c.ot * c.rate; used[c.rate] = 1; }
         }
       });
       row.rates = Object.keys(used).map(Number).sort(function (a, b) { return a - b; });
@@ -1175,6 +1416,8 @@ var RH = (function () {
         if (String(a.pin) === String(pin) && a.d >= from && a.d <= to) { row.adv += +a.amt || 0; row.advList.push(a); }
       });
       row.gross = Math.round(row.gross);
+      row.otPay = Math.round(row.otPay);
+      row.absent = Math.max(0, row.expected - row.presentExp);
       row.net = row.gross - row.adv;
       row.avg = row.daysH ? (row.hours - row.liveMin) / row.daysH : null;
       row.avgIn = row.morningIn ? row.inSum / row.morningIn : null;
@@ -1295,6 +1538,10 @@ var RH = (function () {
     var mg = 0, mgN = 0, wd = {};
     [6, 0, 1, 2, 3, 4, 5].forEach(function (k) { wd[k] = { exp: 0, abs: 0 }; });
     var complete = 0, presentPast = 0;
+    // সহজ ভাগ: সকালে কতটা দেরি, সন্ধ্যায় মাগরিবের তুলনায় কখন গেলেন
+    var arrCats = [["ontime", 0], ["l15", 15], ["l30", 30], ["l60", 60], ["l60p", 1e9]].map(function (x) { return { k: x[0], max: x[1], n: 0 }; });
+    var depCats = ["early", "atM", "after", "night", "nopunch"].map(function (k) { return { k: k, n: 0 }; });
+    var depIdx = { early: 0, atM: 1, after: 2, night: 3, nopunch: 4 };
     ds.forEach(function (d, i) {
       var inf = dinfo(ctx, d);
       if (inf.working) { mg += maghrib(d, ctx.s); mgN++; }
@@ -1305,6 +1552,19 @@ var RH = (function () {
         }
         if (c.status === "present" && !c.estOut && c.outMin != null && c.n >= 2) {
           for (var k = 0; k < dep.length; k++) if (c.outMin >= dep[k].a && c.outMin < dep[k].b) { dep[k].n++; break; }
+        }
+        if (c.inMin != null && !c.estIn && c.inMin < 12 * 60 && c.status !== "manual" ) {
+          var lm = c.lateMin || 0;
+          for (var q = 0; q < arrCats.length; q++) if (lm <= arrCats[q].max) { arrCats[q].n++; break; }
+        }
+        if (d < ctx.today && c.att > 0 && c.status !== "manual") {
+          var dk;
+          if (c.estOut || c.status === "single" || c.outMin == null) dk = "nopunch";
+          else if (c.outMin < c.maghrib - 30) dk = "early";
+          else if (c.outMin <= c.maghrib + 30) dk = "atM";
+          else if (c.outMin <= c.maghrib + 180) dk = "after";
+          else dk = "night";
+          depCats[depIdx[dk]].n++;
         }
         if (c.expected && d < ctx.today) {
           var x = wd[weekday(d)];
@@ -1329,7 +1589,7 @@ var RH = (function () {
     };
     var weekdays = [6, 0, 1, 2, 3, 4].map(function (k) { return { wd: k, exp: wd[k].exp, abs: wd[k].abs, rate: wd[k].exp ? wd[k].abs / wd[k].exp : null }; });
     return { from: from, to: end, report: rep, kpis: kpis, status: buckets, byWeek: byWeek,
-      arrival: arr, departure: dep, maghribAvg: mgN ? mg / mgN : null, weekdays: weekdays };
+      arrival: arr, departure: dep, maghribAvg: mgN ? mg / mgN : null, weekdays: weekdays, arrCats: arrCats, depCats: depCats };
   }
 
   /* শেষ কয়েক সপ্তাহের ধারা */
@@ -1348,7 +1608,7 @@ var RH = (function () {
         avg: t.daysH ? (t.hours - t.liveMin) / t.daysH / 60 : null,
         fd: fdN ? fdSum / fdN / 60 : null,
         ot: t.daysH ? t.otMin / t.daysH / 60 : null,
-        late: t.late, absent: Math.max(0, t.expected - t.presentExp), incomplete: t.est,
+        late: t.late, absent: Math.max(0, t.expected - t.presentExp), incomplete: t.est, otPay: t.otPay, gross: t.gross,
         hours: t.hours / 60, wages: t.gross, units: t.units, deptWages: depW
       });
     }
@@ -1376,7 +1636,7 @@ var RH = (function () {
 
   return {
     DEFAULTS: DEFAULTS, DEPTS: DEPTS, settings: settings, rulesFor: rulesFor, maghrib: maghrib, sunsetMin: sunsetMin,
-    fullDayMin: fullDayMin, computeDay: computeDay, dayFor: dayFor, rateOn: rateOn, currentRate: currentRate,
+    fullDayMin: fullDayMin, computeDay: computeDay, dayFor: dayFor, rateOn: rateOn, currentRate: currentRate, rateHistory: rateHistory,
     weekOf: weekOf, dates: dates, monthDates: monthDates, workerName: workerName, inPay: inPay, deptOf: deptOf,
     deptMatch: deptMatch, recentPins: recentPins, makeCtx: makeCtx, cday: cday, dinfo: dinfo, isActive: isActive,
     dayClass: dayClass, rangeReport: rangeReport, weekReport: weekReport, monthReport: monthReport,
@@ -1397,7 +1657,7 @@ const {
   useCallback,
   Fragment
 } = React;
-const APP_VERSION = "2.00";
+const APP_VERSION = "3.01";
 const DEPTS = RH.DEPTS;
 const BN = "০১২৩৪৫৬৭৮৯";
 const bn = s => String(s == null ? "" : s).replace(/[0-9]/g, d => BN[d]);
@@ -1667,6 +1927,36 @@ const I = {
   }),
   edit: React.createElement("path", {
     d: "M4 20h4L19 9l-4-4L4 16v4Zm9-13 4 4"
+  }),
+  lock: React.createElement("path", {
+    d: "M7 11V8a5 5 0 0 1 10 0v3M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1Zm6 4v2"
+  }),
+  id: React.createElement("path", {
+    d: "M3 6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6Zm5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-3 3c.5-1.5 1.6-2 3-2s2.5.5 3 2m3-7h4m-4 3h4"
+  }),
+  camera: React.createElement("path", {
+    d: "M4 8a1 1 0 0 1 1-1h3l1.5-2h5L16 7h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8Zm8 9a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
+  }),
+  phone: React.createElement("path", {
+    d: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"
+  }),
+  cash: React.createElement("path", {
+    d: "M3 7h18v10H3zM7 7a4 4 0 0 1-4 4m18 0a4 4 0 0 1-4-4M7 17a4 4 0 0 0-4-4m18 0a4 4 0 0 0-4 4M12 14.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"
+  }),
+  search: React.createElement("path", {
+    d: "M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Zm5-2 5 5"
+  }),
+  download: React.createElement("path", {
+    d: "M12 4v11m0 0-4-4m4 4 4-4M5 20h14"
+  }),
+  pin: React.createElement("path", {
+    d: "M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Zm0-9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"
+  }),
+  info: React.createElement("path", {
+    d: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-11v6m0-9h.01"
+  }),
+  bulb: React.createElement("path", {
+    d: "M9 18h6m-5 3h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3Z"
   })
 };
 const Icon = ({
@@ -1770,22 +2060,67 @@ function Field({
 function Avatar({
   name,
   pin,
-  dept
+  dept,
+  size,
+  onClick
 }) {
   const ch = (name || "?").trim().charAt(0).toUpperCase();
   const col = dept ? deptColor(dept) : null;
   const hue = parseInt(pin, 10) * 47 % 360;
-  return React.createElement("span", {
-    className: "av",
-    style: {
+  const ph = typeof PHOTOS !== "undefined" ? PHOTOS[pin] : null;
+  const Tag = onClick ? "button" : "span";
+  return React.createElement(Tag, {
+    className: "av" + (size ? " " + size : "") + (ph ? " ph" : ""),
+    onClick: onClick,
+    type: onClick ? "button" : undefined,
+    style: ph ? null : {
       background: "hsl(" + hue + " 28% 92%)",
       color: "hsl(" + hue + " 30% 30%)"
     }
-  }, ch, col && React.createElement("i", {
+  }, ph ? React.createElement("img", {
+    src: ph,
+    alt: ""
+  }) : ch, col && React.createElement("i", {
     style: {
       background: col
     }
   }));
+}
+const PHONE_LABELS = ["নিজের", "বাড়ি", "বাবা", "মা", "স্ত্রী", "ভাই", "অন্য"];
+function phonesOf(w) {
+  const l = (w && Array.isArray(w.phones) ? w.phones : []).filter(p => p && p.n);
+  if (!l.length && w && w.phone) l.push({
+    n: w.phone,
+    l: "নিজের"
+  });
+  return l;
+}
+function cleanPhone(p) {
+  return String(p || "").replace(/[০-৯]/g, c => BN.indexOf(c)).replace(/[^\d+]/g, "");
+}
+function waLink(phone, text) {
+  let p = cleanPhone(phone).replace(/^\+/, "");
+  if (p.startsWith("01")) p = "88" + p;
+  if (p.length && p.length < 12) p = "";
+  return "https://wa.me/" + p + (text ? "?text=" + encodeURIComponent(text) : "");
+}
+const telLink = p => "tel:" + cleanPhone(p);
+function downloadCSV(name, rows) {
+  const esc = v => {
+    const t = v == null ? "" : String(v);
+    return /[",\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t;
+  };
+  const text = "\ufeff" + rows.map(r => r.map(esc).join(",")).join("\r\n");
+  const url = URL.createObjectURL(new Blob([text], {
+    type: "text/csv;charset=utf-8"
+  }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
 }
 function Empty({
   children
@@ -2023,7 +2358,11 @@ function Stat({
   delta,
   goodUp = true,
   neutral,
-  small
+  small,
+  onClick,
+  on,
+  kind,
+  hero
 }) {
   let d = null;
   if (delta != null && isFinite(delta.v) && delta.prev != null) {
@@ -2035,15 +2374,25 @@ function Stat({
       className: "delta " + cls
     }, same ? "＝" : up ? "▲" : "▼", " ", same ? "আগের মতো" : delta.fmt(Math.abs(diff)), React.createElement("em", null, " ", delta.label || "গত সপ্তাহের চেয়ে"));
   }
-  return React.createElement("div", {
-    className: "stat" + (small ? " small" : "")
-  }, React.createElement("div", {
+  const cls = "stat" + (small ? " small" : "") + (hero ? " hero" : "") + (onClick ? " tap" : "") + (on ? " on" : "") + (kind ? " k-" + kind : "");
+  const inner = React.createElement(React.Fragment, null, React.createElement("div", {
     className: "stat-l"
-  }, label), React.createElement("div", {
+  }, label, onClick && React.createElement(Icon, {
+    n: on ? "close" : "down",
+    s: 14
+  })), React.createElement("div", {
     className: "stat-v"
   }, value), sub && React.createElement("div", {
     className: "stat-s"
   }, sub), d);
+  return onClick ? React.createElement("button", {
+    type: "button",
+    className: cls,
+    onClick: onClick,
+    "aria-pressed": !!on
+  }, inner) : React.createElement("div", {
+    className: cls
+  }, inner);
 }
 function statusChip(c, nowM) {
   if (c.off) return React.createElement(Chip, {
@@ -2071,7 +2420,7 @@ function statusChip(c, nowM) {
   }, "\u09AC\u09C7\u09B0 \u09AA\u09BE\u099E\u09CD\u099A \u09A8\u09C7\u0987");
   if (c.lateMin > 0 && c.inMin < 12 * 60) return React.createElement(Chip, {
     kind: "warn"
-  }, "\u09A6\u09C7\u09B0\u09BF ", dur(c.lateMin));
+  }, "\u09B2\u09C7\u099F \u09AA\u09CD\u09B0\u09AC\u09C7\u09B6 ", dur(c.lateMin));
   if (c.inMin >= 12 * 60) return React.createElement(Chip, {
     kind: "warn"
   }, "\u09A6\u09C1\u09AA\u09C1\u09B0\u09C7\u09B0 \u09AA\u09B0\u09C7");
@@ -2088,6 +2437,18 @@ function UnitsBadge({
   return React.createElement("span", {
     className: "units"
   }, unitsGlyph(c.att), c.ot > 0 && React.createElement("em", null, "+", unitsGlyph(c.ot)));
+}
+function advMin(a) {
+  if (a.t) return RH.toMin(a.t);
+  const at = String(a.at || "");
+  if (at.slice(0, 10) === a.d && at.length >= 16) return RH.toMin(at.slice(11, 16));
+  return null;
+}
+const advKey = a => a.d + " " + (a.t || (String(a.at || "").slice(0, 10) === a.d ? String(a.at).slice(11, 16) : "00:00"));
+const advSort = (a, b) => advKey(a) < advKey(b) ? 1 : advKey(a) > advKey(b) ? -1 : 0;
+function advWhen(a) {
+  const m = advMin(a);
+  return fmtShort(a.d) + (m != null ? " · " + clockP(m) : "");
 }
 function estText(c) {
   const f = c.flags[0];
@@ -2110,6 +2471,605 @@ function estAssume(c, s) {
   if (c.status === "single" && s.single === "half") return "নিয়ম অনুযায়ী অর্ধেক দিন ধরা হয়েছে।";
   if (c.status === "single" && s.single === "zero") return "নিয়ম অনুযায়ী হাজিরা ধরা হয়নি।";
   return (parts.length ? "ধরা হয়েছে: " + parts.join(", ") + "। " : "") + "আন্দাজ থেকে ওভারটাইম ধরা হয় না।";
+}
+let PHOTOS = {};
+function loadImage(file) {
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => res({
+      img,
+      url
+    });
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      rej(new Error("ছবিটা খোলা যায়নি"));
+    };
+    img.src = url;
+  });
+}
+async function shrinkImage(file, opt) {
+  const o = Object.assign({
+    max: 1400,
+    square: false,
+    quality: 0.82,
+    limit: 450000
+  }, opt || {});
+  const {
+    img,
+    url
+  } = await loadImage(file);
+  try {
+    let sw = img.naturalWidth,
+      sh = img.naturalHeight,
+      sx = 0,
+      sy = 0;
+    if (!sw || !sh) throw new Error("ছবিটা খোলা যায়নি");
+    if (o.square) {
+      const m = Math.min(sw, sh);
+      sx = (sw - m) / 2;
+      sy = (sh - m) * 0.35;
+      sw = sh = m;
+    }
+    let max = o.max,
+      out = null,
+      w = 0,
+      h = 0;
+    for (let round = 0; round < 6; round++) {
+      const scale = Math.min(1, max / Math.max(sw, sh));
+      w = Math.max(1, Math.round(sw * scale));
+      h = Math.max(1, Math.round(sh * scale));
+      const cv = document.createElement("canvas");
+      cv.width = w;
+      cv.height = h;
+      const g = cv.getContext("2d");
+      g.fillStyle = "#fff";
+      g.fillRect(0, 0, w, h);
+      g.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+      let q = o.quality;
+      out = cv.toDataURL("image/jpeg", q);
+      while (out.length * 0.75 > o.limit && q > 0.45) {
+        q -= 0.08;
+        out = cv.toDataURL("image/jpeg", q);
+      }
+      if (out.length * 0.75 <= o.limit) break;
+      max = Math.round(max * 0.8);
+    }
+    return {
+      dataUrl: out,
+      w,
+      h
+    };
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+function dataUrlBytes(du) {
+  return b64ToBuf(du.slice(du.indexOf(",") + 1));
+}
+function bufToB64(buf) {
+  const b = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
+  let s = "";
+  for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+function b64ToBuf(str) {
+  const bin = atob(str),
+    b = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) b[i] = bin.charCodeAt(i);
+  return b;
+}
+const VAULT_CHECK = "rupali-hajira-vault-ok";
+const VKEY = "rh_vault_key";
+const cryptoOk = () => !!(window.crypto && window.crypto.subtle && window.isSecureContext !== false);
+async function deriveKey(pass, saltB64) {
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey({
+    name: "PBKDF2",
+    salt: b64ToBuf(saltB64),
+    iterations: 150000,
+    hash: "SHA-256"
+  }, base, {
+    name: "AES-GCM",
+    length: 256
+  }, true, ["encrypt", "decrypt"]);
+}
+async function encBytes(key, bytes) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = await crypto.subtle.encrypt({
+    name: "AES-GCM",
+    iv
+  }, key, bytes);
+  return {
+    iv: bufToB64(iv),
+    ct: bufToB64(ct)
+  };
+}
+async function decBytes(key, o) {
+  const pt = await crypto.subtle.decrypt({
+    name: "AES-GCM",
+    iv: b64ToBuf(o.iv)
+  }, key, b64ToBuf(o.ct));
+  return new Uint8Array(pt);
+}
+const encText = (key, t) => encBytes(key, new TextEncoder().encode(t));
+const decText = async (key, o) => new TextDecoder().decode(await decBytes(key, o));
+function useVault(meta, saveMeta) {
+  const [key, setKey] = useState(null);
+  useEffect(() => {
+    let dead = false;
+    setKey(null);
+    if (!meta || !meta.salt || !cryptoOk()) return undefined;
+    let saved = null;
+    try {
+      saved = JSON.parse(localStorage.getItem(VKEY) || "null");
+    } catch (e) {}
+    if (!saved || saved.salt !== meta.salt) return undefined;
+    crypto.subtle.importKey("raw", b64ToBuf(saved.k), {
+      name: "AES-GCM"
+    }, true, ["encrypt", "decrypt"]).then(k => decText(k, meta.check).then(t => {
+      if (!dead && t === VAULT_CHECK) setKey(k);
+    })).catch(() => {
+      try {
+        localStorage.removeItem(VKEY);
+      } catch (e) {}
+    });
+    return () => {
+      dead = true;
+    };
+  }, [meta && meta.salt]);
+  const remember = async (k, salt) => {
+    try {
+      localStorage.setItem(VKEY, JSON.stringify({
+        salt,
+        k: bufToB64(await crypto.subtle.exportKey("raw", k))
+      }));
+    } catch (e) {}
+  };
+  return {
+    loaded: meta !== undefined,
+    has: !!(meta && meta.salt),
+    key,
+    ok: cryptoOk(),
+    setup: async (pass, rem) => {
+      if (meta && meta.salt) throw new Error("পাসওয়ার্ড আগেই ঠিক করা আছে");
+      const salt = bufToB64(crypto.getRandomValues(new Uint8Array(16)));
+      const k = await deriveKey(pass, salt);
+      const check = await encText(k, VAULT_CHECK);
+      const ok = await saveMeta({
+        v: 1,
+        salt,
+        check,
+        at: nowIso()
+      });
+      if (!ok) throw new Error("সংরক্ষণ হয়নি — ইন্টারনেট দেখুন");
+      setKey(k);
+      if (rem) await remember(k, salt);
+    },
+    unlock: async (pass, rem) => {
+      const k = await deriveKey(pass, meta.salt);
+      let t = null;
+      try {
+        t = await decText(k, meta.check);
+      } catch (e) {
+        t = null;
+      }
+      if (t !== VAULT_CHECK) throw new Error("পাসওয়ার্ড মেলেনি");
+      setKey(k);
+      if (rem) await remember(k, meta.salt);
+    },
+    lock: () => {
+      setKey(null);
+      try {
+        localStorage.removeItem(VKEY);
+      } catch (e) {}
+    }
+  };
+}
+function VaultGate({
+  vault,
+  children
+}) {
+  if (!vault.ok) return React.createElement("div", {
+    className: "note sm warnish"
+  }, "\u098F\u0987 \u09AC\u09CD\u09B0\u09BE\u0989\u099C\u09BE\u09B0\u09C7 \u09A4\u09BE\u09B2\u09BE\u09AC\u09A6\u09CD\u09A7 \u09A4\u09A5\u09CD\u09AF \u0996\u09CB\u09B2\u09BE \u09AF\u09BE\u09AF\u09BC \u09A8\u09BE\u0964 Chrome-\u098F\u09B0 \u09A8\u09A4\u09C1\u09A8 \u09B8\u0982\u09B8\u09CD\u0995\u09B0\u09A3\u09C7 \u0996\u09C1\u09B2\u09C1\u09A8\u0964");
+  if (!vault.loaded) return React.createElement("div", {
+    className: "muted sm"
+  }, "\u09B2\u09CB\u09A1 \u09B9\u099A\u09CD\u099B\u09C7\u2026");
+  if (vault.key) return children(vault.key);
+  return React.createElement(VaultForm, {
+    vault: vault
+  });
+}
+function VaultForm({
+  vault
+}) {
+  const setup = !vault.has;
+  const [p1, setP1] = useState("");
+  const [p2, setP2] = useState("");
+  const [rem, setRem] = useState(true);
+  const [err, setErr] = useState("");
+  const [busy, setBusy] = useState(false);
+  const go = async () => {
+    setErr("");
+    if (p1.length < 4) {
+      setErr("অন্তত ৪ অক্ষরের পাসওয়ার্ড দিন");
+      return;
+    }
+    if (setup && p1 !== p2) {
+      setErr("দুইবার একই পাসওয়ার্ড লিখুন");
+      return;
+    }
+    setBusy(true);
+    try {
+      await (setup ? vault.setup(p1, rem) : vault.unlock(p1, rem));
+    } catch (e) {
+      setErr(e && e.message || String(e));
+    }
+    setBusy(false);
+  };
+  return React.createElement("div", {
+    className: "vault"
+  }, React.createElement("div", {
+    className: "vault-h"
+  }, React.createElement(Icon, {
+    n: "lock",
+    s: 18
+  }), React.createElement("b", null, setup ? "গোপন তথ্যের জন্য একটা পাসওয়ার্ড ঠিক করুন" : "তালাবদ্ধ — পাসওয়ার্ড দিয়ে খুলুন")), React.createElement("p", {
+    className: "muted sm"
+  }, setup ? "ভোটার আইডি আর কাগজপত্র এই পাসওয়ার্ড দিয়ে তালাবদ্ধ করে রাখা হবে, যেন পাসওয়ার্ড ছাড়া কেউ দেখতে না পারে। পাসওয়ার্ড ভুলে গেলে এগুলো আর খোলা যাবে না — কোথাও লিখে রাখুন।" : "ভোটার আইডি আর কাগজপত্র দেখতে বা যোগ করতে পাসওয়ার্ড দিন।"), React.createElement("div", {
+    className: setup ? "grid2" : ""
+  }, React.createElement(Field, {
+    label: "\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1"
+  }, React.createElement("input", {
+    type: "password",
+    value: p1,
+    autoComplete: setup ? "new-password" : "current-password",
+    onChange: e => setP1(e.target.value),
+    onKeyDown: e => e.key === "Enter" && !setup && go()
+  })), setup && React.createElement(Field, {
+    label: "\u0986\u09AC\u09BE\u09B0 \u09B2\u09BF\u0996\u09C1\u09A8"
+  }, React.createElement("input", {
+    type: "password",
+    value: p2,
+    autoComplete: "new-password",
+    onChange: e => setP2(e.target.value)
+  }))), React.createElement("label", {
+    className: "toggle"
+  }, React.createElement("input", {
+    type: "checkbox",
+    checked: rem,
+    onChange: e => setRem(e.target.checked)
+  }), React.createElement("span", null, "\u098F\u0987 \u09A1\u09BF\u09AD\u09BE\u0987\u09B8\u09C7 \u09AE\u09A8\u09C7 \u09B0\u09BE\u0996\u09C1\u09A8")), err && React.createElement("div", {
+    className: "note sm bad"
+  }, err), React.createElement("button", {
+    className: "btn primary",
+    disabled: busy,
+    onClick: go
+  }, busy ? "অপেক্ষা করুন…" : setup ? "পাসওয়ার্ড ঠিক করুন" : "খুলুন"));
+}
+function Lightbox({
+  src,
+  title,
+  sub,
+  onClose,
+  actions
+}) {
+  useEffect(() => {
+    const k = e => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", k, true);
+    return () => window.removeEventListener("keydown", k, true);
+  }, [onClose]);
+  return React.createElement("div", {
+    className: "lbox",
+    onClick: onClose,
+    role: "dialog",
+    "aria-label": title
+  }, React.createElement("div", {
+    className: "lbox-top",
+    onClick: e => e.stopPropagation()
+  }, React.createElement("div", {
+    className: "grow"
+  }, React.createElement("b", null, title), sub && React.createElement("small", null, sub)), React.createElement("button", {
+    className: "icon-btn",
+    onClick: onClose,
+    "aria-label": "\u09AC\u09A8\u09CD\u09A7"
+  }, React.createElement(Icon, {
+    n: "close"
+  }))), React.createElement("img", {
+    src: src,
+    alt: title,
+    onClick: e => e.stopPropagation()
+  }), actions && React.createElement("div", {
+    className: "lbox-act",
+    onClick: e => e.stopPropagation()
+  }, actions));
+}
+function FilePick({
+  onFile,
+  children,
+  className,
+  label
+}) {
+  const ref = useRef(null);
+  return React.createElement(React.Fragment, null, React.createElement("button", {
+    type: "button",
+    className: className || "btn sm",
+    onClick: () => ref.current && ref.current.click(),
+    "aria-label": label
+  }, children), React.createElement("input", {
+    ref: ref,
+    type: "file",
+    accept: "image/*",
+    hidden: true,
+    onChange: e => {
+      const f = e.target.files && e.target.files[0];
+      e.target.value = "";
+      if (f) onFile(f);
+    }
+  }));
+}
+function PhotoPick({
+  pin,
+  act,
+  children,
+  className
+}) {
+  const [busy, setBusy] = useState(false);
+  const onFile = async f => {
+    setBusy(true);
+    try {
+      const r = await shrinkImage(f, {
+        max: 320,
+        square: true,
+        quality: 0.8,
+        limit: 60000
+      });
+      await act.savePhoto(pin, r.dataUrl);
+    } catch (e) {
+      act.toast(e && e.message || "ছবি নেওয়া যায়নি", true);
+    }
+    setBusy(false);
+  };
+  return React.createElement(FilePick, {
+    onFile: onFile,
+    className: className,
+    label: "\u099B\u09AC\u09BF \u09A4\u09C1\u09B2\u09C1\u09A8"
+  }, busy ? "…" : children);
+}
+const DOC_KINDS = [{
+  k: "nid1",
+  l: "ভোটার আইডি — সামনে",
+  one: true
+}, {
+  k: "nid2",
+  l: "ভোটার আইডি — পেছনে",
+  one: true
+}, {
+  k: "other",
+  l: "অন্য কাগজ"
+}];
+const docLabel = d => d.label || (DOC_KINDS.filter(x => x.k === d.kind)[0] || DOC_KINDS[2]).l;
+function DocsSection({
+  db,
+  pin,
+  w,
+  vault,
+  act
+}) {
+  const [docs, setDocs] = useState(null);
+  useEffect(() => {
+    if (!db) return undefined;
+    return db.collection("att_docs").where("pin", "==", String(pin)).onSnapshot(q => {
+      const l = [];
+      q.forEach(d => l.push(Object.assign({
+        id: d.id
+      }, d.data())));
+      const ord = d => d.kind === "nid1" ? 0 : d.kind === "nid2" ? 1 : 2;
+      l.sort((a, b) => ord(a) - ord(b) || (a.at < b.at ? -1 : 1));
+      setDocs(l);
+    }, () => setDocs([]));
+  }, [db, pin]);
+  return React.createElement("div", {
+    className: "card pad docs"
+  }, React.createElement("div", {
+    className: "docs-h"
+  }, React.createElement(Icon, {
+    n: "id",
+    s: 18
+  }), React.createElement("b", null, "\u09AD\u09CB\u099F\u09BE\u09B0 \u0986\u0987\u09A1\u09BF \u0993 \u0995\u09BE\u0997\u099C\u09AA\u09A4\u09CD\u09B0"), vault.key && React.createElement("button", {
+    className: "link sm",
+    onClick: vault.lock
+  }, "\u09A4\u09BE\u09B2\u09BE \u09A6\u09BF\u09A8")), React.createElement(VaultGate, {
+    vault: vault
+  }, key => React.createElement(DocsBody, {
+    key: pin,
+    vkey: key,
+    pin: pin,
+    w: w,
+    docs: docs,
+    act: act
+  })));
+}
+function DocsBody({
+  vkey,
+  pin,
+  w,
+  docs,
+  act
+}) {
+  const [nid, setNid] = useState(null);
+  const [nidErr, setNidErr] = useState(false);
+  const [show, setShow] = useState(false);
+  const [editNid, setEditNid] = useState(false);
+  const [nidIn, setNidIn] = useState("");
+  const [urls, setUrls] = useState({});
+  const [view, setView] = useState(null);
+  const [busy, setBusy] = useState("");
+  useEffect(() => {
+    let dead = false;
+    setNid(null);
+    setNidErr(false);
+    if (w && w.nidEnc) decText(vkey, w.nidEnc).then(t => !dead && setNid(t)).catch(() => !dead && setNidErr(true));
+    return () => {
+      dead = true;
+    };
+  }, [w && w.nidEnc && w.nidEnc.ct, vkey]);
+  const made = useRef({});
+  const alive = useRef(true);
+  useEffect(() => {
+    (docs || []).forEach(d => {
+      if (made.current[d.id]) return;
+      made.current[d.id] = "…";
+      decBytes(vkey, d).then(b => {
+        const u = URL.createObjectURL(new Blob([b], {
+          type: d.type || "image/jpeg"
+        }));
+        made.current[d.id] = u;
+        if (alive.current) setUrls(x => Object.assign({}, x, {
+          [d.id]: u
+        }));
+      }).catch(() => {
+        made.current[d.id] = "bad";
+        if (alive.current) setUrls(x => Object.assign({}, x, {
+          [d.id]: "bad"
+        }));
+      });
+    });
+  }, [docs, vkey]);
+  useEffect(() => () => {
+    alive.current = false;
+    Object.keys(made.current).forEach(k => {
+      const u = made.current[k];
+      if (u && u.indexOf("blob:") === 0) URL.revokeObjectURL(u);
+    });
+  }, []);
+  const saveNid = async () => {
+    const v = nidIn.replace(/[^\d০-৯]/g, "").replace(/[০-৯]/g, c => BN.indexOf(c));
+    if (v && (v.length < 10 || v.length > 17)) {
+      act.toast("ভোটার আইডি নম্বর ১০, ১৩ বা ১৭ অঙ্কের হয়", true);
+      return;
+    }
+    const ok = await act.saveWorker(pin, {
+      nidEnc: v ? await encText(vkey, v) : null
+    });
+    if (ok) {
+      setEditNid(false);
+      setNidIn("");
+    }
+  };
+  const addDoc = kind => async f => {
+    setBusy(kind);
+    try {
+      const r = await shrinkImage(f, {
+        max: 1500,
+        quality: 0.82,
+        limit: 480000
+      });
+      const e = await encBytes(vkey, dataUrlBytes(r.dataUrl));
+      const kd = DOC_KINDS.filter(x => x.k === kind)[0];
+      const ok = await act.addDoc({
+        pin: String(pin),
+        kind,
+        label: kd.l,
+        type: "image/jpeg",
+        iv: e.iv,
+        ct: e.ct,
+        w: r.w,
+        h: r.h,
+        at: nowIso()
+      });
+      if (ok && kd.one) (docs || []).filter(d => d.kind === kind).forEach(d => act.delDoc(d.id, true));
+    } catch (er) {
+      act.toast(er && er.message || "ছবি নেওয়া যায়নি", true);
+    }
+    setBusy("");
+  };
+  const masked = nid ? show ? bn(nid) : "•••• •••• " + bn(nid.slice(-4)) : null;
+  const has = k => (docs || []).some(d => d.kind === k);
+  return React.createElement("div", null, React.createElement("div", {
+    className: "nid-row"
+  }, React.createElement("span", {
+    className: "muted"
+  }, "\u09AD\u09CB\u099F\u09BE\u09B0 \u0986\u0987\u09A1\u09BF \u09A8\u09AE\u09CD\u09AC\u09B0"), !editNid && React.createElement("b", {
+    className: "nid"
+  }, w && w.nidEnc ? nidErr ? "খোলা যায়নি" : masked || "…" : React.createElement("span", {
+    className: "muted"
+  }, "\u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF")), !editNid && nid && React.createElement("button", {
+    className: "link sm",
+    onClick: () => setShow(!show)
+  }, show ? "লুকান" : "দেখুন"), !editNid && React.createElement("button", {
+    className: "link sm",
+    onClick: () => {
+      setEditNid(true);
+      setNidIn(nid || "");
+    }
+  }, w && w.nidEnc ? "বদলান" : "বসান")), editNid && React.createElement("div", {
+    className: "nid-edit"
+  }, React.createElement("input", {
+    type: "text",
+    inputMode: "numeric",
+    value: nidIn,
+    placeholder: "\u09AF\u09C7\u09AE\u09A8 1234567890",
+    onChange: e => setNidIn(e.target.value),
+    "aria-label": "\u09AD\u09CB\u099F\u09BE\u09B0 \u0986\u0987\u09A1\u09BF \u09A8\u09AE\u09CD\u09AC\u09B0"
+  }), React.createElement("button", {
+    className: "btn sm primary",
+    onClick: saveNid
+  }, "\u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3"), React.createElement("button", {
+    className: "btn sm ghost",
+    onClick: () => setEditNid(false)
+  }, "\u09AC\u09BE\u09A4\u09BF\u09B2")), docs === null && React.createElement("div", {
+    className: "muted sm"
+  }, "\u09B2\u09CB\u09A1 \u09B9\u099A\u09CD\u099B\u09C7\u2026"), docs && docs.length > 0 && React.createElement("div", {
+    className: "doc-grid"
+  }, docs.map(d => React.createElement("button", {
+    key: d.id,
+    type: "button",
+    className: "doc",
+    onClick: () => urls[d.id] && urls[d.id] !== "bad" && setView(d)
+  }, urls[d.id] && urls[d.id] !== "bad" ? React.createElement("img", {
+    src: urls[d.id],
+    alt: docLabel(d)
+  }) : React.createElement("span", {
+    className: "doc-ph"
+  }, urls[d.id] === "bad" ? "খোলা যায়নি" : "…"), React.createElement("small", null, docLabel(d))))), React.createElement("div", {
+    className: "doc-add"
+  }, DOC_KINDS.map(k => React.createElement(FilePick, {
+    key: k.k,
+    className: "btn sm",
+    onFile: addDoc(k.k),
+    label: k.l
+  }, React.createElement(Icon, {
+    n: "camera",
+    s: 16
+  }), " ", busy === k.k ? "রাখা হচ্ছে…" : k.one && has(k.k) ? k.l + " বদলান" : k.l))), view && React.createElement(Lightbox, {
+    src: urls[view.id],
+    title: docLabel(view),
+    sub: RH.workerName(w, pin) + " · " + bn(view.at || ""),
+    onClose: () => setView(null),
+    actions: React.createElement(React.Fragment, null, React.createElement("a", {
+      className: "btn sm",
+      href: urls[view.id],
+      download: "rupali-" + pin + "-" + view.kind + ".jpg"
+    }, "\u09A1\u09BE\u0989\u09A8\u09B2\u09CB\u09A1"), React.createElement("button", {
+      className: "btn sm",
+      onClick: () => {
+        if (confirm(docLabel(view) + " মুছে ফেলবেন?")) {
+          act.delDoc(view.id);
+          setView(null);
+        }
+      }
+    }, React.createElement(Icon, {
+      n: "trash",
+      s: 16
+    }), " \u09AE\u09C1\u099B\u09C1\u09A8"))
+  }));
 }
 function useWidth() {
   const ref = useRef(null);
@@ -2234,7 +3194,8 @@ function ChartCard({
   children,
   note,
   id,
-  wide
+  wide,
+  say
 }) {
   const [tbl, setTbl] = useState(false);
   return React.createElement("section", {
@@ -2255,7 +3216,12 @@ function ChartCard({
   }, React.createElement(Icon, {
     n: "table",
     s: 16
-  })))), legend && !tbl && React.createElement(Legend, {
+  })))), say && React.createElement("div", {
+    className: "say"
+  }, React.createElement(Icon, {
+    n: "bulb",
+    s: 16
+  }), React.createElement("span", null, say)), legend && !tbl && React.createElement(Legend, {
     items: legend
   }), tbl && table ? React.createElement(DataTable, {
     cols: table.cols,
@@ -2272,9 +3238,11 @@ function BarChart({
   yFmt,
   showTotals,
   refs,
+  yRefs,
   onPick,
   colorOf,
-  empty
+  empty,
+  totFmt
 }) {
   const [ref, W] = useWidth();
   const [hv, setHv, bind, leave] = useHover();
@@ -2287,7 +3255,7 @@ function BarChart({
     pw = w - padL - padR,
     ph = h - padT - padB;
   const totals = data.map(d => series.reduce((a, s) => a + (+d.values[s.key] || 0), 0));
-  const max = Math.max(0, ...totals);
+  const max = Math.max(0, ...totals, ...(yRefs || []).map(r => r.v));
   const ticks = niceTicks(max || 1, 4),
     top = ticks[ticks.length - 1];
   const band = pw / Math.max(1, data.length);
@@ -2343,13 +3311,14 @@ function BarChart({
       return React.createElement("path", {
         key: s.key,
         d: barPath(cx - bw / 2, y1, bw, hh, j === nz.length - 1 ? 4 : 0),
-        fill: fill
+        fill: fill,
+        opacity: d.faded ? 0.42 : 1
       });
     }), showTotals && totals[i] > 0 && band >= 18 && React.createElement("text", {
       x: cx,
       y: y(totals[i]) - 5,
-      className: "vl"
-    }, fmt(totals[i])), i % every === 0 && React.createElement("text", {
+      className: "vl" + (d.faded ? " faded" : "")
+    }, (totFmt || fmt)(totals[i])), i % every === 0 && React.createElement("text", {
       x: cx,
       y: h - padB + 15,
       className: "xl"
@@ -2373,7 +3342,19 @@ function BarChart({
       y: padT - 7,
       className: "refl" + (rx > w - 60 ? " end" : "")
     }, r.label));
-  }), React.createElement("line", {
+  }), (yRefs || []).map(r => React.createElement("g", {
+    key: "yr" + r.label
+  }, React.createElement("line", {
+    x1: padL,
+    x2: w - padR,
+    y1: y(r.v),
+    y2: y(r.v),
+    className: "ref"
+  }), r.label && React.createElement("text", {
+    x: w - padR,
+    y: y(r.v) - 4,
+    className: "refl end"
+  }, r.label))), React.createElement("line", {
     x1: padL,
     x2: w - padR,
     y1: padT + ph,
@@ -2560,7 +3541,8 @@ function HBars({
   center,
   centerLabel,
   leftLabel,
-  rightLabel
+  rightLabel,
+  stack
 }) {
   const div = center != null;
   const vals = rows.map(r => r.value).filter(v => v != null);
@@ -2584,7 +3566,7 @@ function HBars({
     };
   };
   return React.createElement("div", {
-    className: "hbars"
+    className: "hbars" + (stack ? " stack" : "")
   }, div && React.createElement("div", {
     className: "hb-axis",
     "aria-hidden": "true"
@@ -2699,11 +3681,13 @@ function Timeline({
   legend = true
 }) {
   const [ref, W] = useWidth();
-  const labelW = W < 440 ? 92 : 140,
-    rightW = 38;
+  const hasSub = rows.some(r => r.sub);
+  const labelW = W < 440 ? hasSub ? 112 : 92 : hasSub ? 180 : 140,
+    rightW = hasSub ? 44 : 38;
   const tw = Math.max(60, W - labelW - rightW - 6);
   const x = m => Math.max(0, Math.min(tw, (m - from) / (to - from) * tw));
-  const step = tw / ((to - from) / 60) < 26 ? 120 : 60;
+  const pxH = tw / ((to - from) / 60);
+  const step = [60, 120, 180, 240].filter(st => st / 60 * pxH >= 36)[0] || 360;
   const ticks = [];
   for (let m = Math.ceil(from / step) * step; m <= to; m += step) ticks.push(m);
   const mg = (marks || []).filter(m => m.kind === "maghrib")[0];
@@ -2733,11 +3717,20 @@ function Timeline({
     style: {
       width: labelW
     }
-  }, React.createElement(DeptDot, {
+  }, r.pin != null ? React.createElement(Avatar, {
+    name: r.label,
+    pin: r.pin,
+    dept: r.dept,
+    size: "xs"
+  }) : React.createElement(DeptDot, {
     k: r.dept
   }), React.createElement("span", {
+    className: "tl-nm"
+  }, React.createElement("span", {
     className: "tl-n"
-  }, r.label)), React.createElement("svg", {
+  }, r.label), r.sub && React.createElement("small", {
+    className: "tl-sub"
+  }, r.sub))), React.createElement("svg", {
     width: tw,
     height: 26,
     className: "tl-t",
@@ -3007,6 +4000,30 @@ function MiniDays({
     }, "+", unitsGlyph(c.ot)));
   }));
 }
+const lateOf = c => c.lateMin > 0 && c.inMin != null && !c.estIn && c.inMin < 12 * 60 ? c.lateMin : 0;
+const chipLate = c => c.status === "present" && c.flags.indexOf("missingOut") < 0 && lateOf(c) > 0;
+function spanText(c) {
+  if (c.status === "absent") return c.off ? "ছুটি" : "আসেননি";
+  if (c.status === "manual") return "হাতে দেওয়া হাজিরা";
+  const a = c.inMin == null || c.estIn ? "?" : clock(c.inMin);
+  const b = c.live ? "এখনো কাজে" : c.outMin == null || c.estOut ? "?" : clock(c.outMin);
+  return a + " – " + b;
+}
+function PhoneBtn({
+  w
+}) {
+  const p = phonesOf(w)[0];
+  if (!p) return null;
+  return React.createElement("a", {
+    className: "icon-btn sm call",
+    href: telLink(p.n),
+    onClick: e => e.stopPropagation(),
+    "aria-label": "\u0995\u09B2 \u0995\u09B0\u09C1\u09A8"
+  }, React.createElement(Icon, {
+    n: "phone",
+    s: 16
+  }));
+}
 function DailyScreen({
   ctx,
   st,
@@ -3017,7 +4034,9 @@ function DailyScreen({
   open,
   go,
   view,
-  setView
+  setView,
+  flt,
+  setFlt
 }) {
   const today = ctx.today,
     s = ctx.s;
@@ -3026,7 +4045,8 @@ function DailyScreen({
   }, [date]);
   const inf = RH.dinfo(ctx, date);
   const nowM = ctx.nowMin;
-  const rows = useMemo(() => {
+  const isToday = date === today;
+  const all = useMemo(() => {
     const out = [];
     Object.keys(ctx.workers).forEach(pin => {
       const w = ctx.workers[pin];
@@ -3045,21 +4065,52 @@ function DailyScreen({
     out.sort((a, b) => rank(a) - rank(b) || (a.c.inMin == null ? 9999 : a.c.inMin) - (b.c.inMin == null ? 9999 : b.c.inMin) || a.pin - b.pin);
     return out;
   }, [ctx, date, dept]);
-  const present = rows.filter(x => x.c.status !== "absent").length;
-  const late = rows.filter(x => x.c.lateMin > 0 && x.c.inMin < 12 * 60).length;
-  const absent = rows.filter(x => x.c.status === "absent" && x.c.expected).length;
-  const hoursSum = rows.reduce((a, x) => a + (x.c.status !== "absent" ? x.c.workedMin : 0), 0);
   const mg = RH.maghrib(date, s);
-  const isToday = date === today;
-  const beforeStart = isToday && nowM < RH.toMin(s.start) + 180;
+  const S = RH.toMin(s.start);
+  const beforeStart = isToday && nowM < S + 180;
+  const F = {
+    present: {
+      t: "এসেছেন",
+      f: x => x.c.status !== "absent"
+    },
+    late: {
+      t: "দেরিতে এসেছেন — বেশি দেরি আগে",
+      f: x => lateOf(x.c) > 0,
+      sort: (a, b) => lateOf(b.c) - lateOf(a.c)
+    },
+    absent: {
+      t: beforeStart ? "এখনো আসেননি" : "আসেননি",
+      f: x => x.c.status === "absent" && x.c.expected
+    },
+    live: {
+      t: "এখনো বের হওয়ার পাঞ্চ দেননি",
+      f: x => x.c.live
+    },
+    ot: {
+      t: "ওভারটাইম পেয়েছেন — বেশি কাজ আগে",
+      f: x => x.c.ot > 0,
+      sort: (a, b) => b.c.workedMin - a.c.workedMin
+    }
+  };
+  const fourth = isToday ? "live" : "ot";
+  const n = {};
+  Object.keys(F).forEach(k => {
+    n[k] = all.filter(F[k].f).length;
+  });
+  const expectedN = all.filter(x => x.c.expected || x.c.status !== "absent").length;
+  const cur = flt && F[flt] && (flt !== "live" || isToday) && (flt !== "ot" || !isToday) ? flt : "";
+  const rows = cur ? all.filter(F[cur].f).sort(F[cur].sort || (() => 0)) : all;
+  const hoursSum = rows.reduce((a, x) => a + (x.c.status !== "absent" ? x.c.workedMin : 0), 0);
+  const tog = k => setFlt(cur === k ? "" : k);
   const noRate = isToday ? Object.keys(ctx.workers).filter(p => {
     const w = ctx.workers[p];
     return RH.inPay(w) && w.onDevice !== false && ctx.recent[p] && RH.currentRate(w) == null;
   }) : [];
   const pcAgo = st.meta ? tsAgo(st.meta.pcSeen) : null;
   const devAgo = st.meta && st.meta.dev ? tsAgo(st.meta.dev.lastContact) : null;
-  const bridgeDown = isToday && st.meta && pcAgo != null && pcAgo > 20;
-  const deviceDown = isToday && st.meta && !bridgeDown && devAgo != null && devAgo > 20;
+  const workTime = nowM >= S - 60 && nowM <= mg + 180;
+  const bridgeDown = isToday && workTime && st.meta && pcAgo != null && pcAgo > 20;
+  const deviceDown = isToday && workTime && st.meta && !bridgeDown && devAgo != null && devAgo > 20;
   let tlFrom = 8 * 60,
     tlTo = mg + 60;
   rows.forEach(x => x.c.segs.forEach(sg => {
@@ -3070,7 +4121,7 @@ function DailyScreen({
   tlFrom = Math.max(5 * 60, Math.floor(tlFrom / 60) * 60);
   tlTo = Math.min(24 * 60, Math.ceil(tlTo / 60) * 60);
   const marks = [{
-    at: RH.toMin(s.start),
+    at: S,
     kind: "start"
   }, {
     at: mg,
@@ -3093,18 +4144,20 @@ function DailyScreen({
   }, "\u0986\u099C\u0995\u09C7 \u09AB\u09BF\u09B0\u09C1\u09A8")), (bridgeDown || deviceDown || noRate.length > 0) && React.createElement("div", {
     className: "tasks"
   }, bridgeDown && React.createElement("button", {
-    className: "task bad",
+    className: "task",
     onClick: () => go("settings")
   }, React.createElement(Icon, {
-    n: "warn",
+    n: "info",
     s: 18
-  }), React.createElement("span", null, React.createElement("b", null, "\u09AA\u09BF\u09B8\u09BF\u09B0 \u09AC\u09CD\u09B0\u09BF\u099C \u09B8\u09BE\u09A1\u09BC\u09BE \u09A6\u09BF\u099A\u09CD\u099B\u09C7 \u09A8\u09BE"), " \xB7 \u09B6\u09C7\u09B7 \u09B8\u09BE\u09A1\u09BC\u09BE ", agoText(pcAgo), "\u0964 \u09A8\u09A4\u09C1\u09A8 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u0986\u09B8\u099B\u09C7 \u09A8\u09BE \u2014 \u09AA\u09BF\u09B8\u09BF \u099A\u09BE\u09B2\u09C1 \u0986\u099B\u09C7 \u0995\u09BF\u09A8\u09BE \u09A6\u09C7\u0996\u09C1\u09A8\u0964")), deviceDown && React.createElement("button", {
-    className: "task bad",
+  }), React.createElement("span", null, React.createElement("b", null, "\u09AA\u09BF\u09B8\u09BF \u09AC\u09A8\u09CD\u09A7 \u09AC\u09BE \u09AC\u09CD\u09B0\u09BF\u099C \u099A\u09B2\u099B\u09C7 \u09A8\u09BE"), " \xB7 \u09B6\u09C7\u09B7 \u09B8\u09BE\u09A1\u09BC\u09BE ", agoText(pcAgo), "\u0964 \u09A8\u09A4\u09C1\u09A8 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09AE\u09C7\u09B6\u09BF\u09A8\u09C7 \u099C\u09AE\u09BE \u09A5\u09BE\u0995\u099B\u09C7 \u2014 \u09AA\u09BF\u09B8\u09BF \u099A\u09BE\u09B2\u09C1 \u09B9\u09B2\u09C7 \u09A8\u09BF\u099C\u09C7 \u09A5\u09C7\u0995\u09C7 \u099A\u09B2\u09C7 \u0986\u09B8\u09AC\u09C7\u0964")), deviceDown && React.createElement("button", {
+    className: "task",
     onClick: () => go("settings")
   }, React.createElement(Icon, {
-    n: "warn",
+    n: "info",
     s: 18
-  }), React.createElement("span", null, React.createElement("b", null, "\u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09AE\u09C7\u09B6\u09BF\u09A8 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u0995\u09B0\u099B\u09C7 \u09A8\u09BE"), " \xB7 \u09B6\u09C7\u09B7 ", agoText(devAgo), "\u0964 \u09AE\u09C7\u09B6\u09BF\u09A8\u09C7\u09B0 \u09A4\u09BE\u09B0 \u09AC\u09BE \u09AA\u09BF\u09B8\u09BF\u09B0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE \u09A6\u09C7\u0996\u09C1\u09A8\u0964")), noRate.length > 0 && React.createElement("button", {
+  }), React.createElement("span", null, React.createElement("b", null, "\u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09AE\u09C7\u09B6\u09BF\u09A8 \u09AA\u09BF\u09B8\u09BF\u09B0 \u09B8\u09BE\u09A5\u09C7 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u0995\u09B0\u099B\u09C7 \u09A8\u09BE"), " \xB7 \u09B6\u09C7\u09B7 ", agoText(devAgo), "\u0964 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09AE\u09C7\u09B6\u09BF\u09A8\u09C7\u0987 \u099C\u09AE\u09BE \u09A5\u09BE\u0995\u099B\u09C7\u0964", st.meta.pcIp && st.meta.pcIp !== "?" ? React.createElement(React.Fragment, null, " \u09AA\u09BF\u09B8\u09BF\u09B0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE \u098F\u0996\u09A8 ", React.createElement("b", {
+    className: "ip"
+  }, st.meta.pcIp), " \u2014 \u09AE\u09C7\u09B6\u09BF\u09A8\u09C7\u09B0 Cloud Server-\u098F \u098F\u0987 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE\u0987 \u0986\u099B\u09C7 \u0995\u09BF\u09A8\u09BE \u09A6\u09C7\u0996\u09C1\u09A8\u0964") : " মেশিনের তার বা পিসির ঠিকানা দেখুন।")), noRate.length > 0 && React.createElement("button", {
     className: "task",
     onClick: () => go("workers")
   }, React.createElement(Icon, {
@@ -3112,23 +4165,43 @@ function DailyScreen({
     s: 18
   }), React.createElement("span", null, React.createElement("b", null, bn(noRate.length), " \u099C\u09A8\u09C7\u09B0 \u09B0\u09C7\u099F \u09AC\u09B8\u09BE\u09A8\u09CB \u09AC\u09BE\u0995\u09BF"), " \xB7 ", noRate.slice(0, 4).map(p => RH.workerName(ctx.workers[p], p)).join(", "), noRate.length > 4 ? " …" : ""))), inf.off && React.createElement("div", {
     className: "note"
-  }, "\u09B6\u09C1\u0995\u09CD\u09B0\u09AC\u09BE\u09B0 \u2014 \u09B8\u09BE\u09AA\u09CD\u09A4\u09BE\u09B9\u09BF\u0995 \u099B\u09C1\u099F\u09BF\u0964", present ? " যাঁরা কাজ করেছেন তাঁদের হাজিরা গোনা হয়েছে।" : ""), inf.holiday && React.createElement("div", {
+  }, "\u09B6\u09C1\u0995\u09CD\u09B0\u09AC\u09BE\u09B0 \u2014 \u09B8\u09BE\u09AA\u09CD\u09A4\u09BE\u09B9\u09BF\u0995 \u099B\u09C1\u099F\u09BF\u0964", n.present ? " যাঁরা কাজ করেছেন তাঁদের হাজিরা গোনা হয়েছে।" : ""), inf.holiday && React.createElement("div", {
     className: "note"
   }, "\u098F\u09A6\u09BF\u09A8 \u09AA\u09CD\u09B0\u09BE\u09AF\u09BC \u0995\u09C7\u0989 \u0986\u09B8\u09C7\u09A8\u09A8\u09BF \u2014 \u0995\u09BE\u09B0\u0996\u09BE\u09A8\u09BE \u09AC\u09A8\u09CD\u09A7 \u099B\u09BF\u09B2 \u09A7\u09B0\u09C7 \u09A8\u09BF\u09AF\u09BC\u09C7 \u0995\u09BE\u0989\u0995\u09C7 \u0985\u09A8\u09C1\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4 \u09A7\u09B0\u09BE \u09B9\u09AF\u09BC\u09A8\u09BF\u0964"), React.createElement("div", {
     className: "stats s4"
   }, React.createElement(Stat, {
     label: "\u0989\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4",
-    value: React.createElement(React.Fragment, null, bn(present), React.createElement("small", null, "/", bn(rows.filter(x => x.c.expected || x.c.status !== "absent").length)))
+    value: React.createElement(React.Fragment, null, bn(n.present), React.createElement("small", null, "/", bn(expectedN))),
+    kind: "ok",
+    on: cur === "present",
+    onClick: () => tog("present")
   }), React.createElement(Stat, {
     label: "\u09A6\u09C7\u09B0\u09BF\u09A4\u09C7",
-    value: bn(late),
-    sub: s.graceMin > 0 ? bn(s.graceMin) + " মিনিট ছাড়ের পরে" : clock(RH.toMin(s.start)) + "-এর পরে"
+    value: bn(n.late),
+    sub: s.graceMin > 0 ? bn(s.graceMin) + " মিনিট ছাড়ের পরে" : clock(S) + "-এর পরে ঢুকেছেন",
+    kind: "warn",
+    on: cur === "late",
+    onClick: () => tog("late")
   }), React.createElement(Stat, {
     label: beforeStart ? "এখনো আসেননি" : "অনুপস্থিত",
-    value: bn(absent)
-  }), React.createElement(Stat, {
-    label: isToday ? "কাজ (এ পর্যন্ত)" : "মোট কাজ",
-    value: hrs(hoursSum, true)
+    value: bn(n.absent),
+    kind: "bad",
+    on: cur === "absent",
+    onClick: () => tog("absent")
+  }), isToday ? React.createElement(Stat, {
+    label: "\u098F\u0996\u09A8\u09CB \u0995\u09BE\u099C\u09C7",
+    value: bn(n.live),
+    sub: "\u09AC\u09C7\u09B0 \u09B9\u0993\u09AF\u09BC\u09BE\u09B0 \u09AA\u09BE\u099E\u09CD\u099A \u09A6\u09C7\u09A8\u09A8\u09BF",
+    kind: "info",
+    on: cur === "live",
+    onClick: () => tog("live")
+  }) : React.createElement(Stat, {
+    label: "\u0993\u09AD\u09BE\u09B0\u099F\u09BE\u0987\u09AE",
+    value: bn(n.ot),
+    sub: "পুরো দিনের পর " + bn(s.otStepHours) + " ঘণ্টা বা বেশি",
+    kind: "info",
+    on: cur === "ot",
+    onClick: () => tog("ot")
   })), React.createElement(DeptChips, {
     dept: dept,
     setDept: setDept,
@@ -3148,9 +4221,21 @@ function DailyScreen({
       l: "টাইমলাইন",
       i: "bars"
     }]
-  })), rows.length === 0 && React.createElement("div", {
+  }), React.createElement("span", {
+    className: "grow"
+  })), React.createElement("div", {
+    className: "list-h" + (cur ? " on" : "")
+  }, React.createElement("b", null, cur ? F[cur].t : "সবাই"), React.createElement("span", {
+    className: "muted"
+  }, bn(rows.length), " \u099C\u09A8", hoursSum > 0 ? " · মোট " + hrs(hoursSum, true) : ""), cur && React.createElement("button", {
+    className: "btn sm ghost",
+    onClick: () => setFlt("")
+  }, React.createElement(Icon, {
+    n: "close",
+    s: 14
+  }), " \u09B8\u09AC\u09BE\u0987\u0995\u09C7 \u09A6\u09C7\u0996\u09C1\u09A8")), rows.length === 0 && React.createElement("div", {
     className: "card"
-  }, React.createElement(Empty, null, inf.off ? "এদিন কেউ কাজ করেননি।" : "কোনো কর্মী নেই। ডিভাইসে কর্মী যোগ করলে এখানে নিজে থেকে চলে আসবে।")), rows.length > 0 && view === "timeline" && React.createElement(ChartCard, {
+  }, React.createElement(Empty, null, cur ? "এই তালিকায় কেউ নেই।" : inf.off ? "এদিন কেউ কাজ করেননি।" : "কোনো কর্মী নেই। ডিভাইসে কর্মী যোগ করলে এখানে নিজে থেকে চলে আসবে।")), rows.length > 0 && view === "timeline" && React.createElement(ChartCard, {
     title: "\u09A6\u09BF\u09A8\u09C7\u09B0 \u099F\u09BE\u0987\u09AE\u09B2\u09BE\u0987\u09A8",
     sub: "\u0995\u09C7 \u0995\u0996\u09A8 \u09A2\u09C1\u0995\u09C7\u099B\u09C7\u09A8, \u09A6\u09C1\u09AA\u09C1\u09B0\u09C7\u09B0 \u09AC\u09BF\u09B0\u09A4\u09BF, \u0995\u0996\u09A8 \u09AC\u09C7\u09B0 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7\u09A8 \u2014 \u09A8\u09BE\u09AE \u099A\u09BE\u09AA\u09B2\u09C7 \u09AC\u09BF\u09B8\u09CD\u09A4\u09BE\u09B0\u09BF\u09A4"
   }, React.createElement(Timeline, {
@@ -3164,20 +4249,26 @@ function DailyScreen({
     }),
     rows: rows.map(x => ({
       key: x.pin,
+      pin: x.pin,
       label: x.name,
       dept: x.dept,
       segs: x.c.segs,
+      sub: spanText(x.c),
       ticks: x.c.punches.map(RH.toMin),
-      right: React.createElement(UnitsBadge, {
+      aria: x.c.status,
+      right: React.createElement("span", {
+        className: "tl-rv"
+      }, React.createElement(UnitsBadge, {
         c: x.c
-      }),
-      aria: x.c.status
+      }), x.c.workedMin > 0 && x.c.status !== "absent" && React.createElement("small", null, hrs(x.c.workedMin), "\u0998"))
     }))
   })), rows.length > 0 && view === "list" && React.createElement("div", {
     className: "card list"
-  }, rows.map(x => React.createElement("button", {
+  }, rows.map(x => React.createElement("div", {
     key: x.pin,
-    className: "row",
+    className: "row act"
+  }, React.createElement("button", {
+    className: "row-tap",
     onClick: () => open({
       t: "day",
       pin: x.pin,
@@ -3207,9 +4298,13 @@ function DailyScreen({
     className: "nw"
   }, dur(x.c.workedMin), x.c.est ? " (আন্দাজ)" : x.c.live ? " (চলছে)" : ""))))), React.createElement("span", {
     className: "row-end"
-  }, statusChip(x.c, nowM), React.createElement(UnitsBadge, {
+  }, statusChip(x.c, nowM), lateOf(x.c) > 0 && !chipLate(x.c) && React.createElement("span", {
+    className: "late-tag"
+  }, "\u09B2\u09C7\u099F \u09AA\u09CD\u09B0\u09AC\u09C7\u09B6 \xB7 ", dur(lateOf(x.c))), React.createElement(UnitsBadge, {
     c: x.c
-  }))))));
+  }))), x.c.status === "absent" && React.createElement(PhoneBtn, {
+    w: x.w
+  })))));
 }
 function deltaOf(cur, prev, fmt, eps) {
   return {
@@ -3291,6 +4386,28 @@ function WeekView({
     ...g,
     rows: g.rows.filter(r => !r.idle || r.paid)
   })).filter(g => g.rows.length);
+  const r1 = v => Math.round(v * 10) / 10;
+  const exportCSV = () => {
+    const out = [["আইডি", "নাম", "বিভাগ"].concat(days.map(d => WDS[RH.weekday(d)] + " " + dm(d))).concat(["মোট ঘণ্টা", "গড় ঘণ্টা/দিন", "উপস্থিত দিন", "হাজিরা", "ওভারটাইম", "রেট", "মজুরি", "অগ্রিম", "প্রদেয়", "পরিশোধিত"])];
+    shownRows.forEach(r => {
+      out.push([r.pin, r.name, r.dept || ""].concat(days.map(d => {
+        const c = r.cells[rep.dates.indexOf(d)];
+        return c.future ? "" : c.off ? "ছুটি" : c.status === "absent" ? c.expected ? "অনুপস্থিত" : "" : r1(c.workedMin / 60);
+      })).concat([r1(r.hours / 60), r.avg ? r1(r.avg / 60) : "", r.present, r.att, r.ot, r.noRate ? "রেট বাকি" : r.rates.join("/"), r.noRate ? "" : r.gross, r.adv || "", r.noRate ? "" : r.net, r.paid ? "হ্যাঁ" : ""]));
+    });
+    out.push(["", "সবাই মিলে", ""].concat(days.map(() => "")).concat([r1(rep.tot.hours / 60), rep.kpis.avg ? r1(rep.kpis.avg / 60) : "", rep.tot.present, rep.tot.att, rep.tot.ot, "", rep.tot.gross, rep.tot.adv || "", rep.tot.net, ""]));
+    const al = ctx.adv.filter(a => a.d >= wk.from && a.d <= wk.to && RH.deptMatch(ctx.workers[a.pin], dept)).sort(advSort).reverse();
+    if (al.length) {
+      out.push([]);
+      out.push(["অগ্রিমের বিবরণ"]);
+      out.push(["তারিখ", "সময়", "আইডি", "নাম", "টাকা", "নোট"]);
+      al.forEach(a => {
+        const m = advMin(a);
+        out.push([fmtShort(a.d), m != null ? clockP(m) : "", a.pin, RH.workerName(ctx.workers[a.pin], a.pin), +a.amt || 0, a.note || ""]);
+      });
+    }
+    downloadCSV("hajira-saptahik-" + wk.from + "-" + wk.to + (dept !== "all" ? "-" + deptLabel(dept) : "") + ".csv", out);
+  };
   return React.createElement("div", null, React.createElement(WeekPicker, {
     weekId: weekId,
     setWeekId: setWeekId,
@@ -3346,7 +4463,13 @@ function WeekView({
   }, React.createElement(Icon, {
     n: "check",
     s: 16
-  }), " \u09B8\u09AC \u09AA\u09B0\u09BF\u09B6\u09CB\u09A7\u09BF\u09A4"), React.createElement("span", {
+  }), " \u09B8\u09AC \u09AA\u09B0\u09BF\u09B6\u09CB\u09A7\u09BF\u09A4"), React.createElement("button", {
+    className: "btn sm",
+    onClick: exportCSV
+  }, React.createElement(Icon, {
+    n: "download",
+    s: 16
+  }), " Excel"), React.createElement("span", {
     className: "grow"
   }), React.createElement(Seg, {
     small: true,
@@ -3408,6 +4531,27 @@ function WeekView({
       weekId: wk.id
     }),
     onPaid: togglePaid
+  }), React.createElement("div", {
+    className: "sec-title adv-h"
+  }, React.createElement(Icon, {
+    n: "cash",
+    s: 16
+  }), " \u098F\u0987 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u0985\u0997\u09CD\u09B0\u09BF\u09AE \u0996\u09BE\u09A4\u09BE", React.createElement("span", {
+    className: "grow"
+  }), React.createElement("button", {
+    className: "btn sm",
+    onClick: () => open({
+      t: "adv",
+      weekId: wk.id
+    })
+  }, React.createElement(Icon, {
+    n: "plus",
+    s: 16
+  }), " \u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A6\u09BF\u09A8")), React.createElement(AdvLedger, {
+    ctx: ctx,
+    list: ctx.adv.filter(a => a.d >= wk.from && a.d <= wk.to && RH.deptMatch(ctx.workers[a.pin], dept)).sort(advSort),
+    act: act,
+    empty: "\u098F\u0987 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u0995\u09CB\u09A8\u09CB \u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A6\u09C7\u0993\u09AF\u09BC\u09BE \u09B9\u09AF\u09BC\u09A8\u09BF\u0964"
   }), (est > 0 || early > 0) && React.createElement("button", {
     className: "review-line",
     onClick: () => open({
@@ -3627,6 +4771,13 @@ function MonthView({
     ...g,
     rows: g.rows.filter(r => !r.idle)
   })).filter(g => g.rows.length);
+  const exportCSV = () => {
+    const out = [["আইডি", "নাম", "বিভাগ"].concat(ds.map(d => bn(+d.slice(8)))).concat(["উপস্থিত দিন", "হাজিরা", "ওভারটাইম", "মোট হাজিরা", "ঘণ্টা", "মজুরি"])];
+    groups.forEach(g => g.rows.forEach(r => {
+      out.push([r.pin, r.name, r.dept || ""].concat(r.cells.map(c => c.future ? "" : c.off ? "ছু" : c.status === "absent" ? c.expected ? "অ" : "" : c.att)).concat([r.present, r.att, r.ot, r.units, Math.round(r.hours / 6) / 10, r.noRate ? "রেট বাকি" : r.gross]));
+    }));
+    downloadCSV("hajira-masik-" + ym + ".csv", out);
+  };
   return React.createElement("div", null, React.createElement(MonthPicker, {
     ym: ym,
     setYm: setYm,
@@ -3683,6 +4834,12 @@ function MonthView({
   }), "\u0986\u09A8\u09CD\u09A6\u09BE\u099C")), React.createElement("span", {
     className: "grow"
   }), React.createElement("button", {
+    className: "btn sm",
+    onClick: exportCSV
+  }, React.createElement(Icon, {
+    n: "download",
+    s: 16
+  }), " Excel"), React.createElement("button", {
     className: "btn sm",
     onClick: () => printJob({
       t: "month",
@@ -3788,6 +4945,17 @@ function DeptScreen({
     st.need(RH.addDays(wk.from, -63));
   }, [wk.from]);
   const dr = useMemo(() => RH.deptReport(ctx, wk, 8), [ctx, wk.id]);
+  const partial = wk.to > today;
+  const cmpTo = partial ? RH.addDays(today, -1) : wk.to;
+  const canCmp = cmpTo >= wk.from;
+  const prevWk = RH.weekOf(RH.addDays(wk.from, -1), s);
+  const curR = useMemo(() => partial && canCmp ? RH.rangeReport(ctx, wk.from, cmpTo, "all", {}) : dr.report, [ctx, wk.id, partial, cmpTo, dr]);
+  const prevR = useMemo(() => canCmp ? RH.rangeReport(ctx, prevWk.from, partial ? RH.addDays(cmpTo, -7) : prevWk.to, "all", {}) : null, [ctx, prevWk.id, partial, cmpTo, canCmp]);
+  const mFrom = today.slice(0, 8) + "01";
+  const mon = useMemo(() => RH.rangeReport(ctx, mFrom, today, "all", {}), [ctx, mFrom]);
+  const T = dr.report.tot;
+  const wdays = dr.report.dates.filter(d => d <= today && RH.dinfo(ctx, d).working).length;
+  const people = dr.report.rows.filter(r => !r.idle).length;
   const [metric, setMetric] = usePref("deptMetric", "hours");
   const [mode, setMode] = usePref("deptMode", "hours");
   const assigned = dr.depts.some(d => d.key);
@@ -3847,7 +5015,38 @@ function DeptScreen({
     setWeekId: setWeekId,
     s: s,
     today: today
-  }), !assigned && React.createElement("div", {
+  }), React.createElement("div", {
+    className: "stats herorow"
+  }, React.createElement(Stat, {
+    hero: true,
+    label: partial ? "এই সপ্তাহের মোট মজুরি (আজ পর্যন্ত)" : "এই সপ্তাহের মোট মজুরি",
+    value: money(T.gross),
+    sub: "হাজিরা " + units(T.units) + (T.adv ? " · অগ্রিম " + money(T.adv) + " · বেতনে দিতে হবে " + money(T.net) : ""),
+    delta: prevR ? {
+      v: curR.tot.gross,
+      prev: prevR.tot.gross,
+      fmt: money,
+      eps: 1,
+      label: partial ? "গত সপ্তাহের একই দিনের চেয়ে" : "গত সপ্তাহের চেয়ে"
+    } : null,
+    neutral: true
+  }), React.createElement(Stat, {
+    label: "\u09AE\u09CB\u099F \u0995\u09B0\u09CD\u09AE\u0998\u09A3\u09CD\u099F\u09BE",
+    value: num(T.hours / 60, 0) + " ঘ",
+    sub: "জনপ্রতি দিনে গড় " + hrs(dr.report.kpis.avg, true)
+  }), React.createElement(Stat, {
+    label: "\u0993\u09AD\u09BE\u09B0\u099F\u09BE\u0987\u09AE\u09C7\u09B0 \u09AE\u099C\u09C1\u09B0\u09BF",
+    value: money(T.otPay),
+    sub: T.gross ? pct(T.otPay / T.gross) + " মোট মজুরির" : null
+  }), React.createElement(Stat, {
+    label: "এ মাসের মজুরি",
+    value: money(mon.tot.gross),
+    sub: monthLabel(today.slice(0, 7)) + " · আজ পর্যন্ত"
+  }), React.createElement(Stat, {
+    label: "\u0995\u09B0\u09CD\u09AE\u09C0",
+    value: bn(people) + " জন",
+    sub: wdays ? "গড়ে রোজ " + num(T.present / wdays, 0) + " জন আসেন" : null
+  })), !assigned && React.createElement("div", {
     className: "note"
   }, "\u0995\u09B0\u09CD\u09AE\u09C0\u09A6\u09C7\u09B0 \u09AC\u09BF\u09AD\u09BE\u0997 \u098F\u0996\u09A8\u09CB \u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF, \u09A4\u09BE\u0987 \u09B8\u09AC\u09BE\u0987 \"\u09AC\u09BF\u09AD\u09BE\u0997 \u09A8\u09C7\u0987\"-\u09A4\u09C7 \u0986\u099B\u09C7\u09A8\u0964 \u0995\u09B0\u09CD\u09AE\u09C0 \u09AA\u09BE\u09A4\u09BE\u09AF\u09BC \u09AA\u09CD\u09B0\u09A4\u09CD\u09AF\u09C7\u0995\u09C7\u09B0 \u09AC\u09BF\u09AD\u09BE\u0997 \u09AC\u09C7\u099B\u09C7 \u09A6\u09BF\u09B2\u09C7 \u098F\u0996\u09BE\u09A8\u09C7 \u099B\u09C1\u09A4\u09BE\u09B0, \u09A8\u0995\u09B6\u09BE, \u09AC\u09BE\u09B0\u09CD\u09A8\u09BF\u09B6, \u09AA\u09B0\u09BF\u09AC\u09B9\u09A8 \u0986\u09B2\u09BE\u09A6\u09BE \u0995\u09B0\u09C7 \u09A4\u09C1\u09B2\u09A8\u09BE \u09A6\u09C7\u0996\u09BE\u09AC\u09C7\u0964", React.createElement("div", null, React.createElement("button", {
     className: "btn sm",
@@ -4001,9 +5200,12 @@ function StatsScreen({
   const an = useMemo(() => RH.analytics(ctx, from, to, dept), [ctx, from, to, dept]);
   const tr = useMemo(() => RH.trend(ctx, to, dept, 12), [ctx, to, dept]);
   const [stPct, setStPct] = usePref("statsPct", false);
-  const [rank, setRank] = usePref("statsRank", "hours");
-  const k = an.kpis;
+  const [rank, setRank] = usePref("statsRank", "avg");
+  const [disc, setDisc] = usePref("statsDisc", "late");
+  const k = an.kpis,
+    T = an.report.tot;
   const S = RH.toMin(s.start) + (+s.graceMin || 0);
+  const rowsAll = an.report.rows.filter(r => !r.idle);
   const stSeries = ["ontime", "late", "unknown", "half", "absent"].map(key => ({
     key,
     label: ST_LABEL[key],
@@ -4024,44 +5226,127 @@ function StatsScreen({
       values: v
     };
   });
-  const trLabels = tr.map(t => dm(t.week.to));
-  const trTips = tr.map(t => weekLabel(t.week, {
+  const sumB = f => an.status.reduce((a, b) => a + f(b), 0);
+  const stDays = sumB(b => b.days),
+    stPresent = sumB(b => b.ontime + b.late + b.unknown + b.half),
+    stLate = sumB(b => b.late);
+  const sayStatus = stDays ? "কাজের দিনে গড়ে " + num(stPresent / stDays, 0) + " জন আসেন, তার মধ্যে " + num(stLate / stDays, 0) + " জন দেরিতে।" : null;
+  const trw = tr.filter(t => t.has).slice(-8);
+  const fds = trw.map(t => t.fd).filter(x => x);
+  const fdAvg = fds.length ? fds.reduce((a, b) => a + b, 0) / fds.length : null;
+  const tip = t => weekLabel(t.week, {
     short: true
-  }) + (t.partial ? " (চলতি)" : ""));
-  const arrIdx = an.arrival.findIndex(b => b.a <= S && S < b.b);
-  const arrData = an.arrival.map(b => ({
-    label: b.label || clock(b.a),
-    tip: b.label || clock(b.a) + "–" + clock(b.b),
+  }) + (t.partial ? " (চলতি)" : "");
+  const avgData = trw.map(t => ({
+    label: dm(t.week.to),
+    sub: t.partial ? "চলতি" : null,
+    tip: tip(t),
     values: {
-      n: b.n
+      a: t.avg || 0
     },
-    color: b.a >= S ? PAL.st.late : PAL.st.ontime
+    faded: t.partial
   }));
-  const depData = an.departure.map(b => ({
-    label: b.label || clock(b.a),
-    tip: b.label || clock(b.a) + "–" + clock(b.b),
-    values: {
-      n: b.n
+  const lastW = trw[trw.length - 1];
+  const sayAvg = lastW && lastW.avg != null && lastW.fd ? (lastW.partial ? "চলতি সপ্তাহে" : "শেষ সপ্তাহে") + " জনপ্রতি দিনে গড়ে " + num(lastW.avg) + " ঘণ্টা কাজ হয়েছে — মাগরিব পর্যন্ত পুরো দিনের (" + num(lastW.fd) + " ঘ) চেয়ে " + num(Math.abs(lastW.avg - lastW.fd)) + " ঘণ্টা " + (lastW.avg >= lastW.fd ? "বেশি (ওভারটাইম)।" : "কম।") : null;
+  const DISC = {
+    late: {
+      l: "দেরিতে আসা",
+      u: "বার",
+      c: PAL.st.late,
+      v: t => t.late,
+      w: "দেরি"
+    },
+    absent: {
+      l: "অনুপস্থিতি",
+      u: "দিন",
+      c: PAL.gray,
+      v: t => t.absent,
+      w: "অনুপস্থিতি"
+    },
+    incomplete: {
+      l: "পাঞ্চ ভুল",
+      u: "দিন",
+      c: PAL.blue,
+      v: t => t.incomplete,
+      w: "পাঞ্চ ভুল"
     }
+  };
+  const dd = DISC[disc] || DISC.late;
+  const discData = trw.map(t => ({
+    label: dm(t.week.to),
+    sub: t.partial ? "চলতি" : null,
+    tip: tip(t),
+    values: {
+      v: dd.v(t)
+    },
+    faded: t.partial
   }));
-  const mgIdx = an.maghribAvg != null ? an.departure.findIndex(b => b.a <= an.maghribAvg && an.maghribAvg < b.b) : -1;
-  const mgFrac = mgIdx >= 0 ? mgIdx + (an.maghribAvg - an.departure[mgIdx].a) / (an.departure[mgIdx].b - an.departure[mgIdx].a) : null;
-  const arrFrac = arrIdx >= 0 ? arrIdx + (S - an.arrival[arrIdx].a) / (an.arrival[arrIdx].b - an.arrival[arrIdx].a) : null;
+  const full = trw.filter(t => !t.partial);
+  const fa = full[full.length - 1],
+    fb = full[full.length - 2];
+  let sayDisc = null;
+  if (fa) {
+    sayDisc = "শেষ পুরো সপ্তাহে " + dd.w + " " + bn(dd.v(fa)) + " " + dd.u;
+    if (fb) {
+      const d = dd.v(fa) - dd.v(fb);
+      sayDisc += " — তার আগের সপ্তাহে ছিল " + bn(dd.v(fb)) + "। " + (d < 0 ? "কমেছে, ভালো লক্ষণ।" : d > 0 ? "বেড়েছে।" : "একই আছে।");
+    } else sayDisc += "।";
+    if (lastW && lastW.partial) sayDisc += " চলতি সপ্তাহে এ পর্যন্ত " + bn(dd.v(lastW)) + "।";
+  }
+  const wdTop = an.weekdays.filter(x => x.exp > 0).slice().sort((a, b) => b.rate - a.rate)[0];
+  const sayWd = wdTop && wdTop.rate > 0 ? WD[wdTop.wd] + " অনুপস্থিতি সবচেয়ে বেশি — প্রতি ১০০ জনে " + bn(Math.round(wdTop.rate * 100)) + " জন আসেন না।" : null;
+  const AL = {
+    ontime: "সময়মতো (" + clock(S) + "-এর মধ্যে)",
+    l15: "১৫ মিনিট পর্যন্ত দেরি",
+    l30: "১৫–৩০ মিনিট দেরি",
+    l60: "৩০ মিনিট–১ ঘণ্টা দেরি",
+    l60p: "১ ঘণ্টার বেশি দেরি"
+  };
+  const aTot = an.arrCats.reduce((a, x) => a + x.n, 0);
+  const arrRows = an.arrCats.map(x => ({
+    key: x.k,
+    label: AL[x.k],
+    sub: bn(x.n) + " বার",
+    value: aTot ? x.n / aTot : 0,
+    color: x.k === "ontime" ? PAL.st.ontime : PAL.st.late
+  }));
+  const lateBig = an.arrCats.filter(x => x.k === "l60" || x.k === "l60p").reduce((a, x) => a + x.n, 0);
+  const sayArr = aTot ? "১০০ বারের মধ্যে " + bn(Math.round(an.arrCats[0].n / aTot * 100)) + " বার সময়মতো এসেছেন; আধা ঘণ্টার বেশি দেরি হয়েছে " + bn(lateBig) + " বার।" : null;
+  const DL = {
+    early: "মাগরিবের আগেই চলে গেছেন",
+    atM: "মাগরিবের সময় (আধা ঘণ্টার মধ্যে)",
+    after: "মাগরিবের পর ৩ ঘণ্টা পর্যন্ত",
+    night: "৩ ঘণ্টার বেশি পরে (রাত পর্যন্ত)",
+    nopunch: "বের হওয়ার পাঞ্চ দেননি"
+  };
+  const DC = {
+    early: PAL.terra,
+    atM: PAL.green,
+    after: PAL.blue,
+    night: PAL.blue,
+    nopunch: PAL.gray
+  };
+  const dTot = an.depCats.reduce((a, x) => a + x.n, 0);
+  const depRows = an.depCats.map(x => ({
+    key: x.k,
+    label: DL[x.k],
+    sub: bn(x.n) + " দিন",
+    value: dTot ? x.n / dTot : 0,
+    color: DC[x.k]
+  }));
+  const dTop = an.depCats.filter(x => x.k !== "nopunch").slice().sort((a, b) => b.n - a.n)[0];
+  const noOut = an.depCats.filter(x => x.k === "nopunch")[0];
+  const sayDep = dTot && dTop ? "বেশিরভাগ দিন (" + pct(dTop.n / dTot) + ") " + DL[dTop.k].replace(/ \(.*\)$/, "") + "।" + (noOut && noOut.n / dTot > 0.12 ? " তবে " + pct(noOut.n / dTot) + " দিন বের হওয়ার পাঞ্চই দেননি — তখন মাগরিব পর্যন্ত ধরা হয়েছে।" : "") : null;
   const R = {
+    avg: {
+      l: "দিনে গড় কাজ",
+      f: v => num(v) + " ঘ",
+      v: r => r.avg == null ? null : r.avg / 60
+    },
     hours: {
       l: "মোট ঘণ্টা",
       f: v => num(v, 0) + " ঘ",
       v: r => r.hours / 60
-    },
-    avg: {
-      l: "গড় ঘণ্টা / দিন",
-      f: v => num(v) + " ঘ",
-      v: r => r.avg == null ? null : r.avg / 60
-    },
-    ot: {
-      l: "ওভারটাইম ঘণ্টা",
-      f: v => num(v) + " ঘ",
-      v: r => r.otMin / 60
     },
     att: {
       l: "উপস্থিতির হার",
@@ -4073,20 +5358,39 @@ function StatsScreen({
       f: v => bn(v) + " দিন",
       v: r => r.late
     },
+    absent: {
+      l: "অনুপস্থিত দিন",
+      f: v => bn(v) + " দিন",
+      v: r => r.absent
+    },
     arrive: {
-      l: "গড় ঢোকার সময়",
+      l: "গড়ে কখন ঢোকেন",
       f: v => clock(v),
       v: r => r.avgIn
+    },
+    ot: {
+      l: "ওভারটাইম ঘণ্টা",
+      f: v => num(v) + " ঘ",
+      v: r => r.otMin / 60
+    },
+    wages: {
+      l: "মজুরি",
+      f: money,
+      v: r => r.noRate ? null : r.gross
     }
   };
-  const rm = R[rank] || R.hours;
-  const rrows = an.report.rows.filter(r => !r.idle).map(r => ({
+  const rm = R[rank] || R.avg;
+  const rrows = rowsAll.map(r => ({
     key: r.pin,
     label: r.name,
     sub: r.dept || null,
     value: rm.v(r),
     color: deptColor(r.dept)
   })).sort((a, b) => rank === "arrive" ? (a.value || 9999) - (b.value || 9999) : (b.value || 0) - (a.value || 0));
+  const usedDepts = Object.keys(rowsAll.reduce((a, r) => {
+    a[r.dept] = 1;
+    return a;
+  }, {}));
   const deptKeys = [];
   tr.forEach(t => Object.keys(t.deptWages).forEach(kk => {
     if (deptKeys.indexOf(kk) < 0) deptKeys.push(kk);
@@ -4096,21 +5400,22 @@ function StatsScreen({
     label: kk || "বিভাগ নেই",
     color: deptColor(kk)
   }));
-  const wageData = tr.map((t, i) => {
+  const trw12 = tr.filter(t => t.has);
+  const wageData = trw12.map(t => {
     const v = {};
     wageSeries.forEach(x => {
       v[x.key] = t.deptWages[x.key === "-" ? "" : x.key] || 0;
     });
     return {
-      label: trLabels[i],
-      tip: trTips[i],
-      values: v
+      label: dm(t.week.to),
+      sub: t.partial ? "চলতি" : null,
+      tip: tip(t),
+      values: v,
+      faded: t.partial
     };
   });
-  const usedDepts = Object.keys(an.report.rows.reduce((a, r) => {
-    if (!r.idle) a[r.dept] = 1;
-    return a;
-  }, {}));
+  const full4 = trw12.filter(t => !t.partial).slice(-4);
+  const sayWage = full4.length ? "শেষ " + bn(full4.length) + " পুরো সপ্তাহে গড়ে সপ্তাহে " + money(full4.reduce((a, t) => a + t.wages, 0) / full4.length) + " মজুরি; এর মধ্যে ওভারটাইম " + money(full4.reduce((a, t) => a + t.otPay, 0) / full4.length) + "।" : null;
   return React.createElement("div", null, React.createElement("div", {
     className: "chips-row",
     role: "tablist",
@@ -4161,34 +5466,39 @@ function StatsScreen({
   }), " \xB7 ", bn(k.workers), " \u099C\u09A8 \u0995\u09B0\u09CD\u09AE\u09C0"), React.createElement("div", {
     className: "stats s3"
   }, React.createElement(Stat, {
-    label: "\u0989\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4\u09BF\u09B0 \u09B9\u09BE\u09B0",
+    label: "\u0989\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4\u09BF",
     value: pct(k.attRate),
-    sub: "\u0995\u09BE\u099C\u09C7\u09B0 \u09A6\u09BF\u09A8\u09C7 \u09AF\u09A4\u099C\u09A8 \u0986\u09B8\u09BE\u09B0 \u0995\u09A5\u09BE"
+    sub: "\u0995\u09BE\u099C\u09C7\u09B0 \u09A6\u09BF\u09A8\u09C7 \u09AF\u09A4\u099C\u09A8 \u0986\u09B8\u09BE\u09B0 \u0995\u09A5\u09BE, \u09A4\u09BE\u09B0 \u0995\u09A4\u099C\u09A8 \u098F\u09B8\u09C7\u099B\u09C7\u09A8"
   }), React.createElement(Stat, {
     label: "\u09B8\u09AE\u09AF\u09BC\u09AE\u09A4\u09CB \u0986\u09B8\u09BE",
     value: pct(k.onTime),
     sub: clock(S) + "-এর মধ্যে ঢুকেছেন"
   }), React.createElement(Stat, {
-    label: "\u0997\u09A1\u09BC \u0995\u09BE\u099C / \u09A6\u09BF\u09A8",
+    label: "\u09A6\u09BF\u09A8\u09C7 \u0997\u09A1\u09BC \u0995\u09BE\u099C",
     value: hrs(k.avg, true),
-    sub: "\u09AC\u09BF\u09B0\u09A4\u09BF \u09AC\u09BE\u09A6\u09C7"
-  }), React.createElement(Stat, {
-    label: "\u0993\u09AD\u09BE\u09B0\u099F\u09BE\u0987\u09AE \u0985\u0982\u09B6",
-    value: pct(k.otRatio),
-    sub: "\u09AE\u09CB\u099F \u0998\u09A3\u09CD\u099F\u09BE\u09B0 \u0995\u09A4 \u0985\u0982\u09B6"
-  }), React.createElement(Stat, {
-    label: "\u09AA\u09BE\u099E\u09CD\u099A \u09B8\u09AE\u09CD\u09AA\u09C2\u09B0\u09CD\u09A3",
-    value: pct(k.complete),
-    sub: "\u09A2\u09CB\u0995\u09BE-\u09AC\u09C7\u09B0 \u09A6\u09C1\u099F\u09CB\u0987 \u0986\u099B\u09C7"
+    sub: "\u099C\u09A8\u09AA\u09CD\u09B0\u09A4\u09BF, \u09A6\u09C1\u09AA\u09C1\u09B0\u09C7\u09B0 \u09AC\u09BF\u09B0\u09A4\u09BF \u09AC\u09BE\u09A6\u09C7"
   }), React.createElement(Stat, {
     label: "\u09AE\u09CB\u099F \u09AE\u099C\u09C1\u09B0\u09BF",
     value: money(k.wages),
     sub: "হাজিরা " + units(k.units)
-  })), React.createElement("div", {
+  }), React.createElement(Stat, {
+    label: "\u0993\u09AD\u09BE\u09B0\u099F\u09BE\u0987\u09AE\u09C7\u09B0 \u09AE\u099C\u09C1\u09B0\u09BF",
+    value: money(T.otPay),
+    sub: T.gross ? pct(T.otPay / T.gross) + " মোট মজুরির" : null
+  }), React.createElement(Stat, {
+    label: "\u09AA\u09BE\u099E\u09CD\u099A \u09AD\u09C1\u09B2",
+    value: bn(T.est) + " দিন",
+    sub: "\u09AC\u09C7\u09B0 \u09B9\u0993\u09AF\u09BC\u09BE\u09B0 \u09AA\u09BE\u099E\u09CD\u099A \u09A6\u09C7\u09A8\u09A8\u09BF"
+  })), React.createElement(Insights, {
+    rows: rowsAll,
+    an: an,
+    open: open
+  }), React.createElement("div", {
     className: "cgrid"
   }, React.createElement(ChartCard, {
-    title: an.byWeek ? "সপ্তাহভিত্তিক উপস্থিতি" : "প্রতিদিনের উপস্থিতি",
+    title: an.byWeek ? "প্রতি সপ্তাহে উপস্থিতি" : "প্রতিদিনের উপস্থিতি",
     sub: "\u0995\u09A4\u099C\u09A8 \u09B8\u09AE\u09AF\u09BC\u09AE\u09A4\u09CB, \u09A6\u09C7\u09B0\u09BF\u09A4\u09C7, \u0985\u09B0\u09CD\u09A7\u09C7\u0995 \u09A6\u09BF\u09A8 \u09AC\u09BE \u0985\u09A8\u09C1\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4",
+    say: sayStatus,
     right: React.createElement(Seg, {
       small: true,
       value: stPct,
@@ -4215,91 +5525,77 @@ function StatsScreen({
     fmt: v => stPct ? num(v, 0) + "%" : bn(Math.round(v)),
     empty: "\u098F\u0987 \u09B8\u09AE\u09AF\u09BC\u09C7 \u0995\u09CB\u09A8\u09CB \u0995\u09BE\u099C\u09C7\u09B0 \u09A6\u09BF\u09A8 \u09A8\u09C7\u0987"
   })), React.createElement(ChartCard, {
-    title: "\u0997\u09A1\u09BC \u0995\u09BE\u099C\u09C7\u09B0 \u0998\u09A3\u09CD\u099F\u09BE \u2014 \u09E7\u09E8 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9",
-    sub: "\u099C\u09A8\u09AA\u09CD\u09B0\u09A4\u09BF \u09A6\u09BF\u09A8\u09C7 \u0997\u09A1\u09BC\u09C7 \u0995\u09A4 \u0998\u09A3\u09CD\u099F\u09BE; \u09A1\u09CD\u09AF\u09BE\u09B6 \u09B0\u09C7\u0996\u09BE = \u09AE\u09BE\u0997\u09B0\u09BF\u09AC \u0985\u09A8\u09C1\u09AF\u09BE\u09AF\u09BC\u09C0 \u09AA\u09C1\u09B0\u09CB \u09A6\u09BF\u09A8",
+    title: "\u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u0997\u09A1\u09BC \u0995\u09BE\u099C\u09C7\u09B0 \u0998\u09A3\u09CD\u099F\u09BE",
+    sub: "\u099C\u09A8\u09AA\u09CD\u09B0\u09A4\u09BF \u09A6\u09BF\u09A8\u09C7 \u0995\u09A4 \u0998\u09A3\u09CD\u099F\u09BE \u0995\u09BE\u099C \u09B9\u09AF\u09BC\u09C7\u099B\u09C7",
+    say: sayAvg,
     legend: [{
       label: "গড় কাজ",
-      color: PAL.blue,
-      kind: "line"
+      color: PAL.blue
     }, {
-      label: "পুরো দিন",
+      label: "পুরো দিন (মাগরিব পর্যন্ত) ≈ " + num(fdAvg) + " ঘ",
       color: PAL.ref,
       kind: "dash"
-    }, {
-      label: "ওভারটাইম",
-      color: PAL.terra,
-      kind: "line"
     }],
     table: {
-      cols: ["সপ্তাহ", "গড় কাজ", "পুরো দিন", "ওভারটাইম"],
-      rows: tr.map((t, i) => [trTips[i], num(t.avg), num(t.fd), num(t.ot)])
+      cols: ["সপ্তাহ", "গড় কাজ", "পুরো দিন"],
+      rows: trw.map(t => [tip(t), num(t.avg), num(t.fd)])
     }
-  }, React.createElement(LineChart, {
-    labels: trLabels,
-    tips: trTips,
-    fmt: v => num(v) + " ঘ",
-    yFmt: v => num(v, 0),
+  }, React.createElement(BarChart, {
+    data: avgData,
     series: [{
-      key: "avg",
+      key: "a",
       label: "গড় কাজ",
-      color: PAL.blue,
-      values: tr.map(t => t.has ? t.avg : null)
-    }, {
-      key: "fd",
-      label: "পুরো দিন",
-      color: PAL.ref,
-      dash: true,
-      values: tr.map(t => t.has ? t.fd : null)
-    }, {
-      key: "ot",
-      label: "ওভারটাইম",
-      color: PAL.terra,
-      values: tr.map(t => t.has ? t.ot : null)
-    }]
-  })), React.createElement(ChartCard, {
-    title: "\u09B6\u09C3\u0999\u09CD\u0996\u09B2\u09BE \u2014 \u09E7\u09E8 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9",
-    sub: "\u09AA\u09CD\u09B0\u09A4\u09BF \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u09A6\u09C7\u09B0\u09BF, \u0985\u09A8\u09C1\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4\u09BF \u0986\u09B0 \u0985\u09B8\u09AE\u09CD\u09AA\u09C2\u09B0\u09CD\u09A3 \u09AA\u09BE\u099E\u09CD\u099A\u09C7\u09B0 \u09A6\u09BF\u09A8 (\u09B8\u09AC \u0995\u09B0\u09CD\u09AE\u09C0 \u09AE\u09BF\u09B2\u09C7)",
-    legend: [{
-      label: "দেরিতে আসা",
-      color: PAL.st.late,
-      kind: "line"
-    }, {
-      label: "অনুপস্থিত",
-      color: PAL.gray,
-      kind: "line"
-    }, {
-      label: "অসম্পূর্ণ পাঞ্চ",
-      color: PAL.blue,
-      kind: "line"
+      color: PAL.blue
     }],
-    table: {
-      cols: ["সপ্তাহ", "দেরি", "অনুপস্থিত", "অসম্পূর্ণ পাঞ্চ"],
-      rows: tr.map((t, i) => [trTips[i], bn(t.late), bn(t.absent), bn(t.incomplete)])
-    }
-  }, React.createElement(LineChart, {
-    labels: trLabels,
-    tips: trTips,
-    fmt: v => bn(Math.round(v)) + " দিন",
-    yFmt: v => bn(v),
-    series: [{
-      key: "late",
-      label: "দেরিতে আসা",
-      color: PAL.st.late,
-      values: tr.map(t => t.has ? t.late : null)
-    }, {
-      key: "abs",
-      label: "অনুপস্থিত",
-      color: PAL.gray,
-      values: tr.map(t => t.has ? t.absent : null)
-    }, {
-      key: "inc",
-      label: "অসম্পূর্ণ পাঞ্চ",
-      color: PAL.blue,
-      values: tr.map(t => t.has ? t.incomplete : null)
-    }]
+    fmt: v => num(v) + " ঘ",
+    totFmt: v => num(v),
+    yFmt: v => num(v, 0),
+    showTotals: true,
+    yRefs: fdAvg ? [{
+      v: fdAvg,
+      label: ""
+    }] : [],
+    empty: "\u09A4\u09A5\u09CD\u09AF \u09A8\u09C7\u0987"
   })), React.createElement(ChartCard, {
-    title: "\u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u0995\u09CB\u09A8 \u09A6\u09BF\u09A8\u09C7 \u0985\u09A8\u09C1\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4\u09BF \u09AC\u09C7\u09B6\u09BF",
-    sub: "\u09AA\u09CD\u09B0\u09A4\u09BF\u099F\u09BF \u09AC\u09BE\u09B0\u09C7 \u09AF\u09A4\u099C\u09A8 \u0986\u09B8\u09BE\u09B0 \u0995\u09A5\u09BE \u09A4\u09BE\u09B0 \u0995\u09A4 \u0985\u0982\u09B6 \u0986\u09B8\u09C7\u09A8\u09A8\u09BF",
+    title: "\u09A6\u09C7\u09B0\u09BF, \u0985\u09A8\u09C1\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4\u09BF \u0986\u09B0 \u09AA\u09BE\u099E\u09CD\u099A \u09AD\u09C1\u09B2",
+    sub: "সব কর্মী মিলে প্রতি সপ্তাহে কত " + dd.u + " — বার যত ছোট, তত ভালো",
+    say: sayDisc,
+    table: {
+      cols: ["সপ্তাহ", "দেরি", "অনুপস্থিত", "পাঞ্চ ভুল"],
+      rows: trw.map(t => [tip(t), bn(t.late), bn(t.absent), bn(t.incomplete)])
+    }
+  }, React.createElement("div", {
+    className: "bar-row in-card"
+  }, React.createElement(Seg, {
+    small: true,
+    value: disc,
+    onChange: setDisc,
+    options: [{
+      v: "late",
+      l: "দেরি"
+    }, {
+      v: "absent",
+      l: "অনুপস্থিত"
+    }, {
+      v: "incomplete",
+      l: "পাঞ্চ ভুল"
+    }]
+  })), React.createElement(BarChart, {
+    data: discData,
+    series: [{
+      key: "v",
+      label: dd.l,
+      color: dd.c
+    }],
+    fmt: v => bn(Math.round(v)) + " " + dd.u,
+    totFmt: v => bn(Math.round(v)),
+    yFmt: v => bn(v),
+    showTotals: true,
+    empty: "\u09A4\u09A5\u09CD\u09AF \u09A8\u09C7\u0987"
+  })), React.createElement(ChartCard, {
+    title: "\u0995\u09CB\u09A8 \u09AC\u09BE\u09B0\u09C7 \u0985\u09A8\u09C1\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4\u09BF \u09AC\u09C7\u09B6\u09BF",
+    sub: "\u09AA\u09CD\u09B0\u09A4\u09BF\u099F\u09BF \u09AC\u09BE\u09B0\u09C7 \u09AF\u09A4\u099C\u09A8 \u0986\u09B8\u09BE\u09B0 \u0995\u09A5\u09BE, \u09A4\u09BE\u09B0 \u0995\u09A4 \u09AD\u09BE\u0997 \u0986\u09B8\u09C7\u09A8\u09A8\u09BF",
+    say: sayWd,
     table: {
       cols: ["দিন", "আসার কথা", "অনুপস্থিত", "হার"],
       rows: an.weekdays.map(x => [WD[x.wd], bn(x.exp), bn(x.abs), pct(x.rate)])
@@ -4319,10 +5615,39 @@ function StatsScreen({
     }],
     fmt: v => num(v, 0) + "%",
     showTotals: true,
-    height: 170
+    height: 180
   })), React.createElement(ChartCard, {
+    title: "\u09B8\u0995\u09BE\u09B2\u09C7 \u0995\u0996\u09A8 \u0986\u09B8\u09C7\u09A8",
+    sub: "প্রতিবার ঢোকার সময় — " + clock(S) + "-এর সাথে তুলনা",
+    say: sayArr,
+    table: {
+      cols: ["কখন", "কতবার", "ভাগ"],
+      rows: an.arrCats.map(x => [AL[x.k], bn(x.n), pct(aTot ? x.n / aTot : null)])
+    }
+  }, aTot ? React.createElement(HBars, {
+    stack: true,
+    rows: arrRows,
+    fmt: v => pct(v)
+  }) : React.createElement("div", {
+    className: "chart-empty"
+  }, "\u09A4\u09A5\u09CD\u09AF \u09A8\u09C7\u0987")), React.createElement(ChartCard, {
+    title: "\u09B8\u09A8\u09CD\u09A7\u09CD\u09AF\u09BE\u09AF\u09BC \u0995\u0996\u09A8 \u09AF\u09BE\u09A8",
+    sub: "\u09B6\u09C7\u09B7 \u09AA\u09BE\u099E\u09CD\u099A \u2014 \u09AE\u09BE\u0997\u09B0\u09BF\u09AC\u09C7\u09B0 \u09B8\u09BE\u09A5\u09C7 \u09A4\u09C1\u09B2\u09A8\u09BE",
+    say: sayDep,
+    table: {
+      cols: ["কখন", "কত দিন", "ভাগ"],
+      rows: an.depCats.map(x => [DL[x.k], bn(x.n), pct(dTot ? x.n / dTot : null)])
+    }
+  }, dTot ? React.createElement(HBars, {
+    stack: true,
+    rows: depRows,
+    fmt: v => pct(v)
+  }) : React.createElement("div", {
+    className: "chart-empty"
+  }, "\u09A4\u09A5\u09CD\u09AF \u09A8\u09C7\u0987")), React.createElement(ChartCard, {
+    wide: true,
     title: "\u0995\u09B0\u09CD\u09AE\u09C0\u09A6\u09C7\u09B0 \u09A4\u09C1\u09B2\u09A8\u09BE",
-    sub: rm.l + (rank === "arrive" ? " — আগে থেকে পরে" : " — বেশি থেকে কম"),
+    sub: rm.l + (rank === "arrive" ? " — আগে থেকে পরে" : " — বেশি থেকে কম") + " · নামে চাপলে বিস্তারিত",
     right: React.createElement("select", {
       className: "mini-sel",
       value: rank,
@@ -4337,8 +5662,8 @@ function StatsScreen({
       color: deptColor(d)
     })) : null,
     table: {
-      cols: ["কর্মী", "ঘণ্টা", "গড়", "ওভারটাইম", "উপস্থিতি", "দেরি", "গড় ঢোকা"],
-      rows: an.report.rows.filter(r => !r.idle).map(r => [r.name, num(r.hours / 60, 0), r.avg ? num(r.avg / 60) : "—", num(r.otMin / 60), pct(r.attRate), bn(r.late), r.avgIn ? clock(r.avgIn) : "—"])
+      cols: ["কর্মী", "গড়/দিন", "ঘণ্টা", "উপস্থিতি", "দেরি", "অনুপস্থিত", "গড় ঢোকা", "ওভারটাইম", "মজুরি"],
+      rows: rowsAll.map(r => [r.name, r.avg ? num(r.avg / 60) : "—", num(r.hours / 60, 0), pct(r.attRate), bn(r.late), bn(r.absent), r.avgIn ? clock(r.avgIn) : "—", num(r.otMin / 60), r.noRate ? "রেট বাকি" : money(r.gross)])
     }
   }, React.createElement(HBars, {
     rows: rrows,
@@ -4350,79 +5675,104 @@ function StatsScreen({
     max: rank === "att" ? 1 : undefined,
     center: rank === "arrive" ? S : undefined,
     centerLabel: clock(S)
-  })), React.createElement("div", {
-    className: "cstack"
-  }, React.createElement(ChartCard, {
-    title: "\u09A2\u09CB\u0995\u09BE\u09B0 \u09B8\u09AE\u09AF\u09BC",
-    sub: "সকালে কে কখন ঢোকেন — ১০ মিনিটের ভাগে; রেখা = " + clock(S),
-    legend: [{
-      label: "সময়মতো",
-      color: PAL.st.ontime
-    }, {
-      label: "দেরিতে",
-      color: PAL.st.late
-    }],
-    table: {
-      cols: ["সময়", "কতবার"],
-      rows: arrData.filter(d => d.values.n).map(d => [d.tip, bn(d.values.n)])
-    }
-  }, React.createElement(BarChart, {
-    data: arrData,
-    series: [{
-      key: "n",
-      label: "কতবার",
-      color: PAL.st.ontime
-    }],
-    colorOf: d => d.color,
-    fmt: v => bn(Math.round(v)),
-    refs: arrFrac != null ? [{
-      x: arrFrac,
-      label: clock(S)
-    }] : [],
-    height: 180
   })), React.createElement(ChartCard, {
-    title: "\u09AC\u09C7\u09B0 \u09B9\u0993\u09AF\u09BC\u09BE\u09B0 \u09B8\u09AE\u09AF\u09BC",
-    sub: "\u09B6\u09C7\u09B7 \u09AA\u09BE\u099E\u09CD\u099A \u2014 \u0986\u09A7\u09BE \u0998\u09A3\u09CD\u099F\u09BE\u09B0 \u09AD\u09BE\u0997\u09C7; \u09B0\u09C7\u0996\u09BE = \u0997\u09A1\u09BC \u09AE\u09BE\u0997\u09B0\u09BF\u09AC (\u09B6\u09C1\u09A7\u09C1 \u09AF\u09C7\u09A6\u09BF\u09A8 \u09AC\u09C7\u09B0 \u09B9\u0993\u09AF\u09BC\u09BE\u09B0 \u09AA\u09BE\u099E\u09CD\u099A \u0986\u099B\u09C7)",
-    table: {
-      cols: ["সময়", "কতবার"],
-      rows: depData.filter(d => d.values.n).map(d => [d.tip, bn(d.values.n)])
-    }
-  }, React.createElement(BarChart, {
-    data: depData,
-    series: [{
-      key: "n",
-      label: "কতবার",
-      color: PAL.blue
-    }],
-    fmt: v => bn(Math.round(v)),
-    refs: mgFrac != null ? [{
-      x: mgFrac,
-      label: "মাগরিব"
-    }] : [],
-    height: 180
-  }))), React.createElement(ChartCard, {
     wide: true,
-    title: "\u09B8\u09BE\u09AA\u09CD\u09A4\u09BE\u09B9\u09BF\u0995 \u09AE\u099C\u09C1\u09B0\u09BF \u2014 \u09E7\u09E8 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9",
+    title: "\u09B8\u09BE\u09AA\u09CD\u09A4\u09BE\u09B9\u09BF\u0995 \u09AE\u099C\u09C1\u09B0\u09BF",
     sub: "\u09AA\u09CD\u09B0\u09A4\u09BF \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u09AE\u09CB\u099F \u09AE\u099C\u09C1\u09B0\u09BF, \u09AC\u09BF\u09AD\u09BE\u0997 \u0985\u09A8\u09C1\u09AF\u09BE\u09AF\u09BC\u09C0 \u09AD\u09BE\u0997 \u0995\u09B0\u09BE",
+    say: sayWage,
     legend: wageSeries.length > 1 ? wageSeries.map(x => ({
       label: x.label,
       color: x.color
     })) : null,
     table: {
-      cols: ["সপ্তাহ"].concat(wageSeries.map(x => x.label)).concat(["মোট"]),
-      rows: tr.map((t, i) => [trTips[i]].concat(wageSeries.map(x => money(wageData[i].values[x.key]))).concat([money(t.wages)]))
+      cols: ["সপ্তাহ"].concat(wageSeries.map(x => x.label)).concat(["মোট", "ওভারটাইম"]),
+      rows: trw12.map((t, i) => [tip(t)].concat(wageSeries.map(x => money(wageData[i].values[x.key]))).concat([money(t.wages), money(t.otPay)]))
     }
   }, React.createElement(BarChart, {
     data: wageData,
     series: wageSeries,
     fmt: money,
-    yFmt: moneyK
+    yFmt: moneyK,
+    totFmt: moneyK,
+    showTotals: true
   }))));
+}
+function Insights({
+  rows,
+  an,
+  open
+}) {
+  const T = an.report.tot;
+  const items = [];
+  const top = key => rows.filter(r => (r[key] || 0) > 0).sort((a, b) => (b[key] || 0) - (a[key] || 0))[0];
+  const hard = rows.filter(r => r.daysH >= 3 && r.avg != null).sort((a, b) => b.avg - a.avg)[0];
+  if (hard) items.push({
+    i: "chart",
+    pin: hard.pin,
+    t: React.createElement(React.Fragment, null, "\u09B8\u09AC\u099A\u09C7\u09AF\u09BC\u09C7 \u09AC\u09C7\u09B6\u09BF \u0995\u09BE\u099C \u0995\u09B0\u09C7\u099B\u09C7\u09A8 ", React.createElement("b", null, hard.name), " \u2014 \u09A6\u09BF\u09A8\u09C7 \u0997\u09A1\u09BC\u09C7 ", hrs(hard.avg, true))
+  });
+  const late = top("late");
+  if (late) items.push({
+    i: "warn",
+    pin: late.pin,
+    t: React.createElement(React.Fragment, null, "\u09B8\u09AC\u099A\u09C7\u09AF\u09BC\u09C7 \u09AC\u09C7\u09B6\u09BF \u09A6\u09C7\u09B0\u09BF ", React.createElement("b", null, late.name), " \u2014 ", bn(late.late), " \u09A6\u09BF\u09A8, \u0997\u09A1\u09BC\u09C7 ", bn(Math.round(late.lateSum / late.late)), " \u09AE\u09BF\u09A8\u09BF\u099F \u0995\u09B0\u09C7")
+  });
+  const abs = top("absent");
+  if (abs) items.push({
+    i: "cal",
+    pin: abs.pin,
+    t: React.createElement(React.Fragment, null, "\u09B8\u09AC\u099A\u09C7\u09AF\u09BC\u09C7 \u09AC\u09C7\u09B6\u09BF \u0985\u09A8\u09C1\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4 ", React.createElement("b", null, abs.name), " \u2014 ", bn(abs.absent), " \u09A6\u09BF\u09A8")
+  });
+  const perfect = rows.filter(r => r.expected >= 3 && r.absent === 0 && r.late === 0);
+  if (perfect.length) items.push({
+    i: "check",
+    t: React.createElement(React.Fragment, null, "\u098F\u0995\u09A6\u09BF\u09A8\u0993 \u09A6\u09C7\u09B0\u09BF \u09AC\u09BE \u0985\u09A8\u09C1\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4\u09BF \u09A8\u09C7\u0987: ", React.createElement("b", null, perfect.map(r => r.name).join(", ")))
+  });
+  const miss = top("est");
+  if (miss) items.push({
+    i: "info",
+    pin: miss.pin,
+    t: React.createElement(React.Fragment, null, "\u09AC\u09C7\u09B0 \u09B9\u0993\u09AF\u09BC\u09BE\u09B0 \u09AA\u09BE\u099E\u09CD\u099A \u09B8\u09AC\u099A\u09C7\u09AF\u09BC\u09C7 \u09AC\u09C7\u09B6\u09BF \u09AD\u09C1\u09B2\u09C7\u099B\u09C7\u09A8 ", React.createElement("b", null, miss.name), " \u2014 ", bn(miss.est), " \u09A6\u09BF\u09A8 (\u09B8\u09AC\u09BE\u0987 \u09AE\u09BF\u09B2\u09C7 ", bn(T.est), " \u09A6\u09BF\u09A8)")
+  });
+  if (T.otPay > 0) items.push({
+    i: "cash",
+    t: React.createElement(React.Fragment, null, "\u0993\u09AD\u09BE\u09B0\u099F\u09BE\u0987\u09AE\u09C7 \u09AE\u099C\u09C1\u09B0\u09BF \u0997\u09C7\u099B\u09C7 ", React.createElement("b", null, money(T.otPay)), " \u2014 \u09AE\u09CB\u099F \u09AE\u099C\u09C1\u09B0\u09BF\u09B0 ", pct(T.otPay / T.gross))
+  });
+  if (!items.length) return null;
+  return React.createElement("div", {
+    className: "card insights"
+  }, React.createElement("div", {
+    className: "ins-h"
+  }, React.createElement(Icon, {
+    n: "bulb",
+    s: 18
+  }), React.createElement("b", null, "\u098F\u0995 \u09A8\u099C\u09B0\u09C7")), items.map((x, i) => x.pin ? React.createElement("button", {
+    key: i,
+    type: "button",
+    className: "ins",
+    onClick: () => open({
+      t: "profile",
+      pin: x.pin
+    })
+  }, React.createElement(Icon, {
+    n: x.i,
+    s: 16
+  }), React.createElement("span", null, x.t), React.createElement(Icon, {
+    n: "right",
+    s: 16
+  })) : React.createElement("div", {
+    key: i,
+    className: "ins"
+  }, React.createElement(Icon, {
+    n: x.i,
+    s: 16
+  }), React.createElement("span", null, x.t))));
 }
 function WorkersScreen({
   ctx,
   open
 }) {
+  const [q, setQ] = useState("");
   const all = Object.keys(ctx.workers).sort((a, b) => a - b).map(p => ({
     pin: p,
     w: ctx.workers[p]
@@ -4433,9 +5783,19 @@ function WorkersScreen({
   rep.rows.forEach(r => {
     byPin[r.pin] = r;
   });
-  const active = all.filter(x => RH.inPay(x.w) && x.w.onDevice !== false && ctx.recent[x.pin]);
+  const qq = toAscii(q).trim().toLowerCase();
+  const match = ({
+    pin,
+    w
+  }) => !qq || (RH.workerName(w, pin) + " " + (w.devName || "") + " " + pin + " " + phonesOf(w).map(p => p.n).join(" ") + " " + (w.addr || "")).toLowerCase().indexOf(qq) >= 0;
+  const list = all.filter(match);
+  const active = list.filter(x => RH.inPay(x.w) && x.w.onDevice !== false && ctx.recent[x.pin]);
   const groups = DEPTS.concat([""]).map(k => [k || "বিভাগ নেই", k, active.filter(x => RH.deptOf(x.w) === k)]).filter(g => g[2].length);
-  const others = [["গত ৩০ দিনে আসেননি", all.filter(x => RH.inPay(x.w) && x.w.onDevice !== false && !ctx.recent[x.pin])], ["বেতনের হিসাবের বাইরে", all.filter(x => !RH.inPay(x.w) && x.w.onDevice !== false)], ["ডিভাইস থেকে মুছে ফেলা", all.filter(x => x.w.onDevice === false)]];
+  const others = [["গত ৩০ দিনে আসেননি", list.filter(x => RH.inPay(x.w) && x.w.onDevice !== false && !ctx.recent[x.pin])], ["বেতনের হিসাবের বাইরে", list.filter(x => !RH.inPay(x.w) && x.w.onDevice !== false)], ["ডিভাইস থেকে মুছে ফেলা", list.filter(x => x.w.onDevice === false)]];
+  const act = all.filter(x => RH.inPay(x.w) && x.w.onDevice !== false && ctx.recent[x.pin]);
+  const missPhoto = act.filter(x => !PHOTOS[x.pin]).length;
+  const missPhone = act.filter(x => !phonesOf(x.w).length).length;
+  const missRate = act.filter(x => RH.currentRate(x.w) == null).length;
   const row = ({
     pin,
     w
@@ -4443,9 +5803,12 @@ function WorkersScreen({
     const rate = RH.currentRate(w);
     const name = RH.workerName(w, pin);
     const r = byPin[pin];
-    return React.createElement("button", {
+    const ph = phonesOf(w)[0];
+    return React.createElement("div", {
       key: pin,
-      className: "row",
+      className: "row act"
+    }, React.createElement("button", {
+      className: "row-tap",
       onClick: () => open({
         t: "profile",
         pin
@@ -4466,11 +5829,39 @@ function WorkersScreen({
       kind: "bad"
     }, "\u09B0\u09C7\u099F \u09AC\u09BE\u0995\u09BF") : React.createElement("span", {
       className: "muted sm"
-    }, "\u09B0\u09C7\u099F \u09A8\u09C7\u0987")));
+    }, "\u09B0\u09C7\u099F \u09A8\u09C7\u0987"))), ph && React.createElement("a", {
+      className: "icon-btn sm call",
+      href: telLink(ph.n),
+      "aria-label": name + "-কে কল"
+    }, React.createElement(Icon, {
+      n: "phone",
+      s: 16
+    })));
   };
   return React.createElement("div", null, React.createElement("div", {
+    className: "bar-row"
+  }, React.createElement("div", {
+    className: "search grow"
+  }, React.createElement(Icon, {
+    n: "search",
+    s: 18
+  }), React.createElement("input", {
+    type: "search",
+    value: q,
+    placeholder: "\u09A8\u09BE\u09AE, \u0986\u0987\u09A1\u09BF \u09AC\u09BE \u09AB\u09CB\u09A8 \u09A6\u09BF\u09AF\u09BC\u09C7 \u0996\u09C1\u0981\u099C\u09C1\u09A8",
+    onChange: e => setQ(e.target.value),
+    "aria-label": "\u0995\u09B0\u09CD\u09AE\u09C0 \u0996\u09C1\u0981\u099C\u09C1\u09A8"
+  })), React.createElement("button", {
+    className: "btn idc-btn",
+    onClick: () => open({
+      t: "idcard"
+    })
+  }, React.createElement(Icon, {
+    n: "id",
+    s: 18
+  }), " \u0986\u0987\u09A1\u09BF \u0995\u09BE\u09B0\u09CD\u09A1")), !q && (missPhoto > 0 || missPhone > 0 || missRate > 0) && React.createElement("div", {
     className: "note sm"
-  }, "\u09A1\u09BF\u09AD\u09BE\u0987\u09B8\u09C7 \u09A8\u09A4\u09C1\u09A8 \u0995\u09B0\u09CD\u09AE\u09C0 \u09AF\u09CB\u0997 \u0995\u09B0\u09B2\u09C7 \u098F\u0996\u09BE\u09A8\u09C7 \u09A8\u09BF\u099C\u09C7 \u09A5\u09C7\u0995\u09C7 \u099A\u09B2\u09C7 \u0986\u09B8\u09C7\u0964 \u09A8\u09BE\u09AE \u099A\u09BE\u09AA\u09B2\u09C7 \u09A4\u09BE\u0981\u09B0 \u09E7\u09E8 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09A6\u09C7\u0996\u09AC\u09C7\u09A8; \u09B8\u09C7\u0996\u09BE\u09A8 \u09A5\u09C7\u0995\u09C7 \u09A8\u09BE\u09AE, \u09AC\u09BF\u09AD\u09BE\u0997 \u0986\u09B0 \u09B0\u09C7\u099F \u09AC\u09A6\u09B2\u09BE\u09A8\u09CB \u09AF\u09BE\u09AF\u09BC\u0964"), groups.map(([title, k, list]) => React.createElement("div", {
+  }, "\u098F\u0996\u09A8 \u0995\u09BE\u099C \u0995\u09B0\u099B\u09C7\u09A8 ", bn(act.length), " \u099C\u09A8 \u2014 ", [missPhoto ? bn(missPhoto) + " জনের ছবি" : null, missPhone ? bn(missPhone) + " জনের ফোন নম্বর" : null, missRate ? bn(missRate) + " জনের রেট" : null].filter(Boolean).join(", "), " \u09AC\u09B8\u09BE\u09A8\u09CB \u09AC\u09BE\u0995\u09BF\u0964 \u09A8\u09BE\u09AE \u099A\u09BE\u09AA\u09C1\u09A8, \u09A4\u09BE\u09B0\u09AA\u09B0 \"\u09A4\u09A5\u09CD\u09AF \u09AC\u09A6\u09B2\u09BE\u09A8\"\u0964"), groups.map(([title, k, l]) => React.createElement("div", {
     key: title
   }, React.createElement("div", {
     className: "sec-title"
@@ -4478,17 +5869,17 @@ function WorkersScreen({
     k: k
   }), title, " ", React.createElement("span", {
     className: "muted"
-  }, "\xB7 ", bn(list.length), " \u099C\u09A8")), React.createElement("div", {
+  }, "\xB7 ", bn(l.length), " \u099C\u09A8")), React.createElement("div", {
     className: "card list"
-  }, list.map(x => row(x, true))))), others.map(([title, list]) => list.length > 0 && React.createElement("div", {
+  }, l.map(x => row(x, true))))), others.map(([title, l]) => l.length > 0 && React.createElement("div", {
     key: title
   }, React.createElement("div", {
     className: "sec-title"
   }, title, " ", React.createElement("span", {
     className: "muted"
-  }, "\xB7 ", bn(list.length), " \u099C\u09A8")), React.createElement("div", {
+  }, "\xB7 ", bn(l.length), " \u099C\u09A8")), React.createElement("div", {
     className: "card list"
-  }, list.map(x => row(x, false))))), all.length === 0 && React.createElement(Empty, null, "\u098F\u0996\u09A8\u09CB \u0995\u09CB\u09A8\u09CB \u0995\u09B0\u09CD\u09AE\u09C0 \u0986\u09B8\u09C7\u09A8\u09BF\u0964 \u09AA\u09BF\u09B8\u09BF\u09B0 \u09AC\u09CD\u09B0\u09BF\u099C \u099A\u09BE\u09B2\u09C1 \u09A5\u09BE\u0995\u09B2\u09C7 \u09A1\u09BF\u09AD\u09BE\u0987\u09B8 \u09A5\u09C7\u0995\u09C7 \u09A8\u09BF\u099C\u09C7 \u09A5\u09C7\u0995\u09C7 \u0986\u09B8\u09AC\u09C7\u0964"));
+  }, l.map(x => row(x, false))))), q && list.length === 0 && React.createElement(Empty, null, "\"", q, "\" \u09A8\u09BE\u09AE\u09C7 \u0995\u09BE\u0989\u0995\u09C7 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF\u0964"), all.length === 0 && React.createElement(Empty, null, "\u098F\u0996\u09A8\u09CB \u0995\u09CB\u09A8\u09CB \u0995\u09B0\u09CD\u09AE\u09C0 \u0986\u09B8\u09C7\u09A8\u09BF\u0964 \u09AA\u09BF\u09B8\u09BF\u09B0 \u09AC\u09CD\u09B0\u09BF\u099C \u099A\u09BE\u09B2\u09C1 \u09A5\u09BE\u0995\u09B2\u09C7 \u09A1\u09BF\u09AD\u09BE\u0987\u09B8 \u09A5\u09C7\u0995\u09C7 \u09A8\u09BF\u099C\u09C7 \u09A5\u09C7\u0995\u09C7 \u0986\u09B8\u09AC\u09C7\u0964"));
 }
 function SettingsScreen({
   ctx,
@@ -4497,8 +5888,22 @@ function SettingsScreen({
   cfg,
   resetCfg,
   hfmt,
-  setHfmt
+  setHfmt,
+  vault
 }) {
+  const [org, setOrg] = useState({
+    org: ctx.s.org,
+    orgAddr: ctx.s.orgAddr,
+    orgPhone: ctx.s.orgPhone
+  });
+  useEffect(() => {
+    setOrg({
+      org: ctx.s.org,
+      orgAddr: ctx.s.orgAddr,
+      orgPhone: ctx.s.orgPhone
+    });
+  }, [st.settingsDoc]);
+  const orgDirty = ["org", "orgAddr", "orgPhone"].some(k => String(org[k] || "") !== String(ctx.s[k] || ""));
   const d = ctx.s;
   const [f, setF] = useState(() => ({
     ...d
@@ -4625,6 +6030,26 @@ function SettingsScreen({
     }]
   }))), React.createElement("div", {
     className: "sec-title"
+  }, "\u09AD\u09CB\u099F\u09BE\u09B0 \u0986\u0987\u09A1\u09BF \u0993 \u0995\u09BE\u0997\u099C\u09AA\u09A4\u09CD\u09B0\u09C7\u09B0 \u09A4\u09BE\u09B2\u09BE"), React.createElement("div", {
+    className: "card pad kvl"
+  }, React.createElement("div", null, React.createElement("span", null, "\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1"), React.createElement("b", null, !vault.loaded ? "…" : vault.has ? "ঠিক করা আছে" : "এখনো ঠিক করা হয়নি")), React.createElement("div", null, React.createElement("span", null, "\u098F\u0987 \u09A1\u09BF\u09AD\u09BE\u0987\u09B8\u09C7"), React.createElement("b", {
+    className: vault.key ? "ok-t" : ""
+  }, vault.key ? "খোলা" : "তালাবদ্ধ")), vault.key ? React.createElement("div", {
+    className: "row-btns"
+  }, React.createElement("button", {
+    className: "btn sm",
+    onClick: vault.lock
+  }, React.createElement(Icon, {
+    n: "lock",
+    s: 16
+  }), " \u098F\u0987 \u09A1\u09BF\u09AD\u09BE\u0987\u09B8\u09C7 \u09A4\u09BE\u09B2\u09BE \u09A6\u09BF\u09A8")) : React.createElement("div", {
+    className: "vault-in"
+  }, React.createElement(VaultGate, {
+    vault: vault
+  }, () => null)), React.createElement("div", {
+    className: "muted sm"
+  }, "\u09AD\u09CB\u099F\u09BE\u09B0 \u0986\u0987\u09A1\u09BF\u09B0 \u09A8\u09AE\u09CD\u09AC\u09B0, \u0995\u09BE\u09B0\u09CD\u09A1\u09C7\u09B0 \u099B\u09AC\u09BF \u0986\u09B0 \u0985\u09A8\u09CD\u09AF \u0995\u09BE\u0997\u099C \u098F\u0987 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09A6\u09BF\u09AF\u09BC\u09C7 \u09A4\u09BE\u09B2\u09BE\u09AC\u09A6\u09CD\u09A7 \u09A5\u09BE\u0995\u09C7 \u2014 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u099B\u09BE\u09A1\u09BC\u09BE \u09A1\u09BE\u099F\u09BE\u09AC\u09C7\u099C \u09A5\u09C7\u0995\u09C7\u0993 \u0995\u09C7\u0989 \u09AA\u09A1\u09BC\u09A4\u09C7 \u09AA\u09BE\u09B0\u09C7 \u09A8\u09BE\u0964 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AD\u09C1\u09B2\u09C7 \u0997\u09C7\u09B2\u09C7 \u098F\u0997\u09C1\u09B2\u09CB \u0986\u09B0 \u0996\u09CB\u09B2\u09BE \u09AF\u09BE\u09AC\u09C7 \u09A8\u09BE\u0964")), React.createElement("div", {
+    className: "sec-title"
   }, "\u09AA\u09BF\u09B8\u09BF\u09B0 \u09AC\u09CD\u09B0\u09BF\u099C \u0993 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09AE\u09C7\u09B6\u09BF\u09A8"), React.createElement("div", {
     className: "card pad kvl"
   }, !m && React.createElement("div", {
@@ -4633,7 +6058,9 @@ function SettingsScreen({
     className: pcAgo != null && pcAgo > 20 ? "bad-t" : "ok-t"
   }, agoText(pcAgo))), React.createElement("div", null, React.createElement("span", null, "\u09AE\u09C7\u09B6\u09BF\u09A8 \u09B6\u09C7\u09B7 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997"), React.createElement("b", {
     className: devAgo != null && devAgo > 20 ? "bad-t" : "ok-t"
-  }, agoText(devAgo))), React.createElement("div", null, React.createElement("span", null, "\u09AE\u09C7\u09B6\u09BF\u09A8\u09C7 \u0995\u09B0\u09CD\u09AE\u09C0"), React.createElement("b", null, m.dev && m.dev.users >= 0 ? bn(m.dev.users) + " জন" : "—")), React.createElement("div", null, React.createElement("span", null, "\u09AA\u09BE\u09A0\u09BE\u09A8\u09CB \u09AC\u09BE\u0995\u09BF"), React.createElement("b", null, bn(m.queue || 0), "\u099F\u09BF")), React.createElement("div", null, React.createElement("span", null, "\u09AA\u09BF\u09B8\u09BF\u09B0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE"), React.createElement("b", null, bn(m.pcIp || ""), ":", bn(m.port || ""))), React.createElement("div", null, React.createElement("span", null, "\u09AC\u09CD\u09B0\u09BF\u099C \u09AD\u09BE\u09B0\u09CD\u09B8\u09A8"), React.createElement("b", null, bn(m.v || ""))), m.lastError && React.createElement("div", null, React.createElement("span", null, "\u09A4\u09CD\u09B0\u09C1\u099F\u09BF"), React.createElement("b", {
+  }, agoText(devAgo))), React.createElement("div", null, React.createElement("span", null, "\u09AE\u09C7\u09B6\u09BF\u09A8\u09C7 \u0995\u09B0\u09CD\u09AE\u09C0"), React.createElement("b", null, m.dev && m.dev.users >= 0 ? bn(m.dev.users) + " জন" : "—")), React.createElement("div", null, React.createElement("span", null, "\u09AA\u09BE\u09A0\u09BE\u09A8\u09CB \u09AC\u09BE\u0995\u09BF"), React.createElement("b", null, bn(m.queue || 0), "\u099F\u09BF")), React.createElement("div", null, React.createElement("span", null, "\u09AA\u09BF\u09B8\u09BF\u09B0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE"), React.createElement("b", {
+    className: "ip"
+  }, m.pcIp || "", ":", m.port || "")), React.createElement("div", null, React.createElement("span", null, "\u09AC\u09CD\u09B0\u09BF\u099C \u09AD\u09BE\u09B0\u09CD\u09B8\u09A8"), React.createElement("b", null, bn(m.v || ""))), m.lastError && React.createElement("div", null, React.createElement("span", null, "\u09A4\u09CD\u09B0\u09C1\u099F\u09BF"), React.createElement("b", {
     className: "bad-t"
   }, m.lastError))), React.createElement("div", {
     className: "row-btns"
@@ -4650,7 +6077,51 @@ function SettingsScreen({
     className: "ok-t sm"
   }, "\u09B6\u09C7\u09B7 \u0985\u09A8\u09C1\u09B0\u09CB\u09A7 \u09B8\u09AE\u09CD\u09AA\u09A8\u09CD\u09A8")), React.createElement("div", {
     className: "muted sm"
-  }, "\u0995\u09B0\u09CD\u09AE\u09C0\u09B0 \u09A4\u09BE\u09B2\u09BF\u0995\u09BE \u0986\u09B0 \u0997\u09A4 \u09E9\u09E6 \u09A6\u09BF\u09A8\u09C7\u09B0 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u0986\u09AC\u09BE\u09B0 \u0986\u09A8\u09BE \u09B9\u09AC\u09C7\u0964 \u0986\u0997\u09C7\u09B0 \u09A4\u09A5\u09CD\u09AF \u09AE\u09C1\u099B\u09AC\u09C7 \u09A8\u09BE\u0964")), React.createElement("div", {
+  }, "\u0995\u09B0\u09CD\u09AE\u09C0\u09B0 \u09A4\u09BE\u09B2\u09BF\u0995\u09BE \u0986\u09B0 \u0997\u09A4 \u09E9\u09E6 \u09A6\u09BF\u09A8\u09C7\u09B0 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u0986\u09AC\u09BE\u09B0 \u0986\u09A8\u09BE \u09B9\u09AC\u09C7\u0964 \u0986\u0997\u09C7\u09B0 \u09A4\u09A5\u09CD\u09AF \u09AE\u09C1\u099B\u09AC\u09C7 \u09A8\u09BE\u0964"), React.createElement("details", {
+    className: "help"
+  }, React.createElement("summary", null, "\u09AA\u09BF\u09B8\u09BF\u09B0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE \u09AF\u09C7\u09A8 \u0986\u09B0 \u09A8\u09BE \u09AC\u09A6\u09B2\u09BE\u09AF\u09BC \u2014 \u0995\u09C0 \u0995\u09B0\u09AC\u09C7\u09A8"), React.createElement("ol", null, React.createElement("li", null, "\u09AA\u09BF\u09B8\u09BF\u09A4\u09C7 ", React.createElement("b", null, "cmd"), " \u0996\u09C1\u09B2\u09C7 ", React.createElement("code", null, "ipconfig /all"), " \u09B2\u09BF\u0996\u09C1\u09A8\u0964 ", React.createElement("b", null, "Ethernet adapter"), "-\u098F\u09B0 \u09A8\u09BF\u099A\u09C7 ", React.createElement("b", null, "Physical Address"), " (\u09AF\u09C7\u09AE\u09A8 ", React.createElement("code", null, "A4-BB-6D-\u2026"), ") \u09B2\u09BF\u0996\u09C7 \u09B0\u09BE\u0996\u09C1\u09A8\u0964"), React.createElement("li", null, "\u09AB\u09CB\u09A8 \u09AC\u09BE \u09AA\u09BF\u09B8\u09BF\u09B0 \u09AC\u09CD\u09B0\u09BE\u0989\u099C\u09BE\u09B0\u09C7 ", React.createElement("code", null, "192.168.0.1"), " \u0996\u09C1\u09B2\u09C7 \u09B0\u09BE\u0989\u099F\u09BE\u09B0\u09C7 \u09A2\u09C1\u0995\u09C1\u09A8\u0964"), React.createElement("li", null, React.createElement("b", null, "Advanced \u2192 Network \u2192 DHCP Server \u2192 Address Reservation \u2192 Add"), "-\u098F \u0993\u0987 Physical Address \u0986\u09B0 \u09AA\u09BF\u09B8\u09BF\u09B0 \u098F\u0996\u09A8\u0995\u09BE\u09B0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE ", m && m.pcIp && m.pcIp !== "?" ? React.createElement("code", null, m.pcIp) : "দিন", ", \u09A4\u09BE\u09B0\u09AA\u09B0 Save\u0964"), React.createElement("li", null, "\u098F\u0995\u0987\u09AD\u09BE\u09AC\u09C7 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09AE\u09C7\u09B6\u09BF\u09A8\u09C7\u09B0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE\u0993 (", React.createElement("code", null, m && m.dev && m.dev.ip || "192.168.0.201"), ") \u09AE\u09C7\u09B6\u09BF\u09A8\u09C7\u09B0 MAC \u09A6\u09BF\u09AF\u09BC\u09C7 \u09B0\u09BF\u099C\u09BE\u09B0\u09CD\u09AD \u0995\u09B0\u09C1\u09A8\u0964"), React.createElement("li", null, "\u09AA\u09BF\u09B8\u09BF \u09B8\u09AC\u09B8\u09AE\u09AF\u09BC \u09A4\u09BE\u09B0\u09C7 (Ethernet) \u099A\u09BE\u09B2\u09BE\u09A8 \u2014 \u0993\u09AF\u09BC\u09BE\u0987\u09AB\u09BE\u0987\u09A4\u09C7 \u0997\u09C7\u09B2\u09C7 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE \u0986\u09B2\u09BE\u09A6\u09BE \u09B9\u09AF\u09BC\u0964")))), React.createElement("div", {
+    className: "sec-title"
+  }, "\u0986\u0987\u09A1\u09BF \u0995\u09BE\u09B0\u09CD\u09A1\u09C7\u09B0 \u09A4\u09A5\u09CD\u09AF"), React.createElement("div", {
+    className: "card pad"
+  }, React.createElement(Field, {
+    label: "\u09AA\u09CD\u09B0\u09A4\u09BF\u09B7\u09CD\u09A0\u09BE\u09A8\u09C7\u09B0 \u09A8\u09BE\u09AE"
+  }, React.createElement("input", {
+    type: "text",
+    value: org.org || "",
+    onChange: e => setOrg({
+      ...org,
+      org: e.target.value
+    })
+  })), React.createElement("div", {
+    className: "grid2"
+  }, React.createElement(Field, {
+    label: "\u09A0\u09BF\u0995\u09BE\u09A8\u09BE"
+  }, React.createElement("input", {
+    type: "text",
+    value: org.orgAddr || "",
+    onChange: e => setOrg({
+      ...org,
+      orgAddr: e.target.value
+    })
+  })), React.createElement(Field, {
+    label: "\u09AB\u09CB\u09A8"
+  }, React.createElement("input", {
+    type: "tel",
+    value: org.orgPhone || "",
+    placeholder: "01XXXXXXXXX",
+    onChange: e => setOrg({
+      ...org,
+      orgPhone: e.target.value
+    })
+  }))), React.createElement("button", {
+    className: "btn primary",
+    disabled: !orgDirty,
+    onClick: () => act.saveSettings({
+      org: (org.org || "").trim(),
+      orgAddr: (org.orgAddr || "").trim(),
+      orgPhone: cleanPhone(org.orgPhone)
+    })
+  }, "\u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3")), React.createElement("div", {
     className: "sec-title"
   }, "\u09B8\u0982\u09AF\u09CB\u0997"), React.createElement("div", {
     className: "card pad kvl"
@@ -4884,15 +6355,12 @@ function slipText(r, wk) {
   lines.push("হাজিরা: " + units(r.att) + " দিন" + (r.ot > 0 ? " + ওভারটাইম " + units(r.ot) + " = " + units(r.units) : ""));
   if (r.rate != null) lines.push("রেট: " + rateText(r) + " / দিন");
   lines.push("মোট: " + money(r.gross));
-  if (r.adv > 0) lines.push("অগ্রিম: " + money(r.adv));
+  if (r.adv > 0) {
+    lines.push("অগ্রিম মোট: " + money(r.adv));
+    r.advList.slice().sort(advSort).reverse().forEach(a => lines.push("  • " + advWhen(a) + " — " + money(a.amt) + (a.note ? " (" + a.note + ")" : "")));
+  }
   lines.push("প্রদেয়: " + money(r.net));
   return lines.join("\n");
-}
-function waLink(phone, text) {
-  let p = String(phone || "").replace(/\D/g, "");
-  if (p.startsWith("01")) p = "88" + p;
-  if (p.length && p.length < 12) p = "";
-  return "https://wa.me/" + p + "?text=" + encodeURIComponent(text);
 }
 function oneReport(ctx, pin, from, to, weekId) {
   const w = ctx.workers[pin] || {
@@ -4928,9 +6396,6 @@ function WeekSheet({
     pin
   };
   const r = oneReport(ctx, pin, wk.from, wk.to, wk.id);
-  const [amt, setAmt] = useState("");
-  const [ad, setAd] = useState(today >= wk.from && today <= wk.to ? today : wk.to);
-  const [anote, setAnote] = useState("");
   if (!r) return React.createElement(Sheet, {
     title: RH.workerName(w, pin),
     onClose: close
@@ -4940,28 +6405,13 @@ function WeekSheet({
   r.cells.forEach(c => {
     showDay[c.date] = !(c.off && RH.weekday(c.date) === +s.offDay);
   });
-  const addAdv = () => {
-    const a = parseInt(amt, 10);
-    if (!a || a <= 0) return;
-    act.addAdv({
-      pin,
-      d: ad,
-      amt: a,
-      note: anote
-    }).then(ok => {
-      if (ok) {
-        setAmt("");
-        setAnote("");
-      }
-    });
-  };
   return React.createElement(Sheet, {
     title: r.name,
     sub: weekLabel(wk),
     onClose: close,
     foot: React.createElement(React.Fragment, null, React.createElement("a", {
       className: "btn ghost",
-      href: waLink(w.phone, slipText(r, wk)),
+      href: waLink((phonesOf(w)[0] || {}).n, slipText(r, wk)),
       target: "_blank",
       rel: "noopener"
     }, React.createElement(Icon, {
@@ -4994,7 +6444,12 @@ function WeekSheet({
     className: "em wide"
   }, React.createElement("span", null, "\u09AA\u09CD\u09B0\u09A6\u09C7\u09AF\u09BC"), React.createElement("b", {
     className: "big"
-  }, money(r.net)))), React.createElement("div", {
+  }, money(r.net)))), RH.rateHistory(w).filter(h => !h.first && h.from >= wk.from && h.from <= wk.to).map(h => React.createElement("div", {
+    key: h.from,
+    className: "note sm"
+  }, fmtDate(h.from, {
+    wds: true
+  }), " \u09A5\u09C7\u0995\u09C7 \u09A8\u09A4\u09C1\u09A8 \u09B0\u09C7\u099F ", React.createElement("b", null, money(h.rate)), " \u0995\u09BE\u09B0\u09CD\u09AF\u0995\u09B0 (\u0986\u0997\u09C7 ", money(h.prev), ") \u2014 \u098F\u09B0 \u0986\u0997\u09C7\u09B0 \u09A6\u09BF\u09A8\u0997\u09C1\u09B2\u09CB \u09AA\u09C1\u09B0\u09A8\u09CB \u09B0\u09C7\u099F\u09C7 \u09B9\u09BF\u09B8\u09BE\u09AC \u09B9\u09AF\u09BC\u09C7\u099B\u09C7\u0964")), React.createElement("div", {
     className: "card pad"
   }, React.createElement(MiniDays, {
     cells: r.cells,
@@ -5048,120 +6503,272 @@ function WeekSheet({
     c: c
   })))), React.createElement("div", {
     className: "sec-title"
-  }, "\u0985\u0997\u09CD\u09B0\u09BF\u09AE"), r.advList.length === 0 && React.createElement("div", {
-    className: "muted sm"
-  }, "\u098F\u0987 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A8\u09C7\u0987\u0964"), r.advList.slice().sort((a, b) => a.d < b.d ? -1 : 1).map(a => React.createElement("div", {
-    key: a.id,
-    className: "adv-row"
-  }, React.createElement("span", null, fmtShort(a.d)), React.createElement("b", null, money(a.amt)), React.createElement("span", {
-    className: "muted grow"
-  }, a.note), React.createElement("button", {
-    className: "icon-btn sm",
-    onClick: () => confirm(money(a.amt) + " অগ্রিম মুছবেন?") && act.delAdv(a.id),
-    "aria-label": "\u09AE\u09C1\u099B\u09C1\u09A8"
-  }, React.createElement(Icon, {
-    n: "trash",
-    s: 16
-  })))), React.createElement("div", {
-    className: "adv-add"
-  }, React.createElement("input", {
-    type: "number",
-    inputMode: "numeric",
-    placeholder: "\u099F\u09BE\u0995\u09BE",
-    value: amt,
-    onChange: e => setAmt(e.target.value),
-    "aria-label": "\u0985\u0997\u09CD\u09B0\u09BF\u09AE\u09C7\u09B0 \u099F\u09BE\u0995\u09BE"
-  }), React.createElement("input", {
-    type: "date",
-    value: ad,
-    min: wk.from,
-    max: wk.to,
-    onChange: e => setAd(e.target.value),
-    "aria-label": "\u09A4\u09BE\u09B0\u09BF\u0996"
-  }), React.createElement("input", {
-    type: "text",
-    placeholder: "\u09A8\u09CB\u099F",
-    value: anote,
-    onChange: e => setAnote(e.target.value),
-    "aria-label": "\u09A8\u09CB\u099F"
+  }, "\u0985\u0997\u09CD\u09B0\u09BF\u09AE \u2014 \u0995\u09AC\u09C7, \u0995\u0996\u09A8, \u0995\u09A4"), React.createElement(AdvLedger, {
+    ctx: ctx,
+    list: r.advList.slice().sort(advSort),
+    act: act,
+    showName: false,
+    empty: "\u098F\u0987 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A8\u09C7\u0987\u0964"
   }), React.createElement("button", {
-    className: "btn sm primary",
-    onClick: addAdv,
-    disabled: !(parseInt(amt, 10) > 0)
-  }, "\u09AF\u09CB\u0997")), p && Math.round(p.net) !== Math.round(r.net) && React.createElement("div", {
+    className: "btn sm adv-btn",
+    onClick: () => open({
+      t: "adv",
+      pin,
+      weekId: wk.id
+    })
+  }, React.createElement(Icon, {
+    n: "cash",
+    s: 16
+  }), " \u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A6\u09BF\u09A8"), p && Math.round(p.net) !== Math.round(r.net) && React.createElement("div", {
     className: "note sm"
   }, "\u09AA\u09B0\u09BF\u09B6\u09CB\u09A7\u09C7\u09B0 \u09B8\u09AE\u09AF\u09BC \u09AA\u09CD\u09B0\u09A6\u09C7\u09AF\u09BC \u099B\u09BF\u09B2 ", money(p.net), "\u0964 \u098F\u09B0\u09AA\u09B0 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09AC\u09BE \u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09AC\u09A6\u09B2\u09C7\u099B\u09C7\u0964"));
 }
-function AdvSheet({
+const toAscii = t => String(t || "").replace(/[০-৯]/g, c => BN.indexOf(c));
+function activePins(ctx) {
+  const order = p => {
+    const k = DEPTS.indexOf(RH.deptOf(ctx.workers[p]));
+    return k < 0 ? 9 : k;
+  };
+  return Object.keys(ctx.workers).filter(p => RH.inPay(ctx.workers[p]) && ctx.workers[p].onDevice !== false && ctx.recent[p]).sort((a, b) => order(a) - order(b) || a - b);
+}
+function AdvForm({
   ctx,
-  weekId,
-  close,
-  act
+  pin,
+  setPin,
+  fixed,
+  act,
+  min,
+  max,
+  onDone
 }) {
-  const s = ctx.s,
-    today = ctx.today;
-  const wk = RH.weekOf(weekId || today, s);
-  const pins = Object.keys(ctx.workers).filter(p => RH.inPay(ctx.workers[p]) && ctx.workers[p].onDevice !== false && ctx.recent[p]).sort((a, b) => a - b);
-  const [pin, setPin] = useState("");
+  const today = ctx.today;
+  const last = max && max < today ? max : today;
   const [amt, setAmt] = useState("");
-  const [d, setD] = useState(today >= wk.from && today <= wk.to ? today : wk.to);
   const [note, setNote] = useState("");
-  const ok = pin && parseInt(amt, 10) > 0 && d;
-  const save = () => act.addAdv({
-    pin,
-    d,
-    amt: parseInt(amt, 10),
-    note
-  }).then(x => x && close());
-  return React.createElement(Sheet, {
-    title: "\u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A6\u09BF\u09A8",
-    sub: weekLabel(wk),
-    onClose: close,
-    foot: React.createElement("button", {
-      className: "btn primary",
-      disabled: !ok,
-      onClick: save
-    }, "\u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3")
-  }, React.createElement(Field, {
-    label: "\u0995\u09B0\u09CD\u09AE\u09C0"
-  }, React.createElement("div", {
-    className: "pick"
-  }, pins.map(p => React.createElement("button", {
+  const [edit, setEdit] = useState(last !== today);
+  const [d, setD] = useState(last);
+  const [t, setT] = useState(last === today ? RH.hhmm(ctx.nowMin) : "");
+  const [busy, setBusy] = useState(false);
+  const amtRef = useRef(null);
+  const a = parseInt(toAscii(amt).replace(/[^\d]/g, ""), 10) || 0;
+  const wk = RH.weekOf(d || today, ctx.s);
+  const r = useMemo(() => pin ? oneReport(ctx, pin, wk.from, wk.to, wk.id) : null, [ctx, pin, wk.id]);
+  const pins = activePins(ctx);
+  if (pin && pins.indexOf(pin) < 0) pins.unshift(pin);
+  const groups = DEPTS.concat([""]).map(k => [k, pins.filter(p => RH.deptOf(ctx.workers[p]) === k)]).filter(g => g[1].length);
+  const ok = !!pin && a > 0 && !!d && !busy;
+  const save = () => {
+    if (!ok) return;
+    const tm = edit ? t : RH.hhmm(RH.nowMin());
+    setBusy(true);
+    act.addAdv({
+      pin,
+      d: edit ? d : today,
+      t: tm || "",
+      amt: a,
+      note: note.trim()
+    }).then(x => {
+      setBusy(false);
+      if (x) {
+        setAmt("");
+        setNote("");
+        if (onDone) onDone();
+      }
+    });
+  };
+  return React.createElement("div", {
+    className: "card pad advf"
+  }, !fixed && React.createElement(Field, {
+    label: "\u0995\u09BE\u0995\u09C7 \u09A6\u09C7\u09AC\u09C7\u09A8"
+  }, React.createElement("select", {
+    className: "wsel",
+    value: pin,
+    onChange: e => {
+      setPin(e.target.value);
+      setTimeout(() => amtRef.current && amtRef.current.focus(), 60);
+    },
+    "aria-label": "\u0995\u09B0\u09CD\u09AE\u09C0 \u09AC\u09BE\u099B\u09C1\u09A8"
+  }, React.createElement("option", {
+    value: ""
+  }, "\u2014 \u0995\u09B0\u09CD\u09AE\u09C0 \u09AC\u09BE\u099B\u09C1\u09A8 \u2014"), groups.map(([k, l]) => React.createElement("optgroup", {
+    key: k || "-",
+    label: k || "বিভাগ নেই"
+  }, l.map(p => React.createElement("option", {
     key: p,
-    type: "button",
-    className: pin === p ? "on" : "",
-    onClick: () => setPin(p)
-  }, RH.workerName(ctx.workers[p], p))))), React.createElement("div", {
-    className: "grid2"
+    value: p
+  }, RH.workerName(ctx.workers[p], p), " (\u0986\u0987\u09A1\u09BF ", bn(p), ")")))))), pin && React.createElement("div", {
+    className: "adv-info"
+  }, r && r.units > 0 && !r.noRate && React.createElement(React.Fragment, null, "\u098F \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u0986\u09AF\u09BC ", React.createElement("b", null, money(r.gross)), r.adv > 0 && React.createElement(React.Fragment, null, " \xB7 \u0986\u0997\u09C7 \u09A8\u09BF\u09AF\u09BC\u09C7\u099B\u09C7\u09A8 ", React.createElement("b", null, money(r.adv))), " \xB7 \u09AC\u09C7\u09A4\u09A8\u09C7 \u09AA\u09BE\u09AC\u09C7\u09A8 ", React.createElement("b", {
+    className: r.net - a < 0 ? "bad-t" : "ok-t"
+  }, money(r.net - a)), a > 0 && " (এবারসহ)"), r && r.units > 0 && r.noRate && React.createElement("span", {
+    className: "warn-t"
+  }, "\u09B0\u09C7\u099F \u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF \u2014 \u0986\u09AF\u09BC \u09B9\u09BF\u09B8\u09BE\u09AC \u0995\u09B0\u09BE \u09AF\u09BE\u099A\u09CD\u099B\u09C7 \u09A8\u09BE"), (!r || r.units === 0) && React.createElement("span", {
+    className: "muted"
+  }, "\u098F \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u098F\u0996\u09A8\u09CB \u0995\u09CB\u09A8\u09CB \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09A8\u09C7\u0987", r && r.adv > 0 ? " · আগে নিয়েছেন " + money(r.adv) : "")), React.createElement("div", {
+    className: "adv-grid"
   }, React.createElement(Field, {
     label: "\u099F\u09BE\u0995\u09BE"
-  }, React.createElement("input", {
-    type: "number",
+  }, React.createElement("div", {
+    className: "amt-row"
+  }, React.createElement("span", {
+    className: "cur"
+  }, "\u09F3"), React.createElement("input", {
+    ref: amtRef,
+    className: "amt",
+    type: "text",
     inputMode: "numeric",
     value: amt,
+    placeholder: "\u09E6",
+    "aria-label": "\u0985\u0997\u09CD\u09B0\u09BF\u09AE\u09C7\u09B0 \u099F\u09BE\u0995\u09BE",
     onChange: e => setAmt(e.target.value),
-    placeholder: "\u09AF\u09C7\u09AE\u09A8 \u09EB\u09E6\u09E6"
-  })), React.createElement(Field, {
+    onKeyDown: e => e.key === "Enter" && save()
+  }))), React.createElement(Field, {
+    label: "\u09A8\u09CB\u099F (\u0987\u099A\u09CD\u099B\u09BE \u09B9\u09B2\u09C7)"
+  }, React.createElement("input", {
+    type: "text",
+    value: note,
+    placeholder: "\u09AF\u09C7\u09AE\u09A8: \u09AC\u09BE\u099C\u09BE\u09B0",
+    onChange: e => setNote(e.target.value),
+    onKeyDown: e => e.key === "Enter" && save()
+  }))), !edit ? React.createElement("div", {
+    className: "adv-when"
+  }, React.createElement(Icon, {
+    n: "cal",
+    s: 16
+  }), React.createElement("span", null, "\u0986\u099C, ", clockP(ctx.nowMin), " \u2014 \u09A6\u09C7\u0993\u09AF\u09BC\u09BE\u09B0 \u09B8\u09AE\u09AF\u09BC \u09A8\u09BF\u099C\u09C7 \u09A5\u09C7\u0995\u09C7 \u09B2\u09C7\u0996\u09BE \u09A5\u09BE\u0995\u09AC\u09C7"), React.createElement("button", {
+    type: "button",
+    className: "link sm",
+    onClick: () => {
+      setEdit(true);
+      setT(RH.hhmm(ctx.nowMin));
+    }
+  }, "\u0985\u09A8\u09CD\u09AF \u09A6\u09BF\u09A8/\u09B8\u09AE\u09AF\u09BC")) : React.createElement("div", {
+    className: "grid2"
+  }, React.createElement(Field, {
     label: "\u09A4\u09BE\u09B0\u09BF\u0996"
   }, React.createElement("input", {
     type: "date",
     value: d,
-    max: today,
-    onChange: e => setD(e.target.value)
-  }))), React.createElement(Field, {
-    label: "\u09A8\u09CB\u099F"
+    min: min,
+    max: last,
+    onChange: e => e.target.value && setD(e.target.value)
+  })), React.createElement(Field, {
+    label: "\u09B8\u09AE\u09AF\u09BC"
   }, React.createElement("input", {
-    type: "text",
-    value: note,
-    onChange: e => setNote(e.target.value)
+    type: "time",
+    value: t,
+    onChange: e => setT(e.target.value)
+  }))), React.createElement("button", {
+    className: "btn primary block",
+    disabled: !ok,
+    onClick: save
+  }, React.createElement(Icon, {
+    n: "check",
+    s: 18
+  }), " ", !pin ? "কর্মী বাছুন" : a > 0 ? RH.workerName(ctx.workers[pin], pin) + "-কে " + money(a) + " অগ্রিম দিন" : "টাকার পরিমাণ লিখুন"));
+}
+function AdvLedger({
+  ctx,
+  list,
+  act,
+  showName = true,
+  empty
+}) {
+  if (!list.length) return React.createElement("div", {
+    className: "muted sm"
+  }, empty || "এখনো কোনো অগ্রিম দেওয়া হয়নি।");
+  const sum = list.reduce((s, a) => s + (+a.amt || 0), 0);
+  return React.createElement("div", {
+    className: "card ledger"
+  }, list.map(a => {
+    const x = ctx.workers[a.pin],
+      m = advMin(a);
+    return React.createElement("div", {
+      key: a.id,
+      className: "lrow"
+    }, React.createElement("span", {
+      className: "l-when"
+    }, React.createElement("b", null, fmtShort(a.d)), React.createElement("small", null, m != null ? clockP(m) : "সময় লেখা নেই")), React.createElement("span", {
+      className: "l-who"
+    }, showName ? React.createElement("b", null, RH.workerName(x, a.pin)) : null, a.note ? React.createElement("small", null, a.note) : null), React.createElement("b", {
+      className: "l-amt"
+    }, money(a.amt)), act && React.createElement("button", {
+      className: "icon-btn sm",
+      onClick: () => confirm(RH.workerName(x, a.pin) + " — " + money(a.amt) + " অগ্রিম মুছবেন?") && act.delAdv(a.id),
+      "aria-label": "\u09AE\u09C1\u099B\u09C1\u09A8"
+    }, React.createElement(Icon, {
+      n: "trash",
+      s: 16
+    })));
+  }), React.createElement("div", {
+    className: "lrow tot"
+  }, React.createElement("span", {
+    className: "l-when"
+  }, "\u09AE\u09CB\u099F"), React.createElement("span", {
+    className: "l-who"
+  }, React.createElement("small", null, bn(list.length), "\u099F\u09BF \u0985\u0997\u09CD\u09B0\u09BF\u09AE")), React.createElement("b", {
+    className: "l-amt"
+  }, money(sum)), act && React.createElement("span", {
+    className: "icon-sp"
   })));
+}
+function AdvSheet({
+  ctx,
+  weekId,
+  pin: pin0,
+  close,
+  act
+}) {
+  const today = ctx.today;
+  const wk = RH.weekOf(weekId || today, ctx.s);
+  const past = wk.to < today;
+  const [pin, setPin] = useState(pin0 || "");
+  const list = ctx.adv.filter(a => a.d >= wk.from && a.d <= wk.to).sort(advSort);
+  const w = pin0 ? ctx.workers[pin0] || {
+    pin: pin0
+  } : null;
+  return React.createElement(Sheet, {
+    title: "\u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A6\u09BF\u09A8",
+    sub: weekLabel(wk) + (past ? " · আগের সপ্তাহ" : ""),
+    onClose: close
+  }, pin0 && React.createElement("div", {
+    className: "sel-w"
+  }, React.createElement(Avatar, {
+    name: RH.workerName(w, pin0),
+    pin: pin0,
+    dept: RH.deptOf(w),
+    size: "lg"
+  }), React.createElement("div", {
+    className: "grow"
+  }, React.createElement("b", null, RH.workerName(w, pin0)), React.createElement("small", null, "\u0986\u0987\u09A1\u09BF ", bn(pin0), RH.deptOf(w) ? " · " + RH.deptOf(w) : ""))), React.createElement(AdvForm, {
+    key: pin0 || "any",
+    ctx: ctx,
+    pin: pin,
+    setPin: setPin,
+    fixed: !!pin0,
+    act: act,
+    min: past ? wk.from : undefined,
+    max: past ? wk.to : undefined,
+    onDone: () => {
+      if (pin0) close();else setPin("");
+    }
+  }), React.createElement("div", {
+    className: "sec-title"
+  }, "\u098F\u0987 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u0985\u0997\u09CD\u09B0\u09BF\u09AE \u0996\u09BE\u09A4\u09BE"), React.createElement(AdvLedger, {
+    ctx: ctx,
+    list: list,
+    act: act
+  }));
 }
 function ProfileSheet({
   ctx,
   st,
+  db,
   pin,
   close,
-  open
+  open,
+  act,
+  vault
 }) {
   const today = ctx.today;
   useEffect(() => {
@@ -5187,6 +6794,9 @@ function ProfileSheet({
       h: x.hours
     }
   }));
+  const phones = phonesOf(w);
+  const [big, setBig] = useState(false);
+  const photo = PHOTOS[pin];
   return React.createElement(Sheet, {
     title: name,
     wide: true,
@@ -5200,6 +6810,15 @@ function ProfileSheet({
         weekId: today
       })
     }, "\u098F\u0987 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u09B9\u09BF\u09B8\u09BE\u09AC"), React.createElement("button", {
+      className: "btn",
+      onClick: () => open({
+        t: "adv",
+        pin
+      })
+    }, React.createElement(Icon, {
+      n: "cash",
+      s: 16
+    }), " \u0985\u0997\u09CD\u09B0\u09BF\u09AE"), React.createElement("button", {
       className: "btn primary",
       onClick: () => open({
         t: "edit",
@@ -5208,24 +6827,78 @@ function ProfileSheet({
     }, React.createElement(Icon, {
       n: "edit",
       s: 16
-    }), " \u09A8\u09BE\u09AE, \u09AC\u09BF\u09AD\u09BE\u0997 \u0993 \u09B0\u09C7\u099F"))
+    }), " \u09A4\u09A5\u09CD\u09AF \u09AC\u09A6\u09B2\u09BE\u09A8"))
   }, w.onDevice === false && React.createElement("div", {
     className: "note sm"
-  }, "\u098F\u0987 \u0995\u09B0\u09CD\u09AE\u09C0\u0995\u09C7 \u09A1\u09BF\u09AD\u09BE\u0987\u09B8 \u09A5\u09C7\u0995\u09C7 \u09AE\u09C1\u099B\u09C7 \u09AB\u09C7\u09B2\u09BE \u09B9\u09AF\u09BC\u09C7\u099B\u09C7\u0964 \u09AA\u09C1\u09B0\u09A8\u09CB \u09B9\u09BF\u09B8\u09BE\u09AC \u09A5\u09C7\u0995\u09C7 \u09AF\u09BE\u09AC\u09C7\u0964"), r ? React.createElement("div", {
+  }, "\u098F\u0987 \u0995\u09B0\u09CD\u09AE\u09C0\u0995\u09C7 \u09A1\u09BF\u09AD\u09BE\u0987\u09B8 \u09A5\u09C7\u0995\u09C7 \u09AE\u09C1\u099B\u09C7 \u09AB\u09C7\u09B2\u09BE \u09B9\u09AF\u09BC\u09C7\u099B\u09C7\u0964 \u09AA\u09C1\u09B0\u09A8\u09CB \u09B9\u09BF\u09B8\u09BE\u09AC \u09A5\u09C7\u0995\u09C7 \u09AF\u09BE\u09AC\u09C7\u0964"), React.createElement("div", {
+    className: "pf-head"
+  }, React.createElement("div", {
+    className: "pf-photo"
+  }, React.createElement(Avatar, {
+    name: name,
+    pin: pin,
+    dept: dept,
+    size: "xl",
+    onClick: photo ? () => setBig(true) : undefined
+  }), React.createElement(PhotoPick, {
+    pin: pin,
+    act: act,
+    className: "pf-cam"
+  }, React.createElement(Icon, {
+    n: "camera",
+    s: 16
+  }))), React.createElement("div", {
+    className: "pf-info"
+  }, React.createElement("div", {
+    className: "pf-name"
+  }, name, w.devName && w.name ? React.createElement("small", null, " \xB7 ", w.devName) : null), w.father && React.createElement("div", {
+    className: "muted sm"
+  }, "\u09AC\u09BE\u09AC\u09BE: ", w.father), w.joined && React.createElement("div", {
+    className: "muted sm"
+  }, "\u09AF\u09CB\u0997\u09A6\u09BE\u09A8 ", fmtDate(w.joined, {
+    year: true
+  })), !photo && React.createElement("div", {
+    className: "muted sm"
+  }, "\u099B\u09AC\u09BF \u09A8\u09C7\u0987 \u2014 \u0995\u09CD\u09AF\u09BE\u09AE\u09C7\u09B0\u09BE \u099A\u09BF\u09B9\u09CD\u09A8\u09C7 \u099A\u09BE\u09AA \u09A6\u09BF\u09AF\u09BC\u09C7 \u09A4\u09C1\u09B2\u09C1\u09A8"), React.createElement("div", {
+    className: "pf-btns"
+  }, phones[0] && React.createElement("a", {
+    className: "btn sm",
+    href: telLink(phones[0].n)
+  }, React.createElement(Icon, {
+    n: "phone",
+    s: 16
+  }), " \u0995\u09B2"), phones[0] && React.createElement("a", {
+    className: "btn sm",
+    href: waLink(phones[0].n),
+    target: "_blank",
+    rel: "noopener"
+  }, React.createElement(Icon, {
+    n: "chat",
+    s: 16
+  }), " WhatsApp"), React.createElement("button", {
+    className: "btn sm",
+    onClick: () => open({
+      t: "idcard",
+      pins: [pin]
+    })
+  }, React.createElement(Icon, {
+    n: "id",
+    s: 16
+  }), " \u0986\u0987\u09A1\u09BF \u0995\u09BE\u09B0\u09CD\u09A1")))), r ? React.createElement("div", {
     className: "stats s3 in-sheet"
   }, React.createElement(Stat, {
     small: true,
     label: "\u0989\u09AA\u09B8\u09CD\u09A5\u09BF\u09A4\u09BF",
     value: pct(r.attRate),
-    sub: bn(r.presentExp) + "/" + bn(r.expected) + " কাজের দিন"
+    sub: bn(r.presentExp) + "/" + bn(r.expected) + " কাজের দিন এসেছেন"
   }), React.createElement(Stat, {
     small: true,
-    label: "\u0997\u09A1\u09BC \u0995\u09BE\u099C",
+    label: "\u09A6\u09BF\u09A8\u09C7 \u0997\u09A1\u09BC \u0995\u09BE\u099C",
     value: hrs(r.avg, true),
-    sub: "\u09A6\u09BF\u09A8\u09C7, \u09AC\u09BF\u09B0\u09A4\u09BF \u09AC\u09BE\u09A6\u09C7"
+    sub: "\u09AC\u09BF\u09B0\u09A4\u09BF \u09AC\u09BE\u09A6\u09C7"
   }), React.createElement(Stat, {
     small: true,
-    label: "\u0997\u09A1\u09BC \u09A2\u09CB\u0995\u09BE",
+    label: "\u0997\u09A1\u09BC\u09C7 \u09A2\u09CB\u0995\u09C7\u09A8",
     value: r.avgIn != null ? clock(r.avgIn) : "—",
     sub: bn(r.late) + " দিন দেরি"
   }), React.createElement(Stat, {
@@ -5236,13 +6909,13 @@ function ProfileSheet({
   }), React.createElement(Stat, {
     small: true,
     label: "\u0993\u09AD\u09BE\u09B0\u099F\u09BE\u0987\u09AE",
-    value: units(r.ot),
-    sub: hrs(r.otMin, true)
+    value: units(r.ot) + " দিন",
+    sub: money(r.otPay) + " বাড়তি আয়"
   }), React.createElement(Stat, {
     small: true,
-    label: "\u0985\u09B8\u09AE\u09CD\u09AA\u09C2\u09B0\u09CD\u09A3 \u09AA\u09BE\u099E\u09CD\u099A",
-    value: bn(r.est),
-    sub: "\u09A6\u09BF\u09A8 (\u0986\u09A8\u09CD\u09A6\u09BE\u099C)"
+    label: "\u09AA\u09BE\u099E\u09CD\u099A \u09AD\u09C1\u09B2",
+    value: bn(r.est) + " দিন",
+    sub: "\u09AC\u09C7\u09B0 \u09B9\u0993\u09AF\u09BC\u09BE\u09B0 \u09AA\u09BE\u099E\u09CD\u099A \u09A6\u09C7\u09A8\u09A8\u09BF"
   })) : React.createElement(Empty, null, "\u09B6\u09C7\u09B7 \u09E7\u09E8 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u0995\u09CB\u09A8\u09CB \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09A8\u09C7\u0987\u0964"), React.createElement("div", {
     className: "cgrid"
   }, React.createElement(ChartCard, {
@@ -5274,23 +6947,76 @@ function ProfileSheet({
     fmt: v => num(v, 0) + " ঘ",
     yFmt: v => num(v, 0),
     height: 170,
+    showTotals: true,
     onPick: (d, i) => open({
       t: "week",
       pin,
       weekId: pf.weeks[i].week.id
     })
   }))), React.createElement("div", {
+    className: "pf-cols"
+  }, React.createElement("div", {
+    className: "card pad contact"
+  }, React.createElement("div", {
+    className: "docs-h"
+  }, React.createElement(Icon, {
+    n: "phone",
+    s: 18
+  }), React.createElement("b", null, "\u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u0993 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE")), phones.map((p, i) => React.createElement("div", {
+    key: i,
+    className: "ph-line"
+  }, React.createElement("span", {
+    className: "muted"
+  }, p.l || "ফোন"), React.createElement("b", null, bn(p.n)), React.createElement("a", {
+    className: "icon-btn sm",
+    href: telLink(p.n),
+    "aria-label": "\u0995\u09B2"
+  }, React.createElement(Icon, {
+    n: "phone",
+    s: 16
+  })), React.createElement("a", {
+    className: "icon-btn sm",
+    href: waLink(p.n),
+    target: "_blank",
+    rel: "noopener",
+    "aria-label": "WhatsApp"
+  }, React.createElement(Icon, {
+    n: "chat",
+    s: 16
+  })))), w.addr && React.createElement("div", {
+    className: "addr"
+  }, React.createElement(Icon, {
+    n: "pin",
+    s: 16
+  }), React.createElement("span", null, React.createElement("small", null, "\u09AC\u09B0\u09CD\u09A4\u09AE\u09BE\u09A8 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE"), w.addr)), w.home && React.createElement("div", {
+    className: "addr"
+  }, React.createElement(Icon, {
+    n: "pin",
+    s: 16
+  }), React.createElement("span", null, React.createElement("small", null, "\u09B8\u09CD\u09A5\u09BE\u09AF\u09BC\u09C0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE"), w.home)), !phones.length && !w.addr && !w.home && React.createElement("div", {
+    className: "muted sm"
+  }, "\u09AB\u09CB\u09A8 \u09A8\u09AE\u09CD\u09AC\u09B0 \u09AC\u09BE \u09A0\u09BF\u0995\u09BE\u09A8\u09BE \u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF\u0964 \"\u09A4\u09A5\u09CD\u09AF \u09AC\u09A6\u09B2\u09BE\u09A8\" \u09A5\u09C7\u0995\u09C7 \u09AC\u09B8\u09BE\u09A8\u0964")), React.createElement(DocsSection, {
+    db: db,
+    pin: pin,
+    w: w,
+    vault: vault,
+    act: act
+  })), React.createElement("div", {
     className: "grid2 cols"
   }, React.createElement("div", null, React.createElement("div", {
     className: "sec-title"
   }, "\u09B0\u09C7\u099F\u09C7\u09B0 \u0987\u09A4\u09BF\u09B9\u09BE\u09B8"), rateKeys.length === 0 && React.createElement("div", {
     className: "muted sm"
-  }, "\u09B0\u09C7\u099F \u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF\u0964"), rateKeys.map((k, i) => React.createElement("div", {
-    key: k,
+  }, "\u09B0\u09C7\u099F \u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF\u0964"), RH.rateHistory(w).reverse().map(h => React.createElement("div", {
+    key: h.from,
     className: "adv-row"
-  }, React.createElement("span", null, i === 0 ? "শুরু থেকে" : fmtDate(k, {
+  }, React.createElement("span", null, h.first ? "শুরু থেকে" : fmtDate(h.from, {
     year: true
-  }) + " থেকে"), React.createElement("b", null, money(rates[k]))))), React.createElement("div", null, React.createElement("div", {
+  }) + " থেকে কার্যকর"), React.createElement("b", null, money(h.rate)), h.prev != null && React.createElement("small", {
+    className: h.rate >= h.prev ? "ok-t" : "bad-t"
+  }, h.rate >= h.prev ? "+" : "−", money(Math.abs(h.rate - h.prev))), h.from > today && React.createElement(Chip, {
+    kind: "info sm"
+  }, "\u09B8\u09BE\u09AE\u09A8\u09C7")))), React.createElement("div", null, React.createElement("div", {
     className: "sec-title"
   }, "\u09B8\u09BE\u09AE\u09CD\u09AA\u09CD\u09B0\u09A4\u09BF\u0995 \u0985\u0997\u09CD\u09B0\u09BF\u09AE"), advs.length === 0 && React.createElement("div", {
     className: "muted sm"
@@ -5299,7 +7025,23 @@ function ProfileSheet({
     className: "adv-row"
   }, React.createElement("span", null, fmtShort(a.d)), React.createElement("b", null, money(a.amt)), React.createElement("span", {
     className: "muted grow"
-  }, a.note))))));
+  }, a.note))))), big && photo && React.createElement(Lightbox, {
+    src: photo,
+    title: name,
+    onClose: () => setBig(false),
+    actions: React.createElement("button", {
+      className: "btn sm",
+      onClick: () => {
+        if (confirm("ছবিটা মুছে ফেলবেন?")) {
+          act.delPhoto(pin);
+          setBig(false);
+        }
+      }
+    }, React.createElement(Icon, {
+      n: "trash",
+      s: 16
+    }), " \u099B\u09AC\u09BF \u09AE\u09C1\u099B\u09C1\u09A8")
+  }));
 }
 function EditSheet({
   ctx,
@@ -5316,21 +7058,50 @@ function EditSheet({
   const rateKeys = Object.keys(rates).filter(k => rates[k] != null).sort();
   const cur = RH.currentRate(w);
   const [name, setName] = useState(w.name || "");
+  const [father, setFather] = useState(w.father || "");
   const [dept, setDept] = useState(RH.deptOf(w));
-  const [phone, setPhone] = useState(w.phone || "");
+  const [phones, setPhones] = useState(() => {
+    const l = phonesOf(w).map(p => ({
+      n: p.n,
+      l: p.l || "নিজের"
+    }));
+    return l.length ? l : [{
+      n: "",
+      l: "নিজের"
+    }];
+  });
+  const [addr, setAddr] = useState(w.addr || "");
+  const [home, setHome] = useState(w.home || "");
+  const [joined, setJoined] = useState(w.joined || "");
   const [inPay, setInPay] = useState(RH.inPay(w));
   const [rate, setRate] = useState("");
-  const [rateFrom, setRateFrom] = useState(RH.weekOf(ctx.today, s).from);
+  const [rateFrom, setRateFrom] = useState(ctx.today);
+  const wkNow = RH.weekOf(ctx.today, s);
+  const hist = RH.rateHistory(w);
+  const curH = hist.filter(h => h.from <= ctx.today).pop() || hist[0];
+  const nextH = hist.filter(h => h.from > ctx.today)[0];
   const [custom, setCustom] = useState(!!(rules.start || rules.fullHours || rules.breakMin != null || rules.ot === false));
   const [rStart, setRStart] = useState(rules.start || "");
   const [rFull, setRFull] = useState(rules.fullHours != null ? String(rules.fullHours) : "");
   const [rBreak, setRBreak] = useState(rules.breakMin != null ? String(rules.breakMin) : "");
   const [rOt, setROt] = useState(rules.ot !== false);
+  const setPh = (i, k, v) => setPhones(phones.map((p, j) => j === i ? Object.assign({}, p, {
+    [k]: v
+  }) : p));
   const save = () => {
+    const ph = phones.map(p => ({
+      n: cleanPhone(p.n),
+      l: p.l || "নিজের"
+    })).filter(p => p.n);
     const f = {
       name: name.trim(),
+      father: father.trim(),
       dept,
-      phone: phone.trim(),
+      phones: ph,
+      phone: ph.length ? ph[0].n : "",
+      addr: addr.trim(),
+      home: home.trim(),
+      joined: joined || "",
       inPay
     };
     f.rules = custom ? {
@@ -5344,15 +7115,18 @@ function EditSheet({
       breakMin: null,
       ot: true
     };
-    const r = parseInt(rate, 10);
-    if (r > 0) f.rates = {
-      [cur == null ? rateKeys[0] || ctx.today : rateFrom]: r
+    if (rv > 0) f.rates = {
+      [cur == null ? rateKeys[0] || ctx.today : rateFrom]: rv
     };
     act.saveWorker(pin, f).then(ok => ok && close());
   };
   const delRate = k => {
     if (confirm(money(rates[k]) + " রেটটি মুছবেন?")) act.delRate(pin, k);
   };
+  const rv = parseInt(toAscii(rate), 10) || 0;
+  const before = RH.rateOn(w, RH.addDays(rateFrom, -1));
+  const paidAfter = Object.keys(ctx.pay || {}).some(wid => wid >= rateFrom && ctx.pay[wid] && ctx.pay[wid].p && ctx.pay[wid].p[pin]);
+  const photo = PHOTOS[pin];
   return React.createElement(Sheet, {
     title: RH.workerName(w, pin),
     sub: "আইডি " + bn(pin) + (w.devName ? " · ডিভাইসে: " + w.devName : ""),
@@ -5361,6 +7135,29 @@ function EditSheet({
       className: "btn primary",
       onClick: save
     }, "\u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3")
+  }, React.createElement("div", {
+    className: "ed-photo"
+  }, React.createElement(Avatar, {
+    name: RH.workerName(w, pin),
+    pin: pin,
+    dept: dept,
+    size: "xl"
+  }), React.createElement("div", {
+    className: "ed-photo-b"
+  }, React.createElement(PhotoPick, {
+    pin: pin,
+    act: act,
+    className: "btn sm"
+  }, React.createElement(Icon, {
+    n: "camera",
+    s: 16
+  }), " ", photo ? "ছবি বদলান" : "ছবি তুলুন / বাছুন"), photo && React.createElement("button", {
+    className: "btn sm ghost",
+    onClick: () => confirm("ছবিটা মুছে ফেলবেন?") && act.delPhoto(pin)
+  }, "\u09AE\u09C1\u099B\u09C1\u09A8"), React.createElement("span", {
+    className: "fh"
+  }, "\u09AB\u09CB\u09A8\u09C7 \u0995\u09CD\u09AF\u09BE\u09AE\u09C7\u09B0\u09BE \u09AC\u09BE \u0997\u09CD\u09AF\u09BE\u09B2\u09BE\u09B0\u09BF \u09A5\u09C7\u0995\u09C7 \u09A8\u09C7\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AC\u09C7; \u099B\u09AC\u09BF \u099B\u09CB\u099F \u0995\u09B0\u09C7 \u09B0\u09BE\u0996\u09BE \u09B9\u09AF\u09BC"))), React.createElement("div", {
+    className: "grid2"
   }, React.createElement(Field, {
     label: "\u09A8\u09BE\u09AE (\u09AC\u09BE\u0982\u09B2\u09BE\u09AF\u09BC)",
     hint: "\u0996\u09BE\u09B2\u09BF \u09B0\u09BE\u0996\u09B2\u09C7 \u09A1\u09BF\u09AD\u09BE\u0987\u09B8\u09C7\u09B0 \u09A8\u09BE\u09AE \u09A6\u09C7\u0996\u09BE\u09AC\u09C7"
@@ -5370,6 +7167,12 @@ function EditSheet({
     placeholder: w.devName || "",
     onChange: e => setName(e.target.value)
   })), React.createElement(Field, {
+    label: "\u09AC\u09BE\u09AC\u09BE\u09B0 \u09A8\u09BE\u09AE"
+  }, React.createElement("input", {
+    type: "text",
+    value: father,
+    onChange: e => setFather(e.target.value)
+  }))), React.createElement(Field, {
     label: "\u09AC\u09BF\u09AD\u09BE\u0997"
   }, React.createElement("div", {
     className: "pick"
@@ -5380,24 +7183,27 @@ function EditSheet({
     onClick: () => setDept(dept === d ? "" : d)
   }, React.createElement(DeptDot, {
     k: d
-  }), d)))), React.createElement(Field, {
-    label: "\u09AE\u09CB\u09AC\u09BE\u0987\u09B2 \u09A8\u09AE\u09CD\u09AC\u09B0",
-    hint: "WhatsApp-\u098F \u09AC\u09C7\u09A4\u09A8\u09C7\u09B0 \u09B8\u09CD\u09B2\u09BF\u09AA \u09AA\u09BE\u09A0\u09BE\u09A4\u09C7"
-  }, React.createElement("input", {
-    type: "tel",
-    value: phone,
-    placeholder: "01XXXXXXXXX",
-    onChange: e => setPhone(e.target.value)
-  })), React.createElement("div", {
+  }), d)))), React.createElement("div", {
     className: "sec-title"
-  }, "\u09A6\u09C8\u09A8\u09BF\u0995 \u09B0\u09C7\u099F"), cur != null ? React.createElement("div", {
+  }, "\u09A6\u09C8\u09A8\u09BF\u0995 \u09B0\u09C7\u099F (\u09AC\u09C7\u09A4\u09A8)"), cur != null ? React.createElement("div", {
     className: "rate-now"
-  }, "\u098F\u0996\u09A8 ", React.createElement("b", null, money(cur)), " / \u09A6\u09BF\u09A8") : React.createElement("div", {
+  }, "\u098F\u0996\u09A8 ", React.createElement("b", null, money(cur)), " / \u09A6\u09BF\u09A8 ", React.createElement("span", {
+    className: "muted sm"
+  }, "\xB7 ", curH && !curH.first ? fmtDate(curH.from, {
+    year: true
+  }) + " থেকে কার্যকর" : "শুরু থেকে")) : React.createElement("div", {
     className: "note sm warnish"
-  }, "\u09B0\u09C7\u099F \u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF\u0964 \u09B0\u09C7\u099F \u09A6\u09BF\u09B2\u09C7 \u0986\u0997\u09C7\u09B0 \u09B8\u09AC \u09B9\u09BE\u099C\u09BF\u09B0\u09BE\u09A4\u09C7\u0993 \u098F\u0987 \u09B0\u09C7\u099F \u09A7\u09B0\u09BE \u09B9\u09AC\u09C7\u0964"), React.createElement("div", {
+  }, "\u09B0\u09C7\u099F \u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF\u0964 \u09B0\u09C7\u099F \u09A6\u09BF\u09B2\u09C7 \u0986\u0997\u09C7\u09B0 \u09B8\u09AC \u09B9\u09BE\u099C\u09BF\u09B0\u09BE\u09A4\u09C7\u0993 \u098F\u0987 \u09B0\u09C7\u099F \u09A7\u09B0\u09BE \u09B9\u09AC\u09C7\u0964"), nextH && React.createElement("div", {
+    className: "note sm"
+  }, fmtDate(nextH.from, {
+    wds: true,
+    year: true
+  }), " \u09A5\u09C7\u0995\u09C7 ", React.createElement("b", null, money(nextH.rate)), " \u0995\u09BE\u09B0\u09CD\u09AF\u0995\u09B0 \u09B9\u09AC\u09C7\u0964"), React.createElement("div", {
+    className: "card pad rate-box"
+  }, React.createElement("div", {
     className: "grid2"
   }, React.createElement(Field, {
-    label: cur == null ? "রেট (টাকা)" : "নতুন রেট (টাকা)"
+    label: cur == null ? "রেট (টাকা / দিন)" : "নতুন রেট (টাকা / দিন)"
   }, React.createElement("input", {
     type: "number",
     inputMode: "numeric",
@@ -5405,26 +7211,108 @@ function EditSheet({
     placeholder: cur != null ? String(cur) : "যেমন ৬০০",
     onChange: e => setRate(e.target.value)
   })), cur != null && React.createElement(Field, {
-    label: "\u0995\u09AC\u09C7 \u09A5\u09C7\u0995\u09C7"
+    label: "\u0995\u09CB\u09A8 \u09A4\u09BE\u09B0\u09BF\u0996 \u09A5\u09C7\u0995\u09C7 \u0995\u09BE\u09B0\u09CD\u09AF\u0995\u09B0"
   }, React.createElement("input", {
     type: "date",
     value: rateFrom,
-    onChange: e => setRateFrom(e.target.value)
-  }))), rateKeys.length > 1 && rateKeys.map((k, i) => React.createElement("div", {
-    key: k,
-    className: "adv-row"
-  }, React.createElement("span", null, i === 0 ? "শুরু থেকে" : fmtDate(k, {
+    onChange: e => e.target.value && setRateFrom(e.target.value)
+  }))), cur != null && React.createElement("div", {
+    className: "pick chips"
+  }, [["আজ থেকে", ctx.today], ["এই সপ্তাহের শুরু থেকে", wkNow.from], ["আগামী সপ্তাহ থেকে", RH.addDays(wkNow.to, 1)]].map(([l, d]) => React.createElement("button", {
+    key: l,
+    type: "button",
+    className: rateFrom === d ? "on" : "",
+    onClick: () => setRateFrom(d)
+  }, l))), cur != null && rv > 0 && React.createElement("div", {
+    className: "rate-say"
+  }, React.createElement("b", null, fmtDate(rateFrom, {
+    wds: true,
     year: true
-  }) + " থেকে"), React.createElement("b", null, money(rates[k])), React.createElement("span", {
+  })), " \u09A5\u09C7\u0995\u09C7 ", React.createElement("b", null, money(rv)), " \u0995\u09BE\u09B0\u09CD\u09AF\u0995\u09B0 \u09B9\u09AC\u09C7", rv !== before ? React.createElement(React.Fragment, null, " (", rv > before ? money(rv - before) + " বাড়ল" : money(before - rv) + " কমল", ")") : null, "\u0964", " ", "\u098F\u09B0 \u0986\u0997\u09C7\u09B0 \u09A6\u09BF\u09A8\u0997\u09C1\u09B2\u09CB ", money(before), " \u09A7\u09B0\u09C7\u0987 \u09B9\u09BF\u09B8\u09BE\u09AC \u09B9\u09AC\u09C7\u0964", paidAfter && React.createElement("div", {
+    className: "warn-t"
+  }, "\u09B8\u09A4\u09B0\u09CD\u0995\u09A4\u09BE: ", weekLabel(RH.weekOf(rateFrom, s), {
+    short: true
+  }), " \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u09AC\u09C7\u09A4\u09A8 \u0986\u0997\u09C7\u0987 \u09AA\u09B0\u09BF\u09B6\u09CB\u09A7\u09BF\u09A4 \u2014 \u09A8\u09A4\u09C1\u09A8 \u09B0\u09C7\u099F\u09C7 \u09B8\u09C7\u0987 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u09B9\u09BF\u09B8\u09BE\u09AC \u09AC\u09A6\u09B2\u09C7 \u09AF\u09BE\u09AC\u09C7\u0964"))), hist.length > 0 && React.createElement("div", {
+    className: "rate-hist"
+  }, React.createElement("div", {
+    className: "fl"
+  }, "\u09B0\u09C7\u099F\u09C7\u09B0 \u0987\u09A4\u09BF\u09B9\u09BE\u09B8"), hist.slice().reverse().map(h => React.createElement("div", {
+    key: h.from,
+    className: "adv-row"
+  }, React.createElement("span", null, h.first ? "শুরু থেকে" : fmtDate(h.from, {
+    year: true
+  }) + " থেকে কার্যকর"), React.createElement("b", null, money(h.rate)), h.prev != null && React.createElement("small", {
+    className: h.rate >= h.prev ? "ok-t" : "bad-t"
+  }, h.rate >= h.prev ? "+" : "−", money(Math.abs(h.rate - h.prev)).replace("−", "")), React.createElement("span", {
     className: "grow"
-  }), React.createElement("button", {
+  }), hist.length > 1 && React.createElement("button", {
     className: "icon-btn sm",
-    onClick: () => delRate(k),
+    onClick: () => delRate(h.from),
     "aria-label": "\u09AE\u09C1\u099B\u09C1\u09A8"
   }, React.createElement(Icon, {
     n: "trash",
     s: 16
-  })))), React.createElement("div", {
+  }))))), React.createElement("div", {
+    className: "sec-title"
+  }, "\u09AE\u09CB\u09AC\u09BE\u0987\u09B2 \u09A8\u09AE\u09CD\u09AC\u09B0"), phones.map((p, i) => React.createElement("div", {
+    key: i,
+    className: "ph-row"
+  }, React.createElement("select", {
+    value: p.l,
+    onChange: e => setPh(i, "l", e.target.value),
+    "aria-label": "\u0995\u09BE\u09B0 \u09A8\u09AE\u09CD\u09AC\u09B0"
+  }, PHONE_LABELS.map(l => React.createElement("option", {
+    key: l,
+    value: l
+  }, l))), React.createElement("input", {
+    type: "tel",
+    inputMode: "tel",
+    value: p.n,
+    placeholder: "01XXXXXXXXX",
+    onChange: e => setPh(i, "n", e.target.value),
+    "aria-label": "\u09AE\u09CB\u09AC\u09BE\u0987\u09B2 \u09A8\u09AE\u09CD\u09AC\u09B0"
+  }), phones.length > 1 && React.createElement("button", {
+    type: "button",
+    className: "icon-btn sm",
+    onClick: () => setPhones(phones.filter((x, j) => j !== i)),
+    "aria-label": "\u09AE\u09C1\u099B\u09C1\u09A8"
+  }, React.createElement(Icon, {
+    n: "trash",
+    s: 16
+  })))), React.createElement("button", {
+    type: "button",
+    className: "link sm add-ph",
+    onClick: () => setPhones(phones.concat([{
+      n: "",
+      l: phones.length ? "বাড়ি" : "নিজের"
+    }]))
+  }, "+ \u0986\u09B0\u09C7\u0995\u099F\u09BE \u09A8\u09AE\u09CD\u09AC\u09B0"), React.createElement("span", {
+    className: "fh blockh"
+  }, "\u09AA\u09CD\u09B0\u09A5\u09AE \u09A8\u09AE\u09CD\u09AC\u09B0\u09C7 WhatsApp-\u098F \u09AC\u09C7\u09A4\u09A8\u09C7\u09B0 \u09B8\u09CD\u09B2\u09BF\u09AA \u09AF\u09BE\u09AC\u09C7"), React.createElement("div", {
+    className: "sec-title"
+  }, "\u09A0\u09BF\u0995\u09BE\u09A8\u09BE"), React.createElement(Field, {
+    label: "\u09AC\u09B0\u09CD\u09A4\u09AE\u09BE\u09A8 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE"
+  }, React.createElement("textarea", {
+    rows: "2",
+    value: addr,
+    onChange: e => setAddr(e.target.value),
+    placeholder: "\u09AF\u09C7\u09AE\u09A8: \u09AE\u09BE\u099B\u09C1\u09AE\u09AA\u09C1\u09B0, \u09B8\u09BF\u09B0\u09BE\u099C\u0997\u099E\u09CD\u099C"
+  })), React.createElement(Field, {
+    label: "\u09B8\u09CD\u09A5\u09BE\u09AF\u09BC\u09C0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE (\u0997\u09CD\u09B0\u09BE\u09AE\u09C7\u09B0 \u09AC\u09BE\u09A1\u09BC\u09BF)"
+  }, React.createElement("textarea", {
+    rows: "2",
+    value: home,
+    onChange: e => setHome(e.target.value)
+  })), React.createElement(Field, {
+    label: "\u09AF\u09CB\u0997\u09A6\u09BE\u09A8\u09C7\u09B0 \u09A4\u09BE\u09B0\u09BF\u0996"
+  }, React.createElement("input", {
+    type: "date",
+    value: joined,
+    max: ctx.today,
+    onChange: e => setJoined(e.target.value)
+  })), React.createElement("div", {
+    className: "note sm"
+  }, "\u09AD\u09CB\u099F\u09BE\u09B0 \u0986\u0987\u09A1\u09BF \u09A8\u09AE\u09CD\u09AC\u09B0 \u0993 \u0995\u09BE\u09B0\u09CD\u09A1\u09C7\u09B0 \u099B\u09AC\u09BF \u0995\u09B0\u09CD\u09AE\u09C0\u09B0 \u09AA\u09BE\u09A4\u09BE\u09B0 \"\u09AD\u09CB\u099F\u09BE\u09B0 \u0986\u0987\u09A1\u09BF \u0993 \u0995\u09BE\u0997\u099C\u09AA\u09A4\u09CD\u09B0\" \u0985\u0982\u09B6\u09C7 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09A6\u09BF\u09AF\u09BC\u09C7 \u09A4\u09BE\u09B2\u09BE\u09AC\u09A6\u09CD\u09A7 \u0995\u09B0\u09C7 \u09B0\u09BE\u0996\u09BE \u09B9\u09AF\u09BC\u0964"), React.createElement("div", {
     className: "sec-title"
   }, "\u09B9\u09BF\u09B8\u09BE\u09AC"), React.createElement("label", {
     className: "toggle"
@@ -5559,6 +7447,151 @@ function ReviewSheet({
     className: "muted sm"
   }, "\"\u09A0\u09BF\u0995 \u0986\u099B\u09C7\" \u099A\u09BE\u09AA\u09B2\u09C7 \u09B9\u09BF\u09B8\u09BE\u09AC \u09AC\u09A6\u09B2\u09BE\u09AF\u09BC \u09A8\u09BE, \u09B6\u09C1\u09A7\u09C1 \u098F\u0987 \u09A4\u09BE\u09B2\u09BF\u0995\u09BE \u09A5\u09C7\u0995\u09C7 \u09B8\u09B0\u09C7 \u09AF\u09BE\u09AF\u09BC\u0964 \u0986\u09B8\u09B2 \u09B8\u09AE\u09AF\u09BC \u099C\u09BE\u09A8\u09BE \u09A5\u09BE\u0995\u09B2\u09C7 \"\u09B8\u0982\u09B6\u09CB\u09A7\u09A8\" \u09A5\u09C7\u0995\u09C7 \u09AC\u09B8\u09BF\u09AF\u09BC\u09C7 \u09A6\u09BF\u09A8\u0964"));
 }
+function IdCard({
+  w,
+  pin,
+  s,
+  side,
+  today
+}) {
+  const name = RH.workerName(w, pin);
+  const dept = RH.deptOf(w);
+  const ph = phonesOf(w);
+  const photo = PHOTOS[pin];
+  const org = s.org || "রূপালী ফার্নিচার";
+  const foot = [s.orgAddr, s.orgPhone ? "ফোন " + bn(s.orgPhone) : ""].filter(Boolean).join(" · ");
+  if (side === "front") {
+    return React.createElement("div", {
+      className: "idc"
+    }, React.createElement("div", {
+      className: "idc-top"
+    }, React.createElement("b", null, org), React.createElement("small", null, "\u0995\u09B0\u09CD\u09AE\u09C0 \u09AA\u09B0\u09BF\u099A\u09AF\u09BC\u09AA\u09A4\u09CD\u09B0")), React.createElement("div", {
+      className: "idc-body"
+    }, React.createElement("div", {
+      className: "idc-ph"
+    }, photo ? React.createElement("img", {
+      src: photo,
+      alt: ""
+    }) : React.createElement("span", null, name.charAt(0))), React.createElement("div", {
+      className: "idc-info"
+    }, React.createElement("div", {
+      className: "idc-name"
+    }, name), React.createElement("div", {
+      className: "idc-dept"
+    }, dept ? dept + " বিভাগ" : "কর্মী"), React.createElement("div", {
+      className: "idc-kv"
+    }, React.createElement("span", null, "\u0986\u0987\u09A1\u09BF \u09A8\u0982"), React.createElement("b", null, bn(pin))), ph[0] && React.createElement("div", {
+      className: "idc-kv"
+    }, React.createElement("span", null, "\u09AE\u09CB\u09AC\u09BE\u0987\u09B2"), React.createElement("b", null, bn(ph[0].n))), w.joined && React.createElement("div", {
+      className: "idc-kv"
+    }, React.createElement("span", null, "\u09AF\u09CB\u0997\u09A6\u09BE\u09A8"), React.createElement("b", null, fmtDate(w.joined, {
+      year: true
+    }))))), React.createElement("div", {
+      className: "idc-foot"
+    }, foot || org));
+  }
+  const emerg = ph.filter((p, i) => i > 0)[0];
+  return React.createElement("div", {
+    className: "idc back"
+  }, React.createElement("div", {
+    className: "idc-top thin"
+  }, React.createElement("b", null, org)), React.createElement("div", {
+    className: "idc-bk"
+  }, w.father && React.createElement("div", {
+    className: "idc-kv"
+  }, React.createElement("span", null, "\u09AC\u09BE\u09AC\u09BE\u09B0 \u09A8\u09BE\u09AE"), React.createElement("b", null, w.father)), (w.home || w.addr) && React.createElement("div", {
+    className: "idc-kv"
+  }, React.createElement("span", null, "\u09A0\u09BF\u0995\u09BE\u09A8\u09BE"), React.createElement("b", null, w.home || w.addr)), emerg && React.createElement("div", {
+    className: "idc-kv"
+  }, React.createElement("span", null, "\u099C\u09B0\u09C1\u09B0\u09BF (", emerg.l, ")"), React.createElement("b", null, bn(emerg.n))), React.createElement("p", null, "\u098F\u0987 \u0995\u09BE\u09B0\u09CD\u09A1\u099F\u09BF ", org, "-\u098F\u09B0 \u09B8\u09AE\u09CD\u09AA\u09A4\u09CD\u09A4\u09BF\u0964 \u0995\u09BE\u09B0\u09CD\u09A1 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u0997\u09C7\u09B2\u09C7 \u09A8\u09BF\u099A\u09C7\u09B0 \u09A0\u09BF\u0995\u09BE\u09A8\u09BE\u09AF\u09BC \u09AB\u09C7\u09B0\u09A4 \u09A6\u09C7\u0993\u09AF\u09BC\u09BE\u09B0 \u0985\u09A8\u09C1\u09B0\u09CB\u09A7 \u09B0\u0987\u09B2\u0964"), React.createElement("div", {
+    className: "idc-sign"
+  }, React.createElement("span", null, "\u0987\u09B8\u09CD\u09AF\u09C1: ", fmtDate(today, {
+    year: true
+  })), React.createElement("span", {
+    className: "sigl"
+  }, "\u0995\u09B0\u09CD\u09A4\u09C3\u09AA\u0995\u09CD\u09B7\u09C7\u09B0 \u09B8\u09CD\u09AC\u09BE\u0995\u09CD\u09B7\u09B0"))), React.createElement("div", {
+    className: "idc-foot"
+  }, foot || org));
+}
+function IdCardSheet({
+  ctx,
+  pins: pre,
+  close,
+  printJob,
+  go
+}) {
+  const all = activePins(ctx);
+  const [sel, setSel] = useState(() => pre && pre.length ? pre : all);
+  const tog = p => setSel(sel.indexOf(p) >= 0 ? sel.filter(x => x !== p) : sel.concat([p]).sort((a, b) => all.indexOf(a) - all.indexOf(b)));
+  const first = sel[0] || all[0];
+  const noPhoto = sel.filter(p => !PHOTOS[p]).length;
+  return React.createElement(Sheet, {
+    title: "\u0986\u0987\u09A1\u09BF \u0995\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09BF\u09A8\u09CD\u099F",
+    sub: "A4 \u0995\u09BE\u0997\u099C\u09C7 \u09AA\u09CD\u09B0\u09A4\u09BF \u09AA\u09BE\u09A4\u09BE\u09AF\u09BC \u09EB \u099C\u09A8 \u2014 \u09B8\u09BE\u09AE\u09A8\u09C7 \u0993 \u09AA\u09C7\u099B\u09A8\u09C7 \u09AA\u09BE\u09B6\u09BE\u09AA\u09BE\u09B6\u09BF; \u0995\u09C7\u099F\u09C7 \u09AD\u09BE\u0981\u099C \u0995\u09B0\u09C7 \u09B2\u09CD\u09AF\u09BE\u09AE\u09BF\u09A8\u09C7\u099F \u0995\u09B0\u09C1\u09A8",
+    onClose: close,
+    foot: React.createElement("button", {
+      className: "btn primary",
+      disabled: !sel.length,
+      onClick: () => printJob({
+        t: "idcards",
+        pins: sel
+      })
+    }, React.createElement(Icon, {
+      n: "print",
+      s: 16
+    }), " \u09AA\u09CD\u09B0\u09BF\u09A8\u09CD\u099F (", bn(sel.length), " \u099C\u09A8)")
+  }, first && React.createElement("div", {
+    className: "idc-preview"
+  }, React.createElement(IdCard, {
+    w: ctx.workers[first],
+    pin: first,
+    s: ctx.s,
+    side: "front",
+    today: ctx.today
+  }), React.createElement(IdCard, {
+    w: ctx.workers[first],
+    pin: first,
+    s: ctx.s,
+    side: "back",
+    today: ctx.today
+  })), noPhoto > 0 && React.createElement("div", {
+    className: "note sm warnish"
+  }, bn(noPhoto), " \u099C\u09A8\u09C7\u09B0 \u099B\u09AC\u09BF \u09A8\u09C7\u0987 \u2014 \u09A4\u09BE\u0981\u09A6\u09C7\u09B0 \u0995\u09BE\u09B0\u09CD\u09A1\u09C7 \u09A8\u09BE\u09AE\u09C7\u09B0 \u09AA\u09CD\u09B0\u09A5\u09AE \u0985\u0995\u09CD\u09B7\u09B0 \u09A5\u09BE\u0995\u09AC\u09C7\u0964 \u0995\u09B0\u09CD\u09AE\u09C0\u09B0 \u09AA\u09BE\u09A4\u09BE \u09A5\u09C7\u0995\u09C7 \u099B\u09AC\u09BF \u09A4\u09C1\u09B2\u09C7 \u09A8\u09BF\u09A8\u0964"), React.createElement("div", {
+    className: "note sm"
+  }, "\u09AA\u09CD\u09B0\u09A4\u09BF\u09B7\u09CD\u09A0\u09BE\u09A8\u09C7\u09B0 \u09A8\u09BE\u09AE, \u09A0\u09BF\u0995\u09BE\u09A8\u09BE \u0986\u09B0 \u09AB\u09CB\u09A8 \u09B8\u09C7\u099F\u09BF\u0982\u09B8 \u09A5\u09C7\u0995\u09C7 \u09AC\u09A6\u09B2\u09BE\u09A8\u09CB \u09AF\u09BE\u09AF\u09BC\u0964 ", React.createElement("button", {
+    className: "link sm",
+    onClick: () => go("settings")
+  }, "\u09B8\u09C7\u099F\u09BF\u0982\u09B8\u09C7 \u09AF\u09BE\u09A8")), !pre && React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "bar-row"
+  }, React.createElement("b", {
+    className: "grow"
+  }, "\u0995\u09BE\u09B0 \u0995\u09BE\u09B0\u09CD\u09A1 \u099B\u09BE\u09AA\u09AC\u09C7\u09A8"), React.createElement("button", {
+    className: "btn sm ghost",
+    onClick: () => setSel(sel.length === all.length ? [] : all)
+  }, sel.length === all.length ? "সব বাদ" : "সবাই")), React.createElement("div", {
+    className: "card list"
+  }, all.map(p => {
+    const x = ctx.workers[p];
+    return React.createElement("label", {
+      key: p,
+      className: "row pickrow"
+    }, React.createElement("input", {
+      type: "checkbox",
+      checked: sel.indexOf(p) >= 0,
+      onChange: () => tog(p)
+    }), React.createElement(Avatar, {
+      name: RH.workerName(x, p),
+      pin: p,
+      dept: RH.deptOf(x)
+    }), React.createElement("span", {
+      className: "row-main"
+    }, React.createElement("span", {
+      className: "row-name"
+    }, RH.workerName(x, p)), React.createElement("span", {
+      className: "row-sub"
+    }, "\u0986\u0987\u09A1\u09BF ", bn(p), RH.deptOf(x) ? " · " + RH.deptOf(x) : "", !PHOTOS[p] ? " · ছবি নেই" : "")));
+  }))));
+}
 function PrintArea({
   job,
   ctx
@@ -5575,7 +7608,14 @@ function PrintArea({
       className: "ptable"
     }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", null, "\u09A6\u09BF\u09A8"), React.createElement("th", null, "\u09A2\u09CB\u0995\u09BE"), React.createElement("th", null, "\u09AC\u09C7\u09B0"), React.createElement("th", null, "\u0995\u09BE\u099C"), React.createElement("th", null, "\u09B9\u09BE\u099C\u09BF\u09B0\u09BE"), React.createElement("th", null, "OT"))), React.createElement("tbody", null, r.cells.filter(c => !c.future).map(c => React.createElement("tr", {
       key: c.date
-    }, React.createElement("td", null, fmtShort(c.date)), React.createElement("td", null, c.inMin != null && !c.estIn ? clockP(c.inMin) : "—"), React.createElement("td", null, c.outMin != null && !c.estOut ? clockP(c.outMin) : "—"), React.createElement("td", null, c.status === "absent" ? c.off ? "ছুটি" : "—" : dur(c.workedMin) + (c.est ? " *" : "")), React.createElement("td", null, units(c.att)), React.createElement("td", null, c.ot ? units(c.ot) : ""))))), React.createElement("p", null, "\u09AE\u09CB\u099F \u0995\u09BE\u099C ", dur(r.hours), " \xB7 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE ", units(r.att), " \u09A6\u09BF\u09A8", r.ot > 0 ? " + ওভারটাইম " + units(r.ot) + " = " + units(r.units) : "", " \xD7 ", r.noRate ? "রেট বাকি" : rateText(r), " = ", React.createElement("b", null, r.noRate ? "—" : money(r.gross))), r.adv > 0 && React.createElement("p", null, "\u0985\u0997\u09CD\u09B0\u09BF\u09AE: ", money(r.adv)), React.createElement("h3", null, "\u09AA\u09CD\u09B0\u09A6\u09C7\u09AF\u09BC: ", money(r.net)), r.est > 0 && React.createElement("p", {
+    }, React.createElement("td", null, fmtShort(c.date)), React.createElement("td", null, c.inMin != null && !c.estIn ? clockP(c.inMin) : "—"), React.createElement("td", null, c.outMin != null && !c.estOut ? clockP(c.outMin) : "—"), React.createElement("td", null, c.status === "absent" ? c.off ? "ছুটি" : "—" : dur(c.workedMin) + (c.est ? " *" : "")), React.createElement("td", null, units(c.att)), React.createElement("td", null, c.ot ? units(c.ot) : ""))))), React.createElement("p", null, "\u09AE\u09CB\u099F \u0995\u09BE\u099C ", dur(r.hours), " \xB7 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE ", units(r.att), " \u09A6\u09BF\u09A8", r.ot > 0 ? " + ওভারটাইম " + units(r.ot) + " = " + units(r.units) : "", " \xD7 ", r.noRate ? "রেট বাকি" : rateText(r), " = ", React.createElement("b", null, r.noRate ? "—" : money(r.gross))), r.adv > 0 && React.createElement(React.Fragment, null, React.createElement("p", null, "\u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09AE\u09CB\u099F: ", money(r.adv)), React.createElement("table", {
+      className: "ptable"
+    }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", null, "\u09A4\u09BE\u09B0\u09BF\u0996"), React.createElement("th", null, "\u09B8\u09AE\u09AF\u09BC"), React.createElement("th", null, "\u099F\u09BE\u0995\u09BE"), React.createElement("th", null, "\u09A8\u09CB\u099F"))), React.createElement("tbody", null, r.advList.slice().sort(advSort).reverse().map(a => {
+      const m = advMin(a);
+      return React.createElement("tr", {
+        key: a.id
+      }, React.createElement("td", null, fmtShort(a.d)), React.createElement("td", null, m != null ? clockP(m) : "—"), React.createElement("td", null, money(a.amt)), React.createElement("td", null, a.note || ""));
+    })))), React.createElement("h3", null, "\u09AA\u09CD\u09B0\u09A6\u09C7\u09AF\u09BC: ", money(r.net)), r.est > 0 && React.createElement("p", {
       className: "pnote"
     }, "* \u09AA\u09BE\u099E\u09CD\u099A \u0985\u09B8\u09AE\u09CD\u09AA\u09C2\u09B0\u09CD\u09A3 \u2014 \u09AE\u09BE\u0997\u09B0\u09BF\u09AC \u09AA\u09B0\u09CD\u09AF\u09A8\u09CD\u09A4 \u0986\u09A8\u09CD\u09A6\u09BE\u099C\u0964"), React.createElement("p", {
       className: "sign"
@@ -5615,7 +7655,47 @@ function PrintArea({
       key: d
     })), React.createElement("td", null, num(rep.tot.hours / 60)), React.createElement("td", null, rep.kpis.avg ? num(rep.kpis.avg / 60) : ""), React.createElement("td", null, units(rep.tot.units)), React.createElement("td", null), React.createElement("td", null, money(rep.tot.gross)), React.createElement("td", null, money(rep.tot.adv)), React.createElement("td", null, React.createElement("b", null, money(rep.tot.net))), React.createElement("td", null)))), React.createElement("p", {
       className: "pnote"
-    }, "\u0998\u09B0\u09C7: \u0995\u09BE\u099C\u09C7\u09B0 \u0998\u09A3\u09CD\u099F\u09BE (\u09B9\u09BE\u099C\u09BF\u09B0\u09BE)\u0964 * = \u09AA\u09BE\u099E\u09CD\u099A \u0985\u09B8\u09AE\u09CD\u09AA\u09C2\u09B0\u09CD\u09A3, \u09AE\u09BE\u0997\u09B0\u09BF\u09AC \u09AA\u09B0\u09CD\u09AF\u09A8\u09CD\u09A4 \u0986\u09A8\u09CD\u09A6\u09BE\u099C\u0964 \u099B\u09C1 = \u099B\u09C1\u099F\u09BF\u0964"));
+    }, "\u0998\u09B0\u09C7: \u0995\u09BE\u099C\u09C7\u09B0 \u0998\u09A3\u09CD\u099F\u09BE (\u09B9\u09BE\u099C\u09BF\u09B0\u09BE)\u0964 * = \u09AA\u09BE\u099E\u09CD\u099A \u0985\u09B8\u09AE\u09CD\u09AA\u09C2\u09B0\u09CD\u09A3, \u09AE\u09BE\u0997\u09B0\u09BF\u09AC \u09AA\u09B0\u09CD\u09AF\u09A8\u09CD\u09A4 \u0986\u09A8\u09CD\u09A6\u09BE\u099C\u0964 \u099B\u09C1 = \u099B\u09C1\u099F\u09BF\u0964"), (() => {
+      const pins = {};
+      rep.rows.forEach(r => {
+        pins[r.pin] = 1;
+      });
+      const al = ctx.adv.filter(a => a.d >= wk.from && a.d <= wk.to && pins[a.pin]).sort(advSort).reverse();
+      if (!al.length) return null;
+      return React.createElement(React.Fragment, null, React.createElement("h3", null, "\u0985\u0997\u09CD\u09B0\u09BF\u09AE\u09C7\u09B0 \u09AC\u09BF\u09AC\u09B0\u09A3"), React.createElement("table", {
+        className: "ptable"
+      }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", null, "\u09A4\u09BE\u09B0\u09BF\u0996"), React.createElement("th", null, "\u09B8\u09AE\u09AF\u09BC"), React.createElement("th", null, "\u0986\u0987\u09A1\u09BF"), React.createElement("th", null, "\u09A8\u09BE\u09AE"), React.createElement("th", null, "\u099F\u09BE\u0995\u09BE"), React.createElement("th", null, "\u09A8\u09CB\u099F"))), React.createElement("tbody", null, al.map(a => {
+        const m = advMin(a);
+        return React.createElement("tr", {
+          key: a.id
+        }, React.createElement("td", null, fmtShort(a.d)), React.createElement("td", null, m != null ? clockP(m) : "—"), React.createElement("td", null, bn(a.pin)), React.createElement("td", null, RH.workerName(ctx.workers[a.pin], a.pin)), React.createElement("td", null, money(a.amt)), React.createElement("td", null, a.note || ""));
+      }), React.createElement("tr", {
+        className: "tot"
+      }, React.createElement("td", {
+        colSpan: 4
+      }, "\u09AE\u09CB\u099F"), React.createElement("td", null, money(al.reduce((x, a) => x + (+a.amt || 0), 0))), React.createElement("td", null)))));
+    })());
+  }
+  if (job.t === "idcards") {
+    const pins = (job.pins || []).filter(p => ctx.workers[p]);
+    return React.createElement("div", {
+      className: "print-area cards"
+    }, pins.map(p => React.createElement("div", {
+      key: p,
+      className: "idc-pair"
+    }, React.createElement(IdCard, {
+      w: ctx.workers[p],
+      pin: p,
+      s: s,
+      side: "front",
+      today: ctx.today
+    }), React.createElement(IdCard, {
+      w: ctx.workers[p],
+      pin: p,
+      s: s,
+      side: "back",
+      today: ctx.today
+    }))));
   }
   if (job.t === "month") {
     const rep = RH.monthReport(ctx, job.ym, job.dept);
@@ -5682,6 +7762,8 @@ function useStore(db) {
   const [cmd, setCmd] = useState(null);
   const [adv, setAdv] = useState([]);
   const [pay, setPay] = useState({});
+  const [photos, setPhotos] = useState({});
+  const [vaultMeta, setVaultMeta] = useState(undefined);
   const [days, setDays] = useState({});
   const [daysReady, setDaysReady] = useState(false);
   const [from, setFrom] = useState(() => RH.addDays(RH.today(), -75));
@@ -5718,7 +7800,14 @@ function useStore(db) {
         m[d.id] = d.data();
       });
       setPay(m);
-    }, onErr)];
+    }, onErr), db.collection("att_photo").onSnapshot(q => {
+      const m = {};
+      q.forEach(d => {
+        const x = d.data();
+        if (x && x.d) m[d.id] = x.d;
+      });
+      setPhotos(m);
+    }, () => setPhotos({})), db.collection("att_meta").doc("vault").onSnapshot(d => setVaultMeta(d.exists ? d.data() : null), () => setVaultMeta(null))];
     return () => offs.forEach(f => f());
   }, [db, onErr]);
   useEffect(() => {
@@ -5747,6 +7836,8 @@ function useStore(db) {
     cmd,
     adv,
     pay,
+    photos,
+    vaultMeta,
     days,
     daysReady,
     need,
@@ -5780,6 +7871,7 @@ function Main({
   const [ym, setYm] = useState(RH.today().slice(0, 7));
   const [dept, setDept] = usePref("dept", "all");
   const [dayView, setDayView] = usePref("dayView", "list");
+  const [dayFlt, setDayFlt] = useState("");
   const [wview, setWview] = usePref("weekView", "auto");
   const [wmode, setWmode] = usePref("weekMode", "week");
   const [hfmt, setHfmt] = usePref("hfmt", "dec");
@@ -5789,6 +7881,7 @@ function Main({
   const [tick, setTick] = useState(0);
   const [slow, setSlow] = useState(false);
   HFMT = hfmt;
+  PHOTOS = st.photos;
   useEffect(() => {
     history.replaceState(nav, "");
     const pop = e => setNav(validTab(e.state) || {
@@ -5807,9 +7900,9 @@ function Main({
   useEffect(() => {
     if (!job) return undefined;
     let style = null;
-    if (job.t === "weekgrid" || job.t === "month") {
+    if (job.t === "weekgrid" || job.t === "month" || job.t === "idcards") {
       style = document.createElement("style");
-      style.textContent = "@page{size:A4 landscape;margin:8mm}";
+      style.textContent = job.t === "idcards" ? "@page{size:A4 portrait;margin:8mm}" : "@page{size:A4 landscape;margin:8mm}";
       document.head.appendChild(style);
     }
     const t = setTimeout(() => {
@@ -5946,10 +8039,11 @@ function Main({
     addAdv: a => run(db.collection("att_adv").add({
       pin: String(a.pin),
       d: a.d,
+      t: a.t || "",
       amt: +a.amt,
       note: a.note || "",
       at: nowIso()
-    }), "অগ্রিম যোগ হয়েছে"),
+    }), RH.workerName((st.workers || {})[a.pin], a.pin) + " — " + money(a.amt) + " অগ্রিম লেখা হয়েছে"),
     delAdv: id => run(db.collection("att_adv").doc(id).delete(), "অগ্রিম মুছে ফেলা হয়েছে"),
     setPaid: (wid, r, on) => run(db.collection("att_pay").doc(wid).set({
       w: wid,
@@ -5989,13 +8083,26 @@ function Main({
       from: RH.addDays(RH.today(), -30),
       to: RH.today(),
       at: nowIso()
-    }), "অনুরোধ পাঠানো হয়েছে")
+    }), "অনুরোধ পাঠানো হয়েছে"),
+    savePhoto: (pin, d) => run(db.collection("att_photo").doc(String(pin)).set({
+      pin: String(pin),
+      d,
+      at: nowIso()
+    }), "ছবি রাখা হয়েছে"),
+    delPhoto: pin => run(db.collection("att_photo").doc(String(pin)).delete(), "ছবি মুছে ফেলা হয়েছে"),
+    addDoc: o => run(db.collection("att_docs").add(o), "তালাবদ্ধ করে রাখা হয়েছে"),
+    delDoc: (id, quiet) => run(db.collection("att_docs").doc(id).delete(), quiet ? null : "মুছে ফেলা হয়েছে"),
+    saveVaultMeta: m => run(db.collection("att_meta").doc("vault").set(m), "পাসওয়ার্ড ঠিক করা হয়েছে"),
+    toast: (msg, bad) => showToast(msg, bad)
   };
+  const vault = useVault(st.vaultMeta, act.saveVaultMeta);
   const loading = !ctx || !st.daysReady;
   const sh = nav.sheet;
   const props = {
     ctx,
     st,
+    db,
+    vault,
     open,
     act,
     go,
@@ -6038,7 +8145,15 @@ function Main({
     className: "saving"
   }, "\u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09B9\u099A\u09CD\u099B\u09C7\u2026"), st.offline && !loading && React.createElement("span", {
     className: "saving bad-t"
-  }, "\u0985\u09AB\u09B2\u09BE\u0987\u09A8"), React.createElement("button", {
+  }, "\u0985\u09AB\u09B2\u09BE\u0987\u09A8"), !loading && React.createElement("button", {
+    className: "hbtn",
+    onClick: () => open({
+      t: "adv"
+    })
+  }, React.createElement(Icon, {
+    n: "cash",
+    s: 18
+  }), React.createElement("span", null, "\u0985\u0997\u09CD\u09B0\u09BF\u09AE")), React.createElement("button", {
     className: "icon-btn" + (nav.tab === "settings" ? " on" : ""),
     onClick: () => go("settings"),
     "aria-label": "\u09B8\u09C7\u099F\u09BF\u0982\u09B8"
@@ -6056,7 +8171,9 @@ function Main({
     date: date,
     setDate: setDate,
     view: dayView,
-    setView: setDayView
+    setView: setDayView,
+    flt: dayFlt,
+    setFlt: setDayFlt
   })), !loading && nav.tab === "week" && React.createElement(WeekScreen, _extends({}, props, {
     weekId: weekId,
     setWeekId: setWeekId,
@@ -6094,8 +8211,11 @@ function Main({
   }, props, {
     pin: sh.pin,
     weekId: sh.weekId
-  })), !loading && sh && sh.t === "adv" && React.createElement(AdvSheet, _extends({}, props, {
-    weekId: sh.weekId
+  })), !loading && sh && sh.t === "adv" && React.createElement(AdvSheet, _extends({
+    key: "a" + (sh.pin || "") + (sh.weekId || "")
+  }, props, {
+    weekId: sh.weekId,
+    pin: sh.pin
   })), !loading && sh && sh.t === "profile" && React.createElement(ProfileSheet, _extends({
     key: "p" + sh.pin
   }, props, {
@@ -6107,6 +8227,10 @@ function Main({
   })), !loading && sh && sh.t === "review" && React.createElement(ReviewSheet, _extends({}, props, {
     weekId: sh.weekId,
     dept: sh.dept
+  })), !loading && sh && sh.t === "idcard" && React.createElement(IdCardSheet, _extends({
+    key: "i" + (sh.pins || []).join(",")
+  }, props, {
+    pins: sh.pins
   })), toast && React.createElement("div", {
     className: "toast" + (toast.bad ? " bad" : ""),
     role: "status"
