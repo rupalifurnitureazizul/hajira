@@ -3281,7 +3281,7 @@ const {
   useCallback,
   Fragment
 } = React;
-const APP_VERSION = "3.56";
+const APP_VERSION = "3.57";
 const DEPTS = RH.DEPTS;
 const BN = "০১২৩৪৫৬৭৮৯";
 const bn = s => String(s == null ? "" : s).replace(/[0-9]/g, d => BN[d]);
@@ -3437,20 +3437,28 @@ function bridgeList(st) {
     /* v3.56: ব্রিজ ১.০৬ — পিসি নিয়মমতো ঘুমিয়ে আছে কিনা: শেষ খবরটাই ছিল "ঘুমাতে যাচ্ছি"।
        পরের জাগার সময় পেরিয়ে ২০ মিনিটেও সাড়া না এলে late (নির্ধারিত সময়ে জাগেনি)। */
     const pw = m && m.power;
+    /* v3.57: ব্রিজ ১.০৭ — ঘুমানোর নিয়ম Windows-এর; Windows ঘুমানোর ঠিক আগে ব্রিজ খবর দেয়।
+       খবর ছাড়া চুপ হলে = হঠাৎ বন্ধ বা ইন্টারনেট নেই। ব্রিজ ১.০৭ প্রতি ২ মিনিটে খবর দেয়, তাই ১০ মিনিটেই "সাড়া নেই"। */
+    const win = !!(pw && pw.mode === "windows");
+    const downMin = win ? 10 : 20;
     let sleep = null;
-    if (pw && pw.on && pw.lastSleep && pcAgo != null) {
+    if (pw && (pw.on || win) && pw.lastSleep && pcAgo != null) {
       const ls = tsAgo(pw.lastSleep);
       if (ls != null && ls - pcAgo <= 2) {
-        const nw = pw.sleepNextWake || pw.nextWake || "";
+        const nw = pw.on ? pw.sleepNextWake || pw.nextWake || "" : "";
         const toWake = nw ? -tsAgo(nw) : null;
         sleep = {
           next: nw,
-          late: toWake != null && toWake < -20
+          late: toWake != null && toWake < -20,
+          noWake: !pw.on
         };
       }
     }
+    const sudden = !sleep && win && pw.notify !== false && pcAgo != null && pcAgo > downMin;
     return Object.assign(b, {
       sleep,
+      sudden,
+      downMin,
       name: RH.siteName(b.code),
       host: m && m.host === "phone" ? "ফোন" : "পিসি",
       pcAgo,
@@ -3480,16 +3488,23 @@ function hzLinkState(st) {
     const two = L.length > 1 ? b.name + ": " : "";
     let lv = 0,
       msg = "ব্রিজ ও মেশিন সংযুক্ত";
-    if (b.sleep && b.pcAgo != null && b.pcAgo > 20) {
+    if (b.sleep && b.pcAgo != null && b.pcAgo > 2) {
       // v3.56: নিয়মমতো ঘুম — পরের জাগার সময় না পেরোলে লাল নয়
       if (b.sleep.late) {
         lv = 2;
         msg = b.host + " নির্ধারিত সময়ে (" + wakeText(b.sleep.next) + ") জাগেনি";
+      } else if (b.sleep.noWake) {
+        asleep++;
+        msg = b.host + " ঘুমিয়ে আছে · নিজে জাগবে না (জাগানো বন্ধ) · হাজিরা মেশিনে জমা থাকছে";
       } else {
         asleep++;
         msg = b.host + " নিয়মমতো ঘুমিয়ে আছে · পরের জাগা " + wakeText(b.sleep.next) + " · হাজিরা মেশিনে জমা থাকছে";
       }
-    } else if (b.pcAgo == null || b.pcAgo > 20) {
+    } else if (b.sudden) {
+      // v3.57: ঘুমের খবর ছাড়াই চুপ
+      lv = 2;
+      msg = b.host + " হঠাৎ বন্ধ বা ইন্টারনেট নেই (শেষ সাড়া " + agoText(b.pcAgo) + ") — বিদ্যুৎ গেছে কিনা দেখুন";
+    } else if (b.pcAgo == null || b.pcAgo > b.downMin) {
       lv = 2;
       msg = b.host + " / ব্রিজ সাড়া দিচ্ছে না (" + agoText(b.pcAgo) + ")";
     } else if (b.devAgo == null || b.devAgo > 20) {
@@ -3506,6 +3521,20 @@ function hzLinkState(st) {
     c: worst === 0 && asleep === L.length ? "#94a3b8" : ["#22c55e", "#facc15", "#ef4444"][worst],
     t: parts.join(" · ")
   };
+}
+/* v3.57: ব্রিজ ১.০৭ — আগের বার কীভাবে বন্ধ হয়েছিল */
+function stopText(s) {
+  if (!s || !s.kind) return "";
+  const at = wakeText(s.at),
+    back = wakeText(s.back);
+  const by = {
+    schedule: " (নিয়মমতো)",
+    test: " (জাগা পরীক্ষা)",
+    other: " (কেউ চালু করেছেন বা অন্য কারণে)"
+  }[s.by] || "";
+  let t = s.kind === "sleep" ? "ঘুমিয়েছিল " + at + " → জেগেছে " + back + by : s.kind === "bridge" ? "শুধু ব্রিজ নতুন করে চালু হয়েছে " + back : s.kind === "restart" ? "রিস্টার্ট " + at + " → চালু " + back : s.kind === "shutdown" ? "Shut down " + at + " → চালু " + back : s.kind === "sudden" ? "হঠাৎ বন্ধ (বিদ্যুৎ গিয়েছিল?) প্রায় " + at + " → চালু " + back : "বন্ধ হয়েছিল প্রায় " + at + " → চালু " + back;
+  if (s.missed && s.missed.length) t += " · " + s.missed.map(wakeText).join(", ") + "-এর জাগা হয়নি";
+  return t;
 }
 /* v3.56: "2026-11-07 18:50" → "আজ ৬:৫০ সন্ধ্যা" */
 function wakeText(s) {
@@ -6992,7 +7021,7 @@ function DailyScreen({
   const bAlerts = !isToday ? [] : bridges.map(b => {
     // v3.56: নিয়মমতো ঘুমিয়ে থাকলে "বন্ধ" সতর্কবার্তা নয়; নির্ধারিত সময়ে না জাগলে সবসময় সতর্ক
     const asleep = b.sleep && !b.sleep.late;
-    const down = !asleep && (workTime || b.sleep && b.sleep.late) && b.pcAgo != null && b.pcAgo > 20;
+    const down = !asleep && (workTime || b.sleep && b.sleep.late) && b.pcAgo != null && b.pcAgo > b.downMin;
     const devDown = workTime && !down && b.devAgo != null && b.devAgo > 20;
     const clockOff = !down && b.drift != null && Math.abs(b.drift) >= DRIFT_WARN;
     return {
@@ -7069,7 +7098,7 @@ function DailyScreen({
   }, React.createElement(Icon, {
     n: "info",
     s: 18
-  }), React.createElement("span", null, React.createElement("b", null, (two ? b.name + ": " : "") + b.host + (b.sleep && b.sleep.late ? " নির্ধারিত সময়ে (" + wakeText(b.sleep.next) + ") জাগেনি" : " বন্ধ বা ব্রিজ চলছে না")), " · শেষ সাড়া ", agoText(b.pcAgo), "। নতুন হাজিরা মেশিনে জমা থাকছে — " + b.host + " চালু হলে নিজে থেকে চলে আসবে।")), devDown && React.createElement("button", {
+  }), React.createElement("span", null, React.createElement("b", null, (two ? b.name + ": " : "") + b.host + (b.sleep && b.sleep.late ? " নির্ধারিত সময়ে (" + wakeText(b.sleep.next) + ") জাগেনি" : b.sudden ? " হঠাৎ বন্ধ বা ইন্টারনেট নেই — বিদ্যুৎ গেছে কিনা দেখুন" : " বন্ধ বা ব্রিজ চলছে না")), " · শেষ সাড়া ", agoText(b.pcAgo), "। নতুন হাজিরা মেশিনে জমা থাকছে — " + b.host + " চালু হলে নিজে থেকে চলে আসবে।")), devDown && React.createElement("button", {
     className: "task",
     onClick: () => go("settings"),
     "data-bridge-alert": b.code || "main"
@@ -10206,12 +10235,12 @@ function BridgeBox({
     className: "muted sm"
   }, " · " + b.host + "-এ ব্রিজ"), !b.inUse && React.createElement("span", {
     className: "muted sm"
-  }, " · ৭ দিনের বেশি সাড়া নেই")), m && m.power && m.power.on && React.createElement(BridgePowerRows, {
+  }, " · ৭ দিনের বেশি সাড়া নেই")), m && m.power && (m.power.on || m.power.mode === "windows") && React.createElement(BridgePowerRows, {
     b: b
   }), !m && React.createElement("div", {
     className: "muted"
   }, "\u09AC\u09CD\u09B0\u09BF\u099C \u09A5\u09C7\u0995\u09C7 \u098F\u0996\u09A8\u09CB \u0995\u09CB\u09A8\u09CB \u0996\u09AC\u09B0 \u0986\u09B8\u09C7\u09A8\u09BF\u0964"), m && React.createElement(React.Fragment, null, React.createElement("div", null, React.createElement("span", null, b.host + " শেষ সাড়া"), React.createElement("b", {
-    className: b.sleep && !b.sleep.late ? "muted" : b.pcAgo != null && b.pcAgo > 20 ? "bad-t" : "ok-t"
+    className: b.sleep && !b.sleep.late ? "muted" : b.pcAgo != null && b.pcAgo > b.downMin ? "bad-t" : "ok-t"
   }, agoText(b.pcAgo))), React.createElement("div", null, React.createElement("span", null, "\u09AE\u09C7\u09B6\u09BF\u09A8 \u09B6\u09C7\u09B7 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997"), React.createElement("b", {
     className: b.devAgo != null && b.devAgo > 20 ? "bad-t" : "ok-t"
   }, agoText(b.devAgo))), React.createElement("div", null, React.createElement("span", null, "\u09AE\u09C7\u09B6\u09BF\u09A8\u09C7\u09B0 \u0998\u09A1\u09BC\u09BF"), React.createElement("b", {
@@ -10224,22 +10253,29 @@ function BridgeBox({
     className: "muted"
   }, "\u0985\u09AA\u09C7\u0995\u09CD\u09B7\u09BE\u09AF\u09BC\u2026"))));
 }
-/* v3.56: ব্রিজ ১.০৬-এর চালু-বন্ধের সূচি — কখন জাগে, এখন ঘুমিয়ে না জেগে */
+/* v3.56: ব্রিজ ১.০৬-এর চালু-বন্ধের সূচি — কখন জাগে, এখন ঘুমিয়ে না জেগে
+   v3.57: ব্রিজ ১.০৭ — ঘুমানোর নিয়ম Windows-এর; আগের বার কীভাবে বন্ধ হয়েছিল; ঘুমের খবর চালু কিনা */
 function BridgePowerRows({
   b
 }) {
   const pw = b.m.power;
+  const win = pw.mode === "windows";
   const hm = x => {
     const p = String(x).split(":");
     return clockP(+p[0] * 60 + +p[1]);
   };
   const list = (pw.wakeTimes || []).map(hm).join(", ");
-  const now = b.sleep ? b.sleep.late ? "নির্ধারিত সময়ে (" + wakeText(b.sleep.next) + ") জাগেনি" : "ঘুমিয়ে আছে · পরের জাগা " + wakeText(b.sleep.next) : b.pcAgo != null && b.pcAgo <= 20 ? "চালু আছে" + (pw.awakeUntil ? " · " + wakeText(pw.awakeUntil) + " পর্যন্ত" : "") : "সাড়া নেই";
-  return React.createElement(React.Fragment, null, React.createElement("div", null, React.createElement("span", null, "চালু-বন্ধের সূচি"), React.createElement("b", null, list + (pw.awakeMin ? " · প্রতিবার " + bn(pw.awakeMin) + " মিনিট" : ""))), React.createElement("div", {
+  const fresh = b.pcAgo != null && b.pcAgo <= b.downMin;
+  const now = b.sleep ? b.sleep.late ? "নির্ধারিত সময়ে (" + wakeText(b.sleep.next) + ") জাগেনি" : b.sleep.noWake ? "ঘুমিয়ে আছে · নিজে জাগবে না" : "ঘুমিয়ে আছে · পরের জাগা " + wakeText(b.sleep.next) : fresh ? "চালু আছে" + (pw.awakeUntil ? " · " + wakeText(pw.awakeUntil) + " পর্যন্ত" : "") : b.sudden ? "হঠাৎ বন্ধ বা ইন্টারনেট নেই" : "সাড়া নেই";
+  const ls = pw.lastStop && pw.lastStop.kind ? pw.lastStop : null;
+  const row = (k, v, cls, attr) => React.createElement("div", attr || null, React.createElement("span", null, k), React.createElement("b", {
+    className: cls || null
+  }, v));
+  return React.createElement(React.Fragment, null, row(win ? "পিসি জাগে" : "চালু-বন্ধের সূচি", pw.on ? list + (pw.awakeMin ? " · প্রতিবার " + bn(pw.awakeMin) + " মিনিট" : "") : "বন্ধ (Task Scheduler-এ জাগানো বন্ধ)", pw.on ? null : "warn-t"), row("এখন", now, b.sleep ? b.sleep.late ? "bad-t" : "muted" : fresh ? "ok-t" : "bad-t", {
     "data-bridge-power": "1"
-  }, React.createElement("span", null, "এখন"), React.createElement("b", {
-    className: b.sleep ? b.sleep.late ? "bad-t" : "muted" : b.pcAgo != null && b.pcAgo <= 20 ? "ok-t" : "bad-t"
-  }, now)));
+  }), win && row("ঘুমানোর নিয়ম", "Windows-এর সেটিং অনুযায়ী", "muted"), ls && row("আগের বার", stopText(ls), ls.kind === "sudden" || ls.missed && ls.missed.length ? "warn-t" : null, {
+    "data-bridge-laststop": ls.kind
+  }), win && pw.notify === false && row("ঘুমের খবর", "চালু হয়নি — পিসি ঘুমালেও \"হঠাৎ বন্ধ\" দেখাতে পারে", "warn-t"), win && pw.notify !== false && pw.noticeOk === false && row("ঘুমের খবর", "শেষবার ঘুমানোর আগে খবর পৌঁছায়নি", "warn-t"), pw.msg && row("জাগানোয় সমস্যা", pw.msg, "bad-t"));
 }
 function SiteIdCheck({
   ctx,
