@@ -297,6 +297,38 @@ input:focus,textarea:focus,select:focus{outline:2px solid #e8d3b6;border-color:#
 .wc-drift{font-size:12px;margin-top:3px}
 .paybtn{flex:none;align-self:center;width:42px;height:42px;margin:0 12px 0 4px;border-radius:50%;border:1.5px solid #e2d9cc;color:#d0c5b7;display:flex;align-items:center;justify-content:center;background:#fff}
 .paybtn.on{background:var(--ok);border-color:var(--ok);color:#fff}
+.paybtn.half{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+/* v3.58–3.60: আলাদা টিক, পরিশোধের পাতা, ধার */
+.wt-st{margin-left:5px;font-size:11px;font-weight:700}
+.wt-st.ok{color:var(--ok)}.wt-st.part{color:var(--warn)}
+.wt-row.tot small{color:var(--muted);font-weight:400;margin-left:5px;font-size:11px}
+.wt-pay{align-self:flex-start;margin-top:6px}
+.pay-card{display:flex;flex-direction:column;gap:2px}
+.pay-l{display:flex;align-items:baseline;gap:10px;padding:5px 0;font-size:15px}
+.pay-l>span{flex:1;min-width:0;color:var(--ink2)}
+.pay-l>span small{display:block;color:var(--muted);font-size:12px}
+.pay-l>b{flex:none;font-variant-numeric:tabular-nums}
+.pay-l.neg>b{color:var(--bad)}.pay-l.pos>b{color:var(--ok)}
+.pay-l.tot{border-top:1.5px solid var(--line2);margin-top:4px;padding-top:9px;font-size:17px}
+.pay-l.tot>span{color:var(--ink);font-weight:700}
+.pay-cut{border:1px solid var(--line);border-radius:12px;padding:6px 10px 9px;margin:4px 0}
+.pay-cut .pay-l{padding-top:2px}
+.pay-cut .amt-row{margin-top:8px}
+.pay-cut .note-s{font-size:12.5px;margin-top:6px}
+.pay-give{margin-top:14px}
+.pay-give .note-s{font-size:13px;margin-top:8px;line-height:1.5}
+.pay-loan{margin-top:12px;font-size:13px;color:var(--ink2)}
+.pay-loan b{color:var(--bad)}
+.loan-warn{display:flex;gap:8px;align-items:flex-start;margin:8px 0 2px}
+.loan-warn b{color:#7a3424}
+.loan-card{border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin:8px 0;background:#fff}
+.loan-h{display:flex;align-items:baseline;gap:8px;font-size:14px}
+.loan-h>span{flex:1;min-width:0}
+.loan-r{display:flex;align-items:baseline;gap:8px;width:100%;border:0;background:none;padding:4px 0;font:inherit;font-size:13px;text-align:left;border-top:1px dashed var(--line);color:var(--ink)}
+.loan-r>span:first-child{flex:1}
+.loan-r b{font-variant-numeric:tabular-nums;min-width:64px;text-align:right}
+.loan-r em{font-style:normal;min-width:86px;text-align:right;font-size:12px}
+.loan-f{font-size:12.5px;color:var(--ink2);margin-top:4px}
 .paybtn:disabled{opacity:.35}
 .paybtn.sm{width:28px;height:28px;margin:0 auto}
 .review-line{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;margin:2px 0 10px;border-radius:12px;border:1px dashed #d6c3a6;background:#fffaf2;color:#6b4a1f;font-size:14px;text-align:left}
@@ -2505,6 +2537,31 @@ var RH = (function () {
     });
     return o;
   }
+  /* v3.59: পরিশোধ — কত দেওয়া হলো (amt না থাকলে পুরো প্রদেয়, আগের মতো) আর কত রইল (ঋণাত্মক = বেশি দেওয়া) */
+  function payAmt(p) {
+    if (!p) return 0;
+    return p.amt != null && p.amt !== "" && !isNaN(+p.amt) ? Math.round(+p.amt) : Math.round(+p.net || 0);
+  }
+  function payLeft(p) { return p ? Math.round(+p.net || 0) - payAmt(p) : 0; }
+  /* আগের সপ্তাহে কম দেওয়া (+) বা বেশি দেওয়া (−) — এ সপ্তাহের প্রদেয়তে নিজে থেকে যোগ/বাদ।
+     সপ্তাহের id = সপ্তাহের শেষ দিন, তাই আগের সপ্তাহ = ৭ দিন আগে */
+  function carryOf(ctx, pin, weekId) {
+    var prev = weekOf(addDays(weekId, -7), ctx.s).id;
+    var p = ctx.pay && ctx.pay[prev] && ctx.pay[prev].p && ctx.pay[prev].p[pin];
+    return p ? payLeft(p) : 0;
+  }
+  /* v3.60: কর্মীর ধার = সামনের সপ্তাহগুলোর কিস্তি + বকেয়া; শেষ ৪ সপ্তাহে কতবার কিস্তি পুরো দেননি */
+  function loanOf(ctx, pin, weekId) {
+    var o = advOwed(ctx, pin, weekId), d = dueOf(ctx, pin), from = addDays(weekId, -27);
+    var recent = d.miss.filter(function (m) { return m.wk >= from && m.wk <= weekId; }).length;
+    // sum = এ সপ্তাহের কাটার পরে কত থাকবে; now = এখনই কত বাকি (এ সপ্তাহ পরিশোধ না হলে এ সপ্তাহের কিস্তিসহ)
+    var paidThis = !!(ctx.pay && ctx.pay[weekId] && ctx.pay[weekId].p && ctx.pay[weekId].p[pin]), cur = 0;
+    if (!paidThis) (ctx.adv || []).forEach(function (a) {
+      if (!a || String(a.pin) !== String(pin) || !a.d) return;
+      advPlan(a, ctx.s).forEach(function (it) { if (it.wk === weekId && (it.planned || isDue(a))) cur += it.got; });
+    });
+    return { sum: o.sum + d.sum, now: o.sum + d.sum + cur, owed: o.sum, due: d.sum, last: o.last, missN: d.n, recentMiss: recent };
+  }
   function workerName(w, pin) {
     if (!w) return "আইডি " + pin;
     var dn = w.devName || w.devName_k;   // v3.43: শুধু কারখানার মেশিনে থাকলে সেখানকার নাম
@@ -2806,14 +2863,18 @@ var RH = (function () {
       row.otPay = Math.round(row.otPay);
       row.absent = Math.max(0, row.expected - row.presentExp);
       row.net = row.gross - row.adv;
+      row.carry = opt.weekId ? carryOf(ctx, pin, opt.weekId) : 0;   // v3.59: আগের সপ্তাহের বাকি বেতন
+      row.net += row.carry;
       row.avg = row.daysH ? (row.hours - row.liveMin) / row.daysH : null;
       row.avgIn = row.morningIn ? row.inSum / row.morningIn : null;
       row.attRate = row.expected ? row.presentExp / row.expected : null;
       row.brkAvg = row.brkN ? row.brkSum / row.brkN : null;
       row.shortPerDay = row.cDays ? row.cShort / row.cDays : null;
-      row.idle = row.units === 0 && row.adv === 0 && row.present === 0;
+      row.idle = row.units === 0 && row.adv === 0 && row.present === 0 && !row.carry;
       row.paid = paid[pin] || null;
-      if (!active && row.adv === 0 && !row.paid && !opt.all) return;
+      row.paidAmt = payAmt(row.paid);     // v3.59: কত দেওয়া হলো
+      row.left = payLeft(row.paid);       // কত রইল (পরের সপ্তাহে যোগ হবে)
+      if (!active && row.adv === 0 && !row.paid && !row.carry && !opt.all) return;
       rows.push(row);
     });
     // নিষ্ক্রিয়রা একদম শেষে
@@ -3254,7 +3315,7 @@ var RH = (function () {
     parsePunches: parsePunches, SITES: SITES, siteName: siteName, siteCheck: siteCheck, sitesOf: sitesOf, labelEvents: labelEvents, labelLong: labelLong, dayOpt: dayOpt, trustOf: trustOf, buttonStats: buttonStats,
     ivNorm: ivNorm, ivSub: ivSub, ivLen: ivLen, ivIn: ivIn, STATE_NAME: STATE_NAME,
     rateOn: rateOn, currentRate: currentRate, rateHistory: rateHistory,
-    advPlan: advPlan, makePlan: makePlan, isDue: isDue, dueOf: dueOf, dueList: dueList, advWeekList: advWeekList, advOwed: advOwed,
+    advPlan: advPlan, makePlan: makePlan, isDue: isDue, dueOf: dueOf, dueList: dueList, advWeekList: advWeekList, advOwed: advOwed, payAmt: payAmt, payLeft: payLeft, carryOf: carryOf, loanOf: loanOf,
     weekOf: weekOf, dates: dates, monthDates: monthDates, workerName: workerName, inPay: inPay, deptOf: deptOf,
     POS: POS, POS_NAME: POS_NAME, posOf: posOf, leadOf: leadOf, leadOn: leadOn, teamNow: teamNow,
     attachTeams: attachTeams, teamOrder: teamOrder, hourStats: hourStats, hourAll: hourAll, dayAfter: dayAfter, daySplit: daySplit, dayNeed: dayNeed,
@@ -3281,7 +3342,7 @@ const {
   useCallback,
   Fragment
 } = React;
-const APP_VERSION = "3.57";
+const APP_VERSION = "3.60";
 const DEPTS = RH.DEPTS;
 const BN = "০১২৩৪৫৬৭৮৯";
 const bn = s => String(s == null ? "" : s).replace(/[0-9]/g, d => BN[d]);
@@ -7393,7 +7454,7 @@ function WeekView({
   });
   const idle = rep.rows.filter(r => r.idle && !r.paid);
   const unpaid = rep.rows.filter(r => !r.paid && !r.noRate && (r.units > 0 || r.adv > 0));
-  const paidTotal = rep.rows.reduce((a, r) => a + (r.paid ? r.net : 0), 0);
+  const paidTotal = rep.rows.reduce((a, r) => a + (r.paid ? r.paidAmt : 0), 0);
   const est = rep.rows.reduce((a, r) => a + r.cells.filter(c => c.review && c.inc).length, 0);
   const early = rep.rows.reduce((a, r) => a + r.cells.filter(c => c.review && !c.inc).length, 0);
   const days = rep.dates.filter(d => rep.showDay[d]);
@@ -7409,25 +7470,12 @@ function WeekView({
     if (!confirm(bn(unpaid.length) + " জনকে পরিশোধিত চিহ্নিত করবেন?")) return;
     act.setPaidMany(wk.id, unpaid);
   };
-  const togglePaid = r => {
-    const L = r.leadRow || (r.teamTot ? r : null);
-    if (L) {
-      const tm = [L].concat(L.team);
-      if (tm.every(x => x.paid)) {
-        if (confirm(L.name + " মিস্ত্রির দল (" + bn(tm.length) + " জন) — পরিশোধ বাতিল করবেন?")) act.setPaidTeam(wk.id, tm, false);
-        return;
-      }
-      const un = tm.filter(x => !x.paid);
-      const nr = un.filter(x => x.noRate);
-      if (nr.length) {
-        act.toast("রেট বসানো বাকি: " + nr.map(x => x.name).join(", ") + " — দলের বেতন পরিশোধিত করা যাচ্ছে না", true);
-        return;
-      }
-      act.setPaidTeam(wk.id, un, true, L.name + " মিস্ত্রির দল (" + bn(tm.length) + " জন)");
-      return;
-    }
-    if (!r.paid || confirm(r.name + " — পরিশোধ বাতিল করবেন?")) act.setPaid(wk.id, r, !r.paid);
-  };
+  // v3.58: টিক শুধু সেই কর্মীর — পরিশোধের পাতা খোলে (কত দিলেন, কিস্তি কাটা হলো কিনা)
+  const togglePaid = r => open({
+    t: "pay",
+    pin: r.pin,
+    weekId: wk.id
+  });
   const hr = RH.hourAll(ctx);
   const groups = rep.groups.map(g => ({
     ...g,
@@ -7435,12 +7483,12 @@ function WeekView({
   })).filter(g => g.rows.length);
   const r1 = v => Math.round(v * 10) / 10;
   const exportCSV = () => {
-    const out = [["আইডি", "নাম", "বিভাগ", "পদ", "কার দলে"].concat(days.map(d => WDS[RH.weekday(d)] + " " + dm(d))).concat(["মোট ঘণ্টা", "গড় ঘণ্টা/দিন", "উপস্থিত দিন", "হাজিরা", "ওভারটাইম", "রেট", "মজুরি", "অগ্রিম", "প্রদেয়", "দলসহ মিস্ত্রিকে", "পরিশোধিত"])];
+    const out = [["আইডি", "নাম", "বিভাগ", "পদ", "কার দলে"].concat(days.map(d => WDS[RH.weekday(d)] + " " + dm(d))).concat(["মোট ঘণ্টা", "গড় ঘণ্টা/দিন", "উপস্থিত দিন", "হাজিরা", "ওভারটাইম", "রেট", "মজুরি", "অগ্রিম", "প্রদেয়", "দলসহ মিস্ত্রিকে", "দেওয়া হয়েছে"])];
     shownRows.forEach(r => {
       out.push([r.pin, r.name, r.dept || "", r.pos ? RH.POS_NAME[r.pos] : "", r.lead ? r.leadName : ""].concat(days.map(d => {
         const c = r.cells[rep.dates.indexOf(d)];
         return c.future ? "" : c.inactive ? "নিষ্ক্রিয়" : c.off ? "ছুটি" : c.status === "absent" ? c.expected ? "অনুপস্থিত" : "" : r1(c.workedMin / 60);
-      })).concat([r1(r.hours / 60), r.avg ? r1(r.avg / 60) : "", r.present, r.att, r.ot, r.noRate ? "রেট বাকি" : r.rates.join("/"), r.noRate ? "" : r.gross, r.adv || "", r.noRate ? "" : r.net, r.teamTot && !r.teamTot.noRate ? r.teamTot.net : "", r.paid ? "হ্যাঁ" : ""]));
+      })).concat([r1(r.hours / 60), r.avg ? r1(r.avg / 60) : "", r.present, r.att, r.ot, r.noRate ? "রেট বাকি" : r.rates.join("/"), r.noRate ? "" : r.gross, r.adv || "", r.noRate ? "" : r.net, r.teamTot && !r.teamTot.noRate ? r.teamTot.net : "", r.paid ? r.paidAmt : ""]));
     });
     out.push(["", "সবাই মিলে", "", "", ""].concat(days.map(() => "")).concat([r1(rep.tot.hours / 60), rep.kpis.avg ? r1(rep.kpis.avg / 60) : "", rep.tot.present, rep.tot.att, rep.tot.ot, "", rep.tot.gross, rep.tot.adv || "", rep.tot.net, "", ""]));
     const al = RH.advWeekList(ctx, wk, a => RH.deptMatch(ctx.workers[a.pin], dept)).sort(advSort).reverse();
@@ -7586,6 +7634,7 @@ function WeekView({
       date: d
     }),
     onPaid: () => togglePaid(r),
+    onTeam: () => payTeam(act, wk.id, r),
     due: dueBy[r.pin],
     onCut: x => open({
       t: "advcut",
@@ -7659,7 +7708,7 @@ function WeekView({
     className: "paid-line"
   }, "পরিশোধিত ", React.createElement("b", {
     className: "ok-t"
-  }, money(paidTotal)), " · বাকি ", React.createElement("b", null, money(rep.rows.reduce((a, r) => a + (!r.paid && !r.noRate ? r.net : 0), 0)))), idle.length > 0 && React.createElement("div", {
+  }, money(paidTotal)), " · বাকি ", React.createElement("b", null, money(rep.rows.reduce((a, r) => a + (!r.paid && !r.noRate ? r.net : 0) + (r.paid && r.left > 0 ? r.left : 0), 0)))), idle.length > 0 && React.createElement("div", {
     className: "muted sm idle"
   }, "এই সপ্তাহে আসেননি: ", idle.map(r => r.name).join(", ")), isCurrent && React.createElement("div", {
     className: "muted sm idle"
@@ -7678,10 +7727,18 @@ function WorkerCard({
   s,
   due,
   onCut,
-  onDue
+  onDue,
+  onTeam
 }) {
   const p = r.paid;
   const tt = r.teamTot;
+  // v3.58: দলের কে কে এখনো টাকা পাননি
+  const tmAll = tt ? [r].concat(r.team) : [];
+  const tmUn = tmAll.filter(x => !x.paid);
+  const tmUnSum = tmUn.reduce((t, x) => t + x.net, 0);
+  const tmUnNR = tmUn.some(x => x.noRate);
+  const tmUnM = tmUn.some(x => x.pin !== r.pin);   // শুধু মিস্ত্রি নিজে বাকি থাকলে নিজের টিকই যথেষ্ট
+  const loanSum = (owed ? owed.sum : 0) + (due ? due.sum : 0);
   const drift = p && Math.round(p.net) !== Math.round(r.net);
   const mo = useMorph();
   const tOpen = mo.open;
@@ -7716,7 +7773,10 @@ function WorkerCard({
     kind: "bad"
   }, "\u09B0\u09C7\u099F \u09AC\u09BE\u0995\u09BF") : React.createElement("b", {
     className: r.net < 0 ? "bad-t" : ""
-  }, money(r.net)), r.adv > 0 && React.createElement("small", null, "অগ্রিম ", money(r.adv)))), r.lead && React.createElement("div", {
+  }, money(r.net)), r.adv > 0 && React.createElement("small", null, "অগ্রিম ", money(r.adv)), r.carry !== 0 && React.createElement("small", null, r.carry > 0 ? "আগের বাকি +" + money(r.carry) : "আগে বেশি দেওয়া −" + money(-r.carry)), p && r.left !== 0 && React.createElement("small", {
+    className: "warn-t",
+    "data-paid-part": true
+  }, "দেওয়া " + money(r.paidAmt) + (r.left > 0 ? " · বাকি " + money(r.left) : " · " + money(-r.left) + " বেশি")))), r.lead && React.createElement("div", {
     className: "wc-team member"
   }, React.createElement(Icon, {
     n: "users",
@@ -7738,13 +7798,25 @@ function WorkerCard({
     className: "wt-n"
   }, m.name, React.createElement("small", null, RH.POS_NAME[RH.posOf(m.w)] || "")), React.createElement("span", {
     className: "wt-v"
-  }, m.noRate ? "রেট বাকি" : money(m.net)))), React.createElement("div", {
-    className: "wt-row tot"
+  }, m.noRate ? "রেট বাকি" : money(m.net), m.paid && React.createElement("span", {
+    className: "wt-st " + (m.left > 0 ? "part" : "ok")
+  }, m.left > 0 ? "আংশিক" : "✓")))), React.createElement("div", {
+    className: "wt-row tot",
+    "data-team-left": tmUn.length
   }, React.createElement("span", {
     className: "wt-n"
-  }, "\u09AE\u09BF\u09B8\u09CD\u09A4\u09CD\u09B0\u09BF\u0995\u09C7 \u09AE\u09CB\u099F \u09A6\u09BF\u09A8"), React.createElement("b", {
-    className: "wt-v"
-  }, tt.noRate ? "রেট বাকি" : money(tt.net)))), anyDay && React.createElement("button", {
+  }, !tmUn.length ? "দলের সবাই পরিশোধিত" : tmUn.length < tmAll.length ? "মিস্ত্রিকে আর দিন" : "মিস্ত্রিকে মোট দিন", tmUn.length > 0 && tmUn.length < tmAll.length && React.createElement("small", null, "মোট " + (tt.noRate ? "—" : money(tt.net)))), React.createElement("b", {
+    className: "wt-v" + (!tmUn.length ? " ok-t" : "")
+  }, !tmUn.length ? "✓" : tmUnNR ? "রেট বাকি" : money(tmUn.length < tmAll.length ? tmUnSum : tt.net))), tmUnM && onTeam && React.createElement("button", {
+    type: "button",
+    className: "btn sm wt-pay",
+    disabled: tmUnNR,
+    onClick: e => {
+      e.stopPropagation();
+      onTeam();
+    },
+    "data-team-pay": true
+  }, tmUn.length < tmAll.length ? "দলের বাকি " + bn(tmUn.length) + " জনকে একসাথে" : "দলের সবাইকে একসাথে পরিশোধ", tmUnNR ? "" : " · " + money(tmUnSum))), anyDay && React.createElement("button", {
     type: "button",
     className: "wc-tbtn" + (tOpen ? " on" : ""),
     "aria-expanded": tOpen,
@@ -7803,9 +7875,7 @@ function WorkerCard({
   }, advChip(x)) : React.createElement("span", {
     key: x.id,
     className: "wa" + (x.cut === 0 ? " later" : x.taken === false ? " inst" : "")
-  }, advChip(x))), owed && React.createElement("span", {
-    className: "wa owe"
-  }, "বাকি " + money(owed.sum)), due && due.sum > 0 && React.createElement("button", {
+  }, advChip(x))), loanSum > 0 && (due && due.sum > 0 ? React.createElement("button", {
     type: "button",
     className: "wa due tap",
     onClick: e => {
@@ -7814,13 +7884,16 @@ function WorkerCard({
     },
     title: "\u09AC\u0995\u09C7\u09AF\u09BC\u09BE \u2014 \u099A\u09BE\u09AA\u09B2\u09C7 \u09AC\u09C7\u09A4\u09A8 \u09A5\u09C7\u0995\u09C7 \u0995\u09BE\u099F\u09BE \u09AF\u09BE\u09AF\u09BC",
     "data-due-chip": true
-  }, "বকেয়া " + money(due.sum) + (due.n ? " · " + bn(due.n) + " বার দেননি" : ""))), drift && React.createElement("div", {
+  }, "ধার বাকি " + money(loanSum) + " (বকেয়া " + money(due.sum) + ")") : React.createElement("span", {
+    className: "wa owe",
+    "data-loan-chip": true
+  }, "ধার বাকি " + money(loanSum)))), drift && React.createElement("div", {
     className: "wc-drift warn-t"
   }, "পরিশোধের পর হিসাব বদলেছে (তখন ", money(p.net), ")")), React.createElement("button", {
-    className: "paybtn" + (p ? " on" : ""),
+    className: "paybtn" + (p ? r.left > 0 ? " half" : " on" : ""),
     disabled: r.noRate && !p,
     onClick: onPaid,
-    "aria-label": (r.lead || tt ? "দলসহ " : "") + (p ? "পরিশোধ বাতিল" : "পরিশোধিত চিহ্নিত")
+    "aria-label": p ? "পরিশোধ দেখুন বা বদলান" : "পরিশোধ"
   }, React.createElement(Icon, {
     n: "check",
     s: 18
@@ -8198,8 +8271,10 @@ function WeekTable({
     className: "bad-t"
   }, "\u09B0\u09C7\u099F \u09AC\u09BE\u0995\u09BF") : money(r.gross)), React.createElement("td", null, r.adv ? money(r.adv) : ""), React.createElement("td", null, React.createElement("b", null, r.noRate ? "—" : money(r.net)), r.teamTot && React.createElement("small", {
     className: "tteam"
-  }, "দলসহ " + (r.teamTot.noRate ? "—" : money(r.teamTot.net)))), React.createElement("td", null, React.createElement("button", {
-    className: "paybtn sm" + (r.paid ? " on" : ""),
+  }, "দলসহ " + (r.teamTot.noRate ? "—" : money(r.teamTot.net))), r.paid && r.left > 0 && React.createElement("small", {
+    className: "tteam warn-t"
+  }, "বাকি " + money(r.left))), React.createElement("td", null, React.createElement("button", {
+    className: "paybtn sm" + (r.paid ? r.left > 0 ? " half" : " on" : ""),
     disabled: r.noRate && !r.paid,
     onClick: () => onPaid(r),
     "aria-label": "\u09AA\u09B0\u09BF\u09B6\u09CB\u09A7"
@@ -10811,7 +10886,10 @@ function payTeam(act, wid, L) {
     act.toast("রেট বসানো বাকি: " + nr.map(x => x.name).join(", ") + " — দলের বেতন পরিশোধিত করা যাচ্ছে না", true);
     return Promise.resolve(false);
   }
-  return act.setPaidTeam(wid, un, true, L.name + " মিস্ত্রির দল (" + bn(tm.length) + " জন)");
+  // v3.58: শুধু যাঁরা এখনো পাননি — পুরো টাকা; জিজ্ঞেস করে
+  const sum = un.reduce((t, x) => t + x.net, 0);
+  if (!confirm(L.name + " মিস্ত্রির দল — " + un.map(x => x.name).join(", ") + " · মোট " + money(sum) + " পরিশোধিত চিহ্নিত করবেন?")) return Promise.resolve(false);
+  return act.setPaidTeam(wid, un, true, L.name + " মিস্ত্রির দল (" + bn(un.length) + " জন)");
 }
 function teamLines(T, pin) {
   if (!T) return [];
@@ -10851,8 +10929,12 @@ function slipText(r, wk, al, owed, T) {
     cutL.forEach(x => lines.push("  • " + advWhen(x) + " — " + money(x.cut) + (x.it && x.it.n > 1 ? " (কিস্তি " + bn(x.it.i) + "/" + bn(x.it.n) + ", মোট " + money(x.total) + ")" : "") + (x.it && x.it.planned && x.it.n === 1 && x.taken === false ? " (আগে নেওয়া)" : "") + (x.note ? " (" + x.note + ")" : "")));
   }
   list.filter(x => x.taken !== false && x.cut < x.total).forEach(x => lines.push("এ সপ্তাহে নেওয়া " + money(x.total) + " (" + advWhen(x) + ") — " + money(x.total - x.cut) + " পরে কাটা হবে"));
+  if (r.carry > 0) lines.push("আগের সপ্তাহের বাকি: +" + money(r.carry));
+  if (r.carry < 0) lines.push("আগের সপ্তাহে বেশি দেওয়া: −" + money(-r.carry));
   lines.push("প্রদেয়: " + money(r.net));
-  if (owed && owed.sum > 0) lines.push("অগ্রিমের বাকি: " + money(owed.sum) + " (শেষ কিস্তি " + payDay(owed.last) + ")");
+  if (r.paid && r.left > 0) lines.push("দেওয়া হলো: " + money(r.paidAmt) + " · বাকি " + money(r.left) + " (পরের সপ্তাহে যোগ হবে)");
+  if (r.paid && r.left < 0) lines.push("দেওয়া হলো: " + money(r.paidAmt) + " (" + money(-r.left) + " বেশি — পরের সপ্তাহে বাদ যাবে)");
+  if (owed && owed.sum > 0) lines.push("ধার বাকি: " + money(owed.sum) + " (শেষ কিস্তি " + payDay(owed.last) + ")");
   teamLines(T, r.pin).forEach(x => lines.push(x));
   return lines.join("\n");
 }
@@ -10931,14 +11013,16 @@ function WeekSheet({
     }, React.createElement(Icon, {
       n: "print",
       s: 16
-    }), " স্লিপ"), T ? React.createElement("button", {
-      className: "btn " + (T.tm.every(x => x.paid) ? "ok" : "primary"),
-      onClick: () => payTeam(act, wk.id, T.L)
-    }, T.tm.every(x => x.paid) ? "✓ দলসহ পরিশোধিত" : "দলসহ পরিশোধিত চিহ্নিত") : React.createElement("button", {
-      className: "btn " + (p ? "ok" : "primary"),
+    }), " স্লিপ"), React.createElement("button", {
+      className: "btn " + (p ? r.left > 0 ? "ghost warn-t" : "ok" : "primary"),
       disabled: r.noRate && !p,
-      onClick: () => (!p || confirm("পরিশোধ বাতিল করবেন?")) && act.setPaid(wk.id, r, !p)
-    }, p ? "✓ পরিশোধিত" : "পরিশোধিত চিহ্নিত"))
+      onClick: () => open({
+        t: "pay",
+        pin,
+        weekId: wk.id
+      }),
+      "data-ws-pay": true
+    }, p ? r.left > 0 ? "দেওয়া " + money(r.paidAmt) + " · বাকি " + money(r.left) : "✓ পরিশোধিত" : "পরিশোধ"))
   }, owner && React.createElement("div", {
     className: "owner-note"
   }, React.createElement("span", {
@@ -10959,11 +11043,14 @@ function WeekSheet({
     className: "em wide"
   }, React.createElement("span", null, "\u09AA\u09CD\u09B0\u09A6\u09C7\u09AF\u09BC"), React.createElement("b", {
     className: "big"
-  }, money(r.net)))), T && React.createElement(TeamBox, {
+  }, money(r.net)), r.carry !== 0 && React.createElement("small", null, r.carry > 0 ? "আগের সপ্তাহের বাকি +" + money(r.carry) + " সহ" : "আগের সপ্তাহে বেশি দেওয়া −" + money(-r.carry) + " বাদে"), p && r.left !== 0 && React.createElement("small", {
+    className: "warn-t"
+  }, "দেওয়া " + money(r.paidAmt) + (r.left > 0 ? " · বাকি " + money(r.left) + " — পরের সপ্তাহে যোগ হবে" : " · " + money(-r.left) + " বেশি")))), T && React.createElement(TeamBox, {
     T: T,
     pin: pin,
     wk: wk,
-    open: open
+    open: open,
+    act: act
   }), away && React.createElement("div", {
     className: "note sm warnish"
   }, "দলের মিস্ত্রি ", React.createElement("b", null, away.name), (away.off ? " নিষ্ক্রিয়" : " এ সপ্তাহে আসেননি") + " — এ সপ্তাহের বেতন নিজে নেবেন। দল বদলাতে চাইলে ", React.createElement("button", {
@@ -11036,13 +11123,15 @@ function TeamBox({
   T,
   pin,
   wk,
-  open
+  open,
+  act
 }) {
   const {
     L,
     tm
   } = T;
   const tt = L.teamTot;
+  const un = tm.filter(x => !x.paid);
   return React.createElement("div", {
     className: "card pad team-box",
     "data-team-box": true
@@ -11053,7 +11142,7 @@ function TeamBox({
     s: 18
   }), React.createElement("b", null, L.name + " মিস্ত্রির দল"), React.createElement("span", {
     className: "muted sm"
-  }, "\u09AC\u09BF\u09B2\u09C7\u09B0 \u09A6\u09BF\u09A8 \u09B8\u09AC\u09BE\u09B0 \u099F\u09BE\u0995\u09BE \u09AE\u09BF\u09B8\u09CD\u09A4\u09CD\u09B0\u09BF\u09B0 \u09B9\u09BE\u09A4\u09C7")), React.createElement("table", {
+  }, "প্রত্যেকের টিক আলাদা · একসাথে দিলে মিস্ত্রির হাতে")), React.createElement("table", {
     className: "ttable"
   }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", null, "\u09A8\u09BE\u09AE"), React.createElement("th", null, "\u09B9\u09BE\u099C\u09BF\u09B0\u09BE"), React.createElement("th", null, "\u09AE\u099C\u09C1\u09B0\u09BF"), React.createElement("th", null, "\u0985\u0997\u09CD\u09B0\u09BF\u09AE"), React.createElement("th", null, "\u09AA\u09CD\u09B0\u09A6\u09C7\u09AF\u09BC"))), React.createElement("tbody", null, tm.map(x => React.createElement("tr", {
     key: x.pin,
@@ -11066,8 +11155,19 @@ function TeamBox({
   }, React.createElement("td", null, x.name, React.createElement("small", null, RH.POS_NAME[RH.posOf(x.w)] || "")), React.createElement("td", null, units(x.units)), React.createElement("td", null, x.noRate ? React.createElement("span", {
     className: "bad-t"
   }, "\u09B0\u09C7\u099F \u09AC\u09BE\u0995\u09BF") : money(x.gross)), React.createElement("td", null, x.adv ? money(x.adv) : ""), React.createElement("td", null, React.createElement("b", null, money(x.net)), x.paid ? React.createElement("span", {
-    className: "ok-t"
-  }, " ✓") : null)))), React.createElement("tfoot", null, React.createElement("tr", null, React.createElement("td", null, "\u09AE\u09BF\u09B8\u09CD\u09A4\u09CD\u09B0\u09BF\u0995\u09C7 \u09AE\u09CB\u099F"), React.createElement("td", null, units(tt.units)), React.createElement("td", null, tt.noRate ? "—" : money(tt.gross)), React.createElement("td", null, tt.adv ? money(tt.adv) : ""), React.createElement("td", null, React.createElement("b", null, tt.noRate ? "—" : money(tt.net)))))));
+    className: x.left > 0 ? "warn-t" : "ok-t"
+  }, x.left > 0 ? " আংশিক" : " ✓") : null)))), React.createElement("tfoot", null, React.createElement("tr", null, React.createElement("td", null, "\u09AE\u09BF\u09B8\u09CD\u09A4\u09CD\u09B0\u09BF\u0995\u09C7 \u09AE\u09CB\u099F"), React.createElement("td", null, units(tt.units)), React.createElement("td", null, tt.noRate ? "—" : money(tt.gross)), React.createElement("td", null, tt.adv ? money(tt.adv) : ""), React.createElement("td", null, React.createElement("b", null, tt.noRate ? "—" : money(tt.net)))))), act && React.createElement("div", {
+    className: "note-btns"
+  }, un.length ? React.createElement(React.Fragment, null, React.createElement("span", {
+    className: "sm"
+  }, un.length < tm.length ? "এখনো পাননি: " + un.map(x => x.name).join(", ") : "দলের কেউ এখনো পাননি"), un.some(x => x.pin !== L.pin) && React.createElement("button", {
+    className: "btn sm",
+    disabled: un.some(x => x.noRate),
+    onClick: () => payTeam(act, wk.id, L),
+    "data-team-pay": true
+  }, (un.length < tm.length ? "বাকি " + bn(un.length) + " জনকে একসাথে" : "দলের সবাইকে একসাথে") + " · " + money(un.reduce((t, x) => t + x.net, 0)))) : React.createElement("span", {
+    className: "ok-t sm"
+  }, "দলের সবাই পরিশোধিত ✓")));
 }
 const toAscii = t => String(t || "").replace(/[০-৯]/g, c => BN.indexOf(c));
 function activePins(ctx) {
@@ -11118,13 +11218,44 @@ function PlanPick({
   v,
   setV,
   s,
-  paidWks
+  paidWks,
+  due
 }) {
   const items = planItems(amt, baseWk, v, s);
   const prob = planProblem(amt, v);
+  const loan = v.mode === "inst";
   return React.createElement("div", {
     className: "planpick"
-  }, React.createElement(Field, {
+  }, !due && React.createElement(Field, {
+    label: "কী হিসেবে দিচ্ছেন"
+  }, React.createElement(Seg, {
+    value: loan ? "inst" : "adv",
+    onChange: m => setV(Object.assign({}, v, {
+      mode: m === "inst" ? "inst" : v.mode === "next" ? "next" : "now"
+    })),
+    options: [{
+      v: "adv",
+      l: "অগ্রিম"
+    }, {
+      v: "inst",
+      l: "ধার · কিস্তিতে শোধ"
+    }]
+  })), !due && !loan && React.createElement(Field, {
+    label: "কোন সপ্তাহের বেতন থেকে কাটা হবে"
+  }, React.createElement(Seg, {
+    small: true,
+    value: v.mode,
+    onChange: m => setV(Object.assign({}, v, {
+      mode: m
+    })),
+    options: [{
+      v: "now",
+      l: "এই সপ্তাহে"
+    }, {
+      v: "next",
+      l: "আগামী সপ্তাহে"
+    }]
+  })), due && React.createElement(Field, {
     label: "\u0995\u09CB\u09A8 \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u09AC\u09C7\u09A4\u09A8 \u09A5\u09C7\u0995\u09C7 \u0995\u09BE\u099F\u09BE \u09B9\u09AC\u09C7"
   }, React.createElement(Seg, {
     small: true,
@@ -11222,6 +11353,7 @@ function AdvForm({
   const curWk = RH.weekOf(today, ctx.s);
   const r = useMemo(() => pin ? oneReport(ctx, pin, wk.from, wk.to, wk.id) : null, [ctx, pin, wk.id]);
   const owed = pin ? RH.advOwed(ctx, pin, wk.id) : null;
+  const loanW = pin ? RH.loanOf(ctx, pin, wk.id) : null;   // v3.60: আগের ধারের সতর্কতা
   const hist = pin ? advHist(ctx, pin, wk) : null;
   const paidWks = pin ? paidWeeksOf(ctx, pin) : {};
   const pins = activePins(ctx);
@@ -11250,7 +11382,7 @@ function AdvForm({
       amt: a,
       note: note.trim(),
       plan,
-      msg: name + "-কে " + money(a) + " অগ্রিম — " + how + (hist && dd >= wk.from && dd <= wk.to ? " · এ সপ্তাহে " + ordBn(hist.n + 1) + " বার" + (hist.n ? ", মোট " + money(hist.sum + a) : "") : "")
+      msg: name + "-কে " + money(a) + (pv.mode === "inst" ? " ধার — " : " অগ্রিম — ") + how + (hist && dd >= wk.from && dd <= wk.to ? " · এ সপ্তাহে " + ordBn(hist.n + 1) + " বার" + (hist.n ? ", মোট " + money(hist.sum + a) : "") : "")
     }).then(x => {
       setBusy(false);
       if (x) {
@@ -11295,9 +11427,13 @@ function AdvForm({
     className: "warn-t"
   }, "\u09B0\u09C7\u099F \u09AC\u09B8\u09BE\u09A8\u09CB \u09B9\u09AF\u09BC\u09A8\u09BF \u2014 \u0986\u09AF\u09BC \u09B9\u09BF\u09B8\u09BE\u09AC \u0995\u09B0\u09BE \u09AF\u09BE\u099A\u09CD\u099B\u09C7 \u09A8\u09BE"), (!r || r.units === 0) && React.createElement("span", {
     className: "muted"
-  }, "\u098F \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u098F\u0996\u09A8\u09CB \u0995\u09CB\u09A8\u09CB \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09A8\u09C7\u0987", r && r.adv > 0 ? " · আগের অগ্রিম/কিস্তি কাটা " + money(r.adv) : ""), owed && owed.sum > 0 && React.createElement("span", {
-    className: "owed-line"
-  }, "আগের অগ্রিমের বাকি ", React.createElement("b", null, money(owed.sum)), " — পরের সপ্তাহগুলোতে কাটা হবে (শেষ কিস্তি " + payDay(owed.last) + ")")), React.createElement("div", {
+  }, "\u098F \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7 \u098F\u0996\u09A8\u09CB \u0995\u09CB\u09A8\u09CB \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u09A8\u09C7\u0987", r && r.adv > 0 ? " · আগের অগ্রিম/কিস্তি কাটা " + money(r.adv) : "")), loanW && loanW.sum > 0 && React.createElement("div", {
+    className: "note bad sm loan-warn",
+    "data-loan-warn": true
+  }, React.createElement(Icon, {
+    n: "warn",
+    s: 16
+  }), React.createElement("span", null, "আগের ধার বাকি ", React.createElement("b", null, money(loanW.now)), loanW.due > 0 ? " (বকেয়া " + money(loanW.due) + ")" : "", loanW.recentMiss > 0 ? " · শেষ ৪ সপ্তাহে " + bn(loanW.recentMiss) + " বার কিস্তি পুরো দেননি" : "", loanW.last ? " · শেষ কিস্তি " + payDay(loanW.last) : "")), React.createElement("div", {
     className: "adv-grid"
   }, React.createElement(Field, {
     label: "\u099F\u09BE\u0995\u09BE"
@@ -11369,7 +11505,7 @@ function AdvForm({
   }, React.createElement(Icon, {
     n: "check",
     s: 18
-  }), " ", !pin ? "কর্মী বাছুন" : a > 0 ? name + "-কে " + money(a) + " অগ্রিম দিন" : "টাকার পরিমাণ লিখুন"));
+  }), " ", !pin ? "কর্মী বাছুন" : a > 0 ? name + "-কে " + money(a) + (pv.mode === "inst" ? " ধার দিন" : " অগ্রিম দিন") : "টাকার পরিমাণ লিখুন"));
 }
 function advTag(x, st) {
   const t = advTag0(x, st);
@@ -11619,7 +11755,7 @@ function AdvSheet({
     pin: pin0
   } : null;
   return React.createElement(Sheet, {
-    title: "\u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A6\u09BF\u09A8",
+    title: "অগ্রিম বা ধার দিন",
     sub: weekLabel(wk) + (past ? " · আগের সপ্তাহ" : ""),
     onClose: close
   }, pin0 && React.createElement("div", {
@@ -11872,6 +12008,13 @@ function ProfileSheet({
   const advs = ctx.adv.filter(a => String(a.pin) === String(pin)).sort(advSort).slice(0, 6);
   const owedP = RH.advOwed(ctx, pin, RH.weekOf(today, ctx.s).id);
   const dueP = RH.dueOf(ctx, pin);
+  // v3.60: ধার খাতা — কিস্তিতে নেওয়া ধার, বা যার কিস্তি বাকি পড়েছে / সামনে আছে
+  const curWkP = RH.weekOf(today, ctx.s).id;
+  const loanP = RH.loanOf(ctx, pin, curWkP);
+  const loans = ctx.adv.filter(a => String(a.pin) === String(pin) && !RH.isDue(a)).map(a => ({
+    a,
+    plan: RH.advPlan(a, ctx.s)
+  })).filter(x => x.plan.length > 1 || x.plan.some(it => it.missed || it.wk > curWkP)).sort((x, y) => advSort(x.a, y.a)).slice(0, 6);
   const wdata = pf.weeks.map(x => ({
     label: dm(x.week.to),
     tip: weekLabel(x.week, {
@@ -12179,7 +12322,14 @@ function ProfileSheet({
     kind: "info sm"
   }, "\u09B8\u09BE\u09AE\u09A8\u09C7")))), React.createElement("div", null, React.createElement("div", {
     className: "sec-title"
-  }, "\u09B8\u09BE\u09AE\u09CD\u09AA\u09CD\u09B0\u09A4\u09BF\u0995 \u0985\u0997\u09CD\u09B0\u09BF\u09AE"), advs.length === 0 && React.createElement("div", {
+  }, "\u09B8\u09BE\u09AE\u09CD\u09AA\u09CD\u09B0\u09A4\u09BF\u0995 \u0985\u0997\u09CD\u09B0\u09BF\u09AE"), loans.length > 0 && !owner && React.createElement(LoanBook, {
+    ctx: ctx,
+    loans: loans,
+    loan: loanP,
+    curWk: curWkP,
+    open: open,
+    pin: pin
+  }), advs.length === 0 && React.createElement("div", {
     className: "muted sm"
   }, "\u0985\u0997\u09CD\u09B0\u09BF\u09AE \u09A8\u09C7\u0987\u0964"), advs.length > 0 && React.createElement("div", {
     className: "adv-hist",
@@ -12232,6 +12382,62 @@ function ProfileSheet({
       n: "trash",
       s: 16
     }), " ছবি মুছুন")
+  }));
+}
+/* v3.60: ধার খাতা — প্রতিটা ধার, প্রতি সপ্তাহে কত দেওয়ার কথা, দিয়েছেন কিনা; চাপলে সেই সপ্তাহে কত কাটা হলো ঠিক করা যায় */
+function LoanBook({
+  ctx,
+  loans,
+  loan,
+  curWk,
+  open,
+  pin
+}) {
+  const paidWk = wk => !!(ctx.pay[wk] && ctx.pay[wk].p && ctx.pay[wk].p[pin]);
+  return React.createElement("div", {
+    className: "loan-book",
+    "data-loan-book": true
+  }, React.createElement("div", {
+    className: "owed-line"
+  }, "ধার খাতা · ", loan.now > 0 ? React.createElement(React.Fragment, null, "এখন বাকি ", React.createElement("b", {
+    className: "bad-t"
+  }, money(loan.now)), loan.due > 0 ? " (বকেয়া " + money(loan.due) + ")" : "") : React.createElement("b", {
+    className: "ok-t"
+  }, "সব শোধ")), loans.map(({
+    a,
+    plan
+  }) => {
+    const gave = plan.filter(it => it.wk < curWk || it.wk === curWk && paidWk(it.wk)).reduce((t, it) => t + it.got, 0);
+    const miss = plan.reduce((t, it) => t + (it.missed ? it.due : 0), 0);
+    const ahead = plan.filter(it => it.wk > curWk || it.wk === curWk && !paidWk(it.wk)).reduce((t, it) => t + it.amt, 0);
+    return React.createElement("div", {
+      key: a.id,
+      className: "loan-card"
+    }, React.createElement("div", {
+      className: "loan-h"
+    }, React.createElement("span", null, React.createElement("b", null, (plan.length > 1 ? "ধার " : "অগ্রিম ") + money(a.amt)), " · " + advWhen(a), a.note ? " · " + a.note : ""), ahead + miss > 0 ? React.createElement("b", {
+      className: "bad-t"
+    }, "বাকি " + money(ahead + miss)) : React.createElement("b", {
+      className: "ok-t"
+    }, "শোধ ✓")), plan.map(it => {
+      const past = it.wk < curWk || it.wk === curWk && paidWk(it.wk);
+      const st = !past ? it.wk === curWk ? "এ সপ্তাহে" : "সামনে" : it.missed ? it.got > 0 ? "দিয়েছেন " + money(it.got) : "দেননি" : "দিয়েছেন ✓";
+      return React.createElement("button", {
+        key: it.wk,
+        type: "button",
+        className: "loan-r",
+        disabled: it.wk > curWk,
+        onClick: () => open({
+          t: "advcut",
+          id: a.id,
+          wk: it.wk
+        })
+      }, React.createElement("span", null, payDay(it.wk), plan.length > 1 ? " · কিস্তি " + bn(it.i) + "/" + bn(it.n) : ""), React.createElement("b", null, money(it.amt)), React.createElement("em", {
+        className: past ? it.missed ? "bad-t" : "ok-t" : "muted"
+      }, st));
+    }), React.createElement("div", {
+      className: "loan-f"
+    }, "দিয়েছেন " + money(gave) + (miss > 0 ? " · দেননি " + money(miss) : "") + (ahead > 0 ? " · সামনে " + money(ahead) : "")));
   }));
 }
 function EditSheet({
@@ -13365,6 +13571,205 @@ function AdvCutSheet({
     className: "warn-t sm"
   }, "\u098F \u09B8\u09AA\u09CD\u09A4\u09BE\u09B9 \u09AA\u09B0\u09BF\u09B6\u09CB\u09A7\u09BF\u09A4 \u099A\u09BF\u09B9\u09CD\u09A8\u09BF\u09A4 \u2014 \u09AA\u09B0\u09BF\u09B6\u09CB\u09A7\u09C7\u09B0 \u09B9\u09BF\u09B8\u09BE\u09AC\u0993 \u09B8\u09BE\u09A5\u09C7 \u09B8\u09BE\u09A5\u09C7 \u09A0\u09BF\u0995 \u09B9\u09AF\u09BC\u09C7 \u09AF\u09BE\u09AC\u09C7\u0964")));
 }
+/* v3.59–3.60: পরিশোধের পাতা — মজুরি, অগ্রিম, ধারের কিস্তি, আগের সপ্তাহের বাকি; কত দিলেন।
+   কিস্তি/আগের অগ্রিম/বকেয়া আদায়ের ঘরে "কাটলাম / কাটিনি / কিছু" — না-কাটা অংশ বকেয়ায়।
+   কম দিলে বাকিটা পরের সপ্তাহের প্রদেয়তে নিজে যোগ হয়, বেশি দিলে বাদ যায়। */
+function payCutOf(x) {
+  return !!x.it && (RH.isDue(x) || !!x.it.planned);
+}
+function PaySheet({
+  ctx,
+  pin,
+  weekId,
+  close,
+  act,
+  open
+}) {
+  const wk = RH.weekOf(weekId, ctx.s);
+  const r = useMemo(() => oneReport(ctx, pin, wk.from, wk.to, wk.id), [ctx, pin, wk.id]);
+  const w = ctx.workers[pin] || {
+    pin
+  };
+  const name = RH.workerName(w, pin);
+  const cuts = r ? r.advList.filter(payCutOf) : [];
+  const [sel, setSel] = useState(() => {
+    const o = {};
+    cuts.forEach(x => {
+      o[x.id] = !x.it.missed ? "full" : x.it.got > 0 ? "part" : "none";
+    });
+    return o;
+  });
+  const [parts, setParts] = useState(() => {
+    const o = {};
+    cuts.forEach(x => {
+      if (x.it.missed && x.it.got > 0) o[x.id] = String(x.it.got);
+    });
+    return o;
+  });
+  const [amtS, setAmtS] = useState(null);
+  const [busy, setBusy] = useState(false);
+  if (!r) return React.createElement(Sheet, {
+    title: "পরিশোধ",
+    onClose: close
+  }, React.createElement(Empty, null, "এই সপ্তাহের কোনো হিসাব নেই।"));
+  const p = r.paid;
+  const num = v => {
+    const n = parseInt(toAscii(v).replace(/[^\d]/g, ""), 10);
+    return isNaN(n) ? null : n;
+  };
+  const gotOf = x => {
+    const m = sel[x.id] || "full";
+    if (m === "full") return x.it.amt;
+    if (m === "none") return 0;
+    const n = num(parts[x.id]);
+    return n == null || n <= 0 || n >= x.it.amt ? null : n;
+  };
+  const badCut = cuts.some(x => gotOf(x) == null);
+  const delta = cuts.reduce((t, x) => {
+    const g = gotOf(x);
+    return t + (g == null ? 0 : x.it.got - g);
+  }, 0);
+  const due = r.net + delta;
+  const amt0 = p ? RH.payAmt(p) : Math.max(0, due);
+  const amt = amtS == null ? amt0 : num(amtS);
+  const left = amt == null ? 0 : due - amt;
+  const plainAdv = r.advList.filter(x => !payCutOf(x)).reduce((t, x) => t + x.amt, 0);
+  const loan = RH.loanOf(ctx, pin, wk.id);
+  const changed = cuts.filter(x => gotOf(x) !== x.it.got);
+  const same = !!p && !changed.length && amt === RH.payAmt(p) && Math.round(+p.net || 0) === due;
+  const ok = !busy && !badCut && amt != null && !(r.noRate && !p) && !same;
+  const save = () => {
+    if (!ok) return;
+    setBusy(true);
+    act.payWorker(wk.id, r, {
+      amt,
+      net: due,
+      adv: r.adv - delta,
+      cuts: changed.map(x => ({
+        a: x,
+        it: x.it,
+        got: gotOf(x)
+      }))
+    }).then(res => {
+      setBusy(false);
+      if (res !== false) close();
+    });
+  };
+  const unpay = () => {
+    if (!confirm(name + " — পরিশোধ বাতিল করবেন?")) return;
+    act.setPaid(wk.id, r, false).then(res => res !== false && close());
+  };
+  const line = (k, v, cls, sub) => React.createElement("div", {
+    className: "pay-l" + (cls ? " " + cls : "")
+  }, React.createElement("span", null, k, sub ? React.createElement("small", null, sub) : null), React.createElement("b", null, v));
+  return React.createElement(Sheet, {
+    title: "পরিশোধ",
+    sub: name + " · " + payDay(wk.id) + "-এর বেতন",
+    onClose: close,
+    foot: React.createElement(React.Fragment, null, p && React.createElement("button", {
+      className: "btn ghost",
+      onClick: unpay,
+      "data-pay-undo": true
+    }, "পরিশোধ বাতিল"), React.createElement("button", {
+      className: "btn primary",
+      disabled: !ok,
+      onClick: save,
+      "data-pay-save": true
+    }, p ? "সংরক্ষণ" : amt != null ? money(amt) + " দিলাম" : "দিলাম"))
+  }, p && React.createElement("div", {
+    className: "note sm" + (RH.payLeft(p) > 0 ? " warnish" : ""),
+    "data-pay-done": true
+  }, "আগে পরিশোধিত: দেওয়া ", React.createElement("b", null, money(RH.payAmt(p))), RH.payLeft(p) > 0 ? " · বাকি " + money(RH.payLeft(p)) : RH.payLeft(p) < 0 ? " · " + money(-RH.payLeft(p)) + " বেশি" : "", p.at ? " · " + fmtDate(String(p.at).slice(0, 10), {
+    short: true
+  }) : "", p && amt != null && amt < due && React.createElement("div", {
+    className: "note-btns"
+  }, React.createElement("button", {
+    className: "btn sm ok",
+    onClick: () => setAmtS(String(due)),
+    "data-pay-rest": true
+  }, "বাকিটা দিলাম · " + money(due - amt)))), r.noRate && !p && React.createElement("div", {
+    className: "note bad sm"
+  }, "রেট বসানো হয়নি — আগে রেট বসান, তারপর পরিশোধ। ", React.createElement("button", {
+    className: "link sm",
+    onClick: () => open({
+      t: "edit",
+      pin
+    })
+  }, "রেট বসান")), React.createElement("div", {
+    className: "card pad pay-card"
+  }, line("মজুরি", r.noRate ? "রেট বাকি" : money(r.gross), "", r.units ? "হাজিরা " + units(r.units) : ""), plainAdv > 0 && line("অগ্রিম কাটা", "−" + money(plainAdv), "neg"), cuts.map(x => {
+    const g = gotOf(x);
+    const m = sel[x.id] || "full";
+    const lbl = RH.isDue(x) ? "বকেয়া আদায়" : x.it.n > 1 ? "ধারের কিস্তি " + bn(x.it.i) + "/" + bn(x.it.n) : "আগের অগ্রিম";
+    return React.createElement("div", {
+      key: x.id,
+      className: "pay-cut",
+      "data-pay-cut": x.id
+    }, line(lbl, "−" + money(g == null ? 0 : g), "neg", advWhen(x) + (x.it.n > 1 || RH.isDue(x) ? " · মোট " + money(x.total) : "") + (g != null && g < x.it.amt ? " · কাটার কথা " + money(x.it.amt) : "")), React.createElement(Seg, {
+      small: true,
+      value: m,
+      onChange: v => setSel(Object.assign({}, sel, {
+        [x.id]: v
+      })),
+      options: [{
+        v: "full",
+        l: "কাটলাম"
+      }, {
+        v: "none",
+        l: "কাটিনি"
+      }, {
+        v: "part",
+        l: "কিছু"
+      }]
+    }), m === "part" && React.createElement("span", {
+      className: "amt-row sm"
+    }, React.createElement("span", {
+      className: "cur"
+    }, "৳"), React.createElement("input", {
+      className: "amt",
+      type: "text",
+      inputMode: "numeric",
+      value: parts[x.id] || "",
+      placeholder: "০",
+      "aria-label": "কত কাটা হলো",
+      onChange: e => setParts(Object.assign({}, parts, {
+        [x.id]: e.target.value
+      }))
+    })), g == null ? React.createElement("div", {
+      className: "bad-t note-s"
+    }, "০-এর বেশি আর " + money(x.it.amt) + "-এর কম লিখুন") : g < x.it.amt ? React.createElement("div", {
+      className: "warn-t note-s"
+    }, money(x.it.amt - g) + " বকেয়ায় যাবে — পরে যেকোনো সপ্তাহে কাটতে পারবেন") : null);
+  }), r.carry !== 0 && line(r.carry > 0 ? "আগের সপ্তাহের বাকি বেতন" : "আগের সপ্তাহে বেশি দেওয়া", (r.carry > 0 ? "+" : "−") + money(Math.abs(r.carry)), r.carry > 0 ? "pos" : "neg"), line("প্রদেয়", money(due), "tot")), React.createElement("div", {
+    className: "pay-give"
+  }, React.createElement(Field, {
+    label: "কত দিলেন"
+  }, React.createElement("div", {
+    className: "amt-row"
+  }, React.createElement("span", {
+    className: "cur"
+  }, "৳"), React.createElement("input", {
+    className: "amt",
+    type: "text",
+    inputMode: "numeric",
+    value: amtS == null ? String(amt0) : amtS,
+    "aria-label": "কত দিলেন",
+    onChange: e => setAmtS(e.target.value),
+    onKeyDown: e => e.key === "Enter" && save(),
+    "data-pay-amt": true
+  }))), amt == null ? React.createElement("div", {
+    className: "bad-t note-s"
+  }, "টাকার পরিমাণ লিখুন") : left > 0 ? React.createElement("div", {
+    className: "warn-t note-s",
+    "data-pay-left": left
+  }, money(left) + " বাকি থাকবে — পরের সপ্তাহের প্রদেয়তে নিজে যোগ হবে।") : left < 0 ? React.createElement("div", {
+    className: "warn-t note-s",
+    "data-pay-left": left
+  }, money(-left) + " বেশি দিচ্ছেন — পরের সপ্তাহের প্রদেয় থেকে বাদ যাবে।") : null), loan.sum + delta > 0 && React.createElement("div", {
+    className: "pay-loan",
+    "data-pay-loan": true
+  }, "এরপর ধার বাকি ", React.createElement("b", null, money(loan.sum + delta)), loan.due + delta > 0 ? " (বকেয়া " + money(loan.due + delta) + ")" : "", loan.last ? " · শেষ কিস্তি " + payDay(loan.last) : ""));
+}
 function DueSheet({
   ctx,
   pin,
@@ -13447,6 +13852,7 @@ function DueSheet({
   }))), over && React.createElement("div", {
     className: "bad-t sm"
   }, "বকেয়া " + money(d.sum) + "-এর বেশি কাটা যাবে না"), React.createElement(PlanPick, {
+    due: true,
     amt: a,
     baseWk: wk.id,
     v: pv,
@@ -14113,7 +14519,8 @@ function Main({
           p: {
             [pin]: Object.assign({}, pd, {
               adv: Math.round((+pd.adv || 0) - delta),
-              net: Math.round((+pd.net || 0) + delta)
+              net: Math.round((+pd.net || 0) + delta),
+              amt: RH.payAmt(pd)       // v3.59: হাতে যা দেওয়া হয়েছিল তা-ই থাকে; বদলটা বাকি/বেশি হয়ে পরের সপ্তাহে যায়
             })
           }
         }, {
@@ -14135,6 +14542,8 @@ function Main({
           gross: r.gross,
           adv: r.adv,
           units: r.units,
+          amt: r.net,
+          carry: r.carry || 0,
           at: nowIso()
         } : FV.delete()
       }
@@ -14149,6 +14558,8 @@ function Main({
           gross: r.gross,
           adv: r.adv,
           units: r.units,
+          amt: r.net,
+          carry: r.carry || 0,
           at: nowIso()
         } : FV.delete();
       });
@@ -14159,6 +14570,40 @@ function Main({
         merge: true
       }), on ? (label || bn(rows.length) + " জন") + " — পরিশোধিত" : "পরিশোধ বাতিল");
     },
+    // v3.59–3.60: পরিশোধের পাতা — কত দিলেন + কিস্তি কাটা হলো কিনা, একসাথে
+    payWorker: (wid, r, o) => {
+      const b = db.batch();
+      (o.cuts || []).forEach(c => {
+        const full = c.got >= c.it.amt;
+        b.set(db.collection("att_adv").doc(c.a.id), {
+          miss: {
+            [c.it.wk]: full ? FV.delete() : Math.max(0, Math.round(c.got))
+          }
+        }, {
+          merge: true
+        });
+      });
+      const net = Math.round(o.net),
+        amt = Math.max(0, Math.round(o.amt));
+      b.set(db.collection("att_pay").doc(wid), {
+        w: wid,
+        p: {
+          [r.pin]: {
+            net,
+            gross: r.gross,
+            adv: Math.round(o.adv),
+            units: r.units,
+            amt,
+            carry: r.carry || 0,
+            at: nowIso()
+          }
+        }
+      }, {
+        merge: true
+      });
+      const left = net - amt;
+      return run(b.commit(), r.name + " — " + money(amt) + (left > 0 ? " দেওয়া, " + money(left) + " বাকি (পরের সপ্তাহে যোগ হবে)" : left < 0 ? " দেওয়া (" + money(-left) + " বেশি — পরের সপ্তাহে বাদ যাবে)" : " পরিশোধিত"), 7000);
+    },
     setPaidMany: (wid, rows) => {
       const p = {};
       rows.forEach(r => {
@@ -14167,6 +14612,8 @@ function Main({
           gross: r.gross,
           adv: r.adv,
           units: r.units,
+          amt: r.net,
+          carry: r.carry || 0,
           at: nowIso()
         };
       });
@@ -14331,6 +14778,11 @@ function Main({
   }, props, {
     id: sh.id,
     wk: sh.wk
+  })), !loading && sh && sh.t === "pay" && React.createElement(PaySheet, _extends({
+    key: "py" + sh.pin + sh.weekId
+  }, props, {
+    pin: sh.pin,
+    weekId: sh.weekId
   })), !loading && sh && sh.t === "due" && React.createElement(DueSheet, _extends({
     key: "du" + sh.pin
   }, props, {
