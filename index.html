@@ -3342,7 +3342,45 @@ const {
   useCallback,
   Fragment
 } = React;
-const APP_VERSION = "3.60";
+const APP_VERSION = "3.62";
+// v3.62: App Check (reCAPTCHA v3) — OMS-এর একই চাবি; চাবি না থাকলে কিছুই চালু হয় না (আগের মতো)। লাইব্রেরি Google-এর সাইট থেকে আসে
+// (অনলাইনে); দেরিতে চালু হলেও Firebase পরের অনুরোধগুলোতে টোকেন দেয়, তাই অফলাইনে খুললেও নেট এলে ঠিক হয়ে যায়।
+// চাবি এখানে বসবে; তার আগে পরীক্ষা: OMS-এর সিস্টেম ট্যাবের 🛡️ কার্ডে এই ফোনে চাবি দিলে (একই সাইট) এখানেও চালু।
+const HZ_APPCHECK = { key: "", projects: ["rupali-furniture"] };
+function hzAcKey() {
+  let k = HZ_APPCHECK.key;
+  if (!k) { try { const o = JSON.parse(localStorage.getItem("rf_appcheck") || "null"); if (o && o.key) k = o.key; } catch (e) {} }
+  return /^[A-Za-z0-9_-]{20,80}$/.test(String(k || "")) ? k : "";
+}
+function hzAppCheck(app) {
+  try {
+    const k = hzAcKey();
+    if (!k || !app || app.__hzAC) return false;
+    const pid = app.options && app.options.projectId;
+    if (HZ_APPCHECK.projects.indexOf(pid) < 0) return false;
+    const go = () => {
+      try {
+        if (app.__hzAC || !firebase.appCheck) return;
+        firebase.appCheck(app).activate(new firebase.appCheck.ReCaptchaV3Provider(k), true);
+        app.__hzAC = true;
+        if (!document.getElementById("hz-ac-css")) { const s = document.createElement("style"); s.id = "hz-ac-css"; s.textContent = ".grecaptcha-badge{visibility:hidden!important}"; document.head.appendChild(s); }
+      } catch (e) {}
+    };
+    if (firebase.appCheck) { go(); return true; }
+    const load = () => {
+      if (app.__hzAC || document.getElementById("hz-ac-lib")) return;
+      const sc = document.createElement("script");
+      sc.id = "hz-ac-lib";
+      sc.src = "https://www.gstatic.com/firebasejs/10.14.1/firebase-app-check-compat.js";
+      sc.onload = go;
+      sc.onerror = () => { try { sc.remove(); } catch (e) {} };
+      document.head.appendChild(sc);
+    };
+    load();
+    window.addEventListener("online", load);
+    return true;
+  } catch (e) { return false; }
+}
 const DEPTS = RH.DEPTS;
 const BN = "০১২৩৪৫৬৭৮৯";
 const bn = s => String(s == null ? "" : s).replace(/[0-9]/g, d => BN[d]);
@@ -9981,7 +10019,26 @@ function SettingsScreen({
     st: RH.buttonStats(ctx, p, today)
   })).filter(x => x.st.n > 0).sort((a, b) => +a.p - +b.p);
   const btnBad = btn.filter(x => x.st.ok === false);
-  return React.createElement("div", null, React.createElement("div", {
+  // v3.61: \u09AA\u09C1\u09B0\u09A8\u09CB \u09AE\u099C\u09C1\u09B0\u09BF\u09B0 \u09B9\u09BE\u09B0 \u098F\u0996\u09A8\u09CB \u0995\u09B0\u09CD\u09AE\u09C0-\u0996\u09BE\u09A4\u09BE\u09AF\u09BC (OMS-\u098F\u09B0 \u09AE\u09CD\u09AF\u09BE\u09A8\u09C7\u099C\u09BE\u09B0\u0993 \u09AF\u09BE \u09AA\u09A1\u09BC\u09C7\u09A8) \u2014 \u098F\u0995 \u099A\u09BE\u09AA\u09C7 \u09B6\u09C1\u09A7\u09C1-\u09AE\u09BE\u09B2\u09BF\u0995\u09C7\u09B0 \u0996\u09BE\u09A4\u09BE\u09AF\u09BC
+  const legacyN = (st.ratesLegacy || []).length;
+  const [moving, setMoving] = useState(false);
+  return React.createElement("div", null, legacyN > 0 && React.createElement("div", {
+    className: "note warnish",
+    "data-rates-move": legacyN
+  }, React.createElement("b", null, "\uD83D\uDD12 \u09AE\u099C\u09C1\u09B0\u09BF\u09B0 \u09B9\u09BE\u09B0 \u0986\u09B2\u09BE\u09A6\u09BE \u0995\u09B0\u09C1\u09A8"), React.createElement("div", {
+    style: {
+      marginTop: 4,
+      lineHeight: 1.6
+    }
+  }, bn(legacyN) + " \u099C\u09A8 \u0995\u09B0\u09CD\u09AE\u09C0\u09B0 \u09AE\u099C\u09C1\u09B0\u09BF\u09B0 \u09B9\u09BE\u09B0 \u098F\u0996\u09A8 \u0995\u09B0\u09CD\u09AE\u09C0\u09B0 \u0996\u09BE\u09A4\u09BE\u09AF\u09BC \u0986\u099B\u09C7\u0964 \u09A6\u09B2 \u09AC\u09B8\u09BE\u09A8\u09CB\u09B0 \u099C\u09A8\u09CD\u09AF OMS-\u098F\u09B0 \u09AE\u09CD\u09AF\u09BE\u09A8\u09C7\u099C\u09BE\u09B0 \u098F\u0987 \u0996\u09BE\u09A4\u09BE \u09AA\u09A1\u09BC\u09C7\u09A8, \u09A4\u09BE\u0987 \u09B9\u09BE\u09B0\u0993 \u09AA\u09A1\u09BC\u09A4\u09C7 \u09AA\u09BE\u09B0\u09C7\u09A8\u0964 \u098F\u0995 \u099A\u09BE\u09AA\u09C7 \u09B9\u09BE\u09B0\u0997\u09C1\u09B2\u09CB \u09B6\u09C1\u09A7\u09C1-\u09AE\u09BE\u09B2\u09BF\u0995\u09C7\u09B0 \u0996\u09BE\u09A4\u09BE\u09AF\u09BC \u09B8\u09B0\u09AC\u09C7; \u09AC\u09C7\u09A4\u09A8\u09C7\u09B0 \u09B9\u09BF\u09B8\u09BE\u09AC \u09AF\u09C7\u09AE\u09A8 \u0986\u099B\u09C7 \u09A4\u09C7\u09AE\u09A8\u0987 \u09A5\u09BE\u0995\u09AC\u09C7\u0964 \u099A\u09BE\u09AA\u09BE\u09B0 \u0986\u0997\u09C7 \u09AF\u09C7 \u09B8\u09AC \u09AB\u09CB\u09A8 \u09AC\u09BE \u09AA\u09BF\u09B8\u09BF\u09A4\u09C7 \u09B9\u09BE\u099C\u09BF\u09B0\u09BE \u0996\u09CB\u09B2\u09C7\u09A8, \u09B8\u09AC\u0997\u09C1\u09B2\u09CB\u09A4\u09C7 \u098F\u0987 \u09B8\u0982\u09B8\u09CD\u0995\u09B0\u09A3 (v" + APP_VERSION + ") \u09AC\u09B8\u09BF\u09AF\u09BC\u09C7 \u09A8\u09BF\u09A8\u0964"), React.createElement("button", {
+    className: "btn primary",
+    "data-rates-move-btn": true,
+    disabled: moving,
+    onClick: () => {
+      setMoving(true);
+      act.moveRates().then(() => setMoving(false));
+    }
+  }, moving ? "\u09B8\u09B0\u09BE\u09A8\u09CB \u09B9\u099A\u09CD\u099B\u09C7\u2026" : "\uD83D\uDD12 \u098F\u0996\u09A8\u0987 \u0986\u09B2\u09BE\u09A6\u09BE \u0995\u09B0\u09C1\u09A8")), React.createElement("div", {
     className: "sec-title"
   }, "\u09AE\u09BE\u09B2\u09BF\u0995"), React.createElement("div", {
     className: "card pad owner-set"
@@ -13928,7 +13985,11 @@ function DueTable({
   }, money(x.sum))))));
 }
 function useStore(db) {
-  const [workers, setWorkers] = useState(null);
+  const [workersRaw, setWorkers] = useState(null);
+  // v3.61: মজুরির হার শুধু-মালিকের খাতায় (att_rates/{আইডি} = {rates}) — att_workers OMS-এর ম্যানেজারও পড়েন (পদ ও দলের জন্য)।
+  // পুরনো হার att_workers-এ থাকলে দুটো মিলিয়ে দেখানো হয় (একই তারিখ দুই জায়গায় থাকলে att_rates-এরটা)।
+  const [rateDocs, setRateDocs] = useState(null);
+  const [ratesOk, setRatesOk] = useState(false); // সার্ভার থেকে হার এসেছে — তার আগে বেতনের খাতা (att_book) পাঠানো হয় না
   const [settingsDoc, setSettingsDoc] = useState({});
   const [meta, setMeta] = useState(null);
   const [metaK, setMetaK] = useState(null);
@@ -13988,9 +14049,40 @@ function useStore(db) {
         id: d.id
       }, d.data())));
       setWarns(l);
-    }, () => setWarns([])), db.collection("att_meta").doc("vault").onSnapshot(d => setVaultMeta(d.exists ? d.data() : null), () => setVaultMeta(null))];
+    }, () => setWarns([])), db.collection("att_meta").doc("vault").onSnapshot(d => setVaultMeta(d.exists ? d.data() : null), () => setVaultMeta(null)), db.collection("att_rates").onSnapshot({
+      includeMetadataChanges: true
+    }, q => {
+      const m = {};
+      q.forEach(d => {
+        m[d.id] = d.data();
+      });
+      setRateDocs(m);
+      setRatesOk(!q.metadata.fromCache);
+    }, e => {
+      console.warn("att_rates", e && (e.code || e.message));
+      setRateDocs(x => x || {});
+      setRatesOk(false);
+    })];
     return () => offs.forEach(f => f());
   }, [db, onErr]);
+  // v3.61: কর্মী = att_workers + att_rates-এর হার (হার না আসা পর্যন্ত অপেক্ষা, যাতে কারো হার "বাকি" না দেখায়)
+  const workers = useMemo(() => {
+    if (!workersRaw || !rateDocs) return null;
+    const out = {};
+    Object.keys(workersRaw).forEach(p => {
+      const w = workersRaw[p],
+        r = rateDocs[p] && rateDocs[p].rates;
+      out[p] = r && typeof r === "object" ? Object.assign({}, w, {
+        rates: Object.assign({}, w.rates || {}, r)
+      }) : w;
+    });
+    return out;
+  }, [workersRaw, rateDocs]);
+  // এখনো att_workers-এ হার আছে এমন কর্মী (সেটিং-এর "🔒 এখনই আলাদা করুন" কার্ড)
+  const ratesLegacy = useMemo(() => workersRaw ? Object.keys(workersRaw).filter(p => {
+    const r = workersRaw[p] && workersRaw[p].rates;
+    return !!r && typeof r === "object" && Object.keys(r).some(k => r[k] != null && r[k] !== "");
+  }) : [], [workersRaw]);
   useEffect(() => {
     if (!db) return undefined;
     return db.collection("att_days").where("d", ">=", from).onSnapshot({
@@ -14012,6 +14104,8 @@ function useStore(db) {
   const settings = useMemo(() => RH.settings(settingsDoc), [settingsDoc]);
   return {
     workers,
+    ratesLegacy,
+    ratesOk,
     settings,
     settingsDoc,
     meta,
@@ -14340,7 +14434,7 @@ function Main({
     });
   }, [db]);
   useEffect(() => {
-    if (!db || !ctx || !st.daysReady || st.daysCache || st.offline || !books) return undefined;
+    if (!db || !ctx || !st.daysReady || st.daysCache || st.offline || !st.ratesOk || !books) return undefined; // v3.61: হার সার্ভার থেকে না এলে খাতা নয়
     const t = setTimeout(() => {
       const cur = RH.weekOf(ctx.today, ctx.s);
       for (let w = RH.weekOf(BOOK_FROM, ctx.s); w.id <= cur.id; w = RH.weekOf(RH.addDays(w.id, 7), ctx.s)) {
@@ -14370,7 +14464,7 @@ function Main({
       }
     }, 3000);
     return () => clearTimeout(t);
-  }, [db, ctx, books, st.daysReady, st.daysCache, st.offline, st.loadedFrom]);
+  }, [db, ctx, books, st.daysReady, st.daysCache, st.offline, st.ratesOk, st.loadedFrom]);
   const FV = firebase.firestore.FieldValue;
   const dayRef = d => db.collection("att_days").doc(d);
   const listOrDel = (l, f) => Array.isArray(l) && l.length ? l.map(f) : FV.delete();
@@ -14435,9 +14529,53 @@ function Main({
       }, f);
       if ("lead" in g && !g.lead) g.lead = FV.delete();
       if ("lead" in g && g.lead && typeof g.lead !== "object") g.lead = String(g.lead);
+      // v3.61: হার যায় শুধু-মালিকের খাতায় (এই কর্মীর আগের সব হারসহ), কর্মী-খাতার পুরনো হারের ঘর মোছে
+      if (g.rates && typeof g.rates === "object") {
+        const cur = st.workers && st.workers[pin] && st.workers[pin].rates || {};
+        const all = {};
+        Object.keys(cur).forEach(k => {
+          if (cur[k] != null && cur[k] !== "") all[k] = cur[k];
+        });
+        Object.assign(all, g.rates);
+        g.rates = FV.delete();
+        const b = db.batch();
+        b.set(db.collection("att_workers").doc(pin), g, {
+          merge: true
+        });
+        b.set(db.collection("att_rates").doc(pin), {
+          rates: all
+        }, {
+          merge: true
+        });
+        return run(b.commit(), msg || "সংরক্ষিত");
+      }
       return run(db.collection("att_workers").doc(pin).set(g, {
         merge: true
       }), msg || "সংরক্ষিত");
+    },
+    // v3.61: পুরনো হারগুলো att_workers থেকে শুধু-মালিকের খাতায় (att_rates) — একবারের কাজ, মালিকের এক চাপে
+    moveRates: () => {
+      const raw = st.ratesLegacy || [];
+      if (!raw.length) return Promise.resolve(true);
+      const b = db.batch();
+      raw.forEach(p => {
+        const cur = st.workers && st.workers[p] && st.workers[p].rates || {};
+        const all = {};
+        Object.keys(cur).forEach(k => {
+          if (cur[k] != null && cur[k] !== "") all[k] = cur[k];
+        });
+        b.set(db.collection("att_rates").doc(String(p)), {
+          rates: all
+        }, {
+          merge: true
+        });
+        b.set(db.collection("att_workers").doc(String(p)), {
+          rates: FV.delete()
+        }, {
+          merge: true
+        });
+      });
+      return run(b.commit(), "🔒 মজুরির হার আলাদা মালিক-খাতায় সরানো হয়েছে");
     },
     clearLeads: pins => {
       if (!pins.length) return Promise.resolve(true);
@@ -14449,13 +14587,22 @@ function Main({
       }));
       return run(b.commit(), null);
     },
-    delRate: (pin, k) => run(db.collection("att_workers").doc(pin).set({
-      rates: {
-        [k]: FV.delete()
-      }
-    }, {
-      merge: true
-    }), "রেট মুছে ফেলা হয়েছে"),
+    delRate: (pin, k) => {
+      // v3.61: দুই জায়গা থেকেই (পুরনো হার কর্মী-খাতায় থাকতে পারে)
+      const b = db.batch(),
+        del = {
+          rates: {
+            [k]: FV.delete()
+          }
+        };
+      b.set(db.collection("att_rates").doc(pin), del, {
+        merge: true
+      });
+      if ((st.ratesLegacy || []).indexOf(String(pin)) >= 0) b.set(db.collection("att_workers").doc(pin), del, {
+        merge: true
+      });
+      return run(b.commit(), "রেট মুছে ফেলা হয়েছে");
+    },
     saveSettings: (f, msg) => run(db.collection("att_settings").doc("main").set(f, {
       merge: true
     }), msg || "নিয়ম সংরক্ষিত"),
@@ -14893,6 +15040,7 @@ function App() {
     let off = () => {};
     try {
       const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(cfg);
+      hzAppCheck(app); // v3.62: লগইন/ডেটাবেসের আগেই
       const a = app.auth();
       try {
         a.useDeviceLanguage();
