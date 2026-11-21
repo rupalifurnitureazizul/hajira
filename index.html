@@ -3342,11 +3342,11 @@ const {
   useCallback,
   Fragment
 } = React;
-const APP_VERSION = "3.63";
+const APP_VERSION = "3.65";
 // v3.62: App Check (reCAPTCHA v3) — OMS-এর একই চাবি; চাবি না থাকলে কিছুই চালু হয় না (আগের মতো)। লাইব্রেরি Google-এর সাইট থেকে আসে
 // (অনলাইনে); দেরিতে চালু হলেও Firebase পরের অনুরোধগুলোতে টোকেন দেয়, তাই অফলাইনে খুললেও নেট এলে ঠিক হয়ে যায়।
 // চাবি এখানে বসবে; তার আগে পরীক্ষা: OMS-এর সিস্টেম ট্যাবের 🛡️ কার্ডে এই ফোনে চাবি দিলে (একই সাইট) এখানেও চালু।
-const HZ_APPCHECK = { key: "", projects: ["rupali-furniture"] };
+const HZ_APPCHECK = { ent: true, key: "6LcUfisuAAAAAGsMSH4f5mBtP6yZBIKmbheS8hKa", projects: ["rupali-furniture"] }; // v3.64: মালিকের site key; v3.65: Fraud Defense (reCAPTCHA Enterprise)
 function hzAcKey() {
   let k = HZ_APPCHECK.key;
   if (!k) { try { const o = JSON.parse(localStorage.getItem("rf_appcheck") || "null"); if (o && o.key) k = o.key; } catch (e) {} }
@@ -3361,7 +3361,8 @@ function hzAppCheck(app) {
     const go = () => {
       try {
         if (app.__hzAC || !firebase.appCheck) return;
-        firebase.appCheck(app).activate(new firebase.appCheck.ReCaptchaV3Provider(k), true);
+        const P = HZ_APPCHECK.ent === false ? firebase.appCheck.ReCaptchaV3Provider : firebase.appCheck.ReCaptchaEnterpriseProvider; // v3.65
+        firebase.appCheck(app).activate(new P(k), true);
         app.__hzAC = true;
         if (!document.getElementById("hz-ac-css")) { const s = document.createElement("style"); s.id = "hz-ac-css"; s.textContent = ".grecaptcha-badge{visibility:hidden!important}"; document.head.appendChild(s); }
       } catch (e) {}
