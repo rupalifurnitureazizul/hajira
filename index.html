@@ -3342,7 +3342,7 @@ const {
   useCallback,
   Fragment
 } = React;
-const APP_VERSION = "3.62";
+const APP_VERSION = "3.63";
 // v3.62: App Check (reCAPTCHA v3) — OMS-এর একই চাবি; চাবি না থাকলে কিছুই চালু হয় না (আগের মতো)। লাইব্রেরি Google-এর সাইট থেকে আসে
 // (অনলাইনে); দেরিতে চালু হলেও Firebase পরের অনুরোধগুলোতে টোকেন দেয়, তাই অফলাইনে খুললেও নেট এলে ঠিক হয়ে যায়।
 // চাবি এখানে বসবে; তার আগে পরীক্ষা: OMS-এর সিস্টেম ট্যাবের 🛡️ কার্ডে এই ফোনে চাবি দিলে (একই সাইট) এখানেও চালু।
@@ -3762,9 +3762,15 @@ function findConfig() {
         if (c) return c;
       }
     }
+    // v3.63: কিছু না থাকলে ব্যবসার প্রজেক্ট (নিজে সংযোগ মুছে থাকলে নয় — তখন সেটআপ পাতা)
+    if (localStorage.getItem("rh_cfg_reset") !== "1") return HZ_FB_CFG;
   } catch (e) {}
   return null;
 }
+// v3.63: ব্যবসার Firebase প্রজেক্টের কোড (মালিকের দেওয়া, ২১ নভেম্বর ২০২৬) — নতুন ডিভাইসে আর কোড পেস্ট করতে হয় না।
+// গোপন নয় (প্রতিটা Firebase ওয়েব অ্যাপে থাকে); তথ্য খোলে শুধু মালিকের Gmail-এ, নিয়ম অনুযায়ী।
+const HZ_FB_CFG = { apiKey: "AIzaSyCsJGARWfQYLScEfP5imcdsgYfUWSHt7B4", authDomain: "rupali-furniture.firebaseapp.com", projectId: "rupali-furniture",
+  storageBucket: "rupali-furniture.firebasestorage.app", messagingSenderId: "52240946732", appId: "1:52240946732:web:bdc63304e0ccd41398e389" };
 const I = {
   sun: React.createElement("path", {
     d: "M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.41-1.41M4.93 19.07l1.41-1.41m0-11.32L4.93 4.93m14.14 14.14-1.41-1.41M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
@@ -10314,7 +10320,34 @@ function SettingsScreen({
     onClick: () => {
       if (confirm("এই ডিভাইস থেকে লগআউট করবেন? আবার ঢুকতে Google দিয়ে লগইন লাগবে।")) hzSignOut();
     }
-  }, "লগআউট")), React.createElement(HzInstallCard, null));
+  }, "লগআউট")), React.createElement(HzInstallCard, null), React.createElement(HzShareCard, null));
+}
+/* v3.63: "📤 অ্যাপের লিংক পাঠান" — প্রজেক্টের কোড অ্যাপেই আছে, তাই নিজের অন্য ফোন/কম্পিউটারে শুধু লিংক খুলে মালিকের Gmail দিয়ে লগইন */
+function HzShareCard() {
+  let url = "";
+  try { url = location.origin + location.pathname; } catch (e) {}
+  const [done, setDone] = useState("");
+  if (!url) return null;
+  const msg = "রূপালী হাজিরা অ্যাপ: " + url + "\nChrome-এ খুলে মালিকের Gmail দিয়ে লগইন করুন (হাজিরা অ্যাপ শুধু মালিকের জন্য)।";
+  const toast = t => { setDone(t); setTimeout(() => setDone(""), 2500); };
+  const fallback = () => {
+    try { const t = document.createElement("textarea"); t.value = msg; t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select(); document.execCommand("copy"); document.body.removeChild(t); toast("লিংক কপি হয়েছে"); } catch (e) {}
+  };
+  const copy = () => { try { navigator.clipboard.writeText(msg).then(() => toast("লিংক কপি হয়েছে"), fallback); } catch (e) { fallback(); } };
+  const share = async () => {
+    try { if (navigator.share) { await navigator.share({ title: "রূপালী হাজিরা", text: msg }); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+    copy();
+  };
+  return React.createElement("div", {
+    className: "card pad",
+    "data-share-card": "1"
+  }, React.createElement("div", { style: { fontWeight: 700 } }, "📤 অ্যাপের লিংক পাঠান"),
+    React.createElement("div", { className: "muted sm", style: { marginTop: 2 } }, "নিজের অন্য ফোন বা কম্পিউটারে শুধু এই লিংক খুলে মালিকের Gmail দিয়ে লগইন — আর কোনো কোড লাগে না। (ম্যানেজার হাজিরা অ্যাপে ঢুকতে পারেন না।)"),
+    React.createElement("div", { "data-share-url": "1", className: "sm", style: { marginTop: 6, wordBreak: "break-all", userSelect: "all" } }, url),
+    React.createElement("div", { style: { display: "flex", gap: 6, marginTop: 8, flexWrap: "wrap" } },
+      React.createElement("button", { className: "btn sm primary", "data-share-app": "1", onClick: share }, "📤 পাঠান"),
+      React.createElement("button", { className: "btn sm", "data-share-copy": "1", onClick: copy }, "কপি")),
+    done && React.createElement("div", { className: "sm", "data-share-done": "1", style: { color: "#166534", marginTop: 6 } }, "✓ " + done));
 }
 /* v3.54: সেটিংসে "ফোনে অ্যাপ হিসেবে বসান" — Chrome অনুমতি দিলে এক চাপে; না দিলে (যেমন iPhone) কীভাবে বসাবেন লেখা থাকে।
    আগে থেকে বসানো থাকলে বা হোম স্ক্রিন থেকে খোলা হলে দেখায় না। */
@@ -13544,7 +13577,12 @@ function Setup({
   }, err), React.createElement("button", {
     className: "btn primary",
     onClick: go
-  }, "\u09B8\u0982\u09AF\u09CB\u0997 \u0995\u09B0\u09C1\u09A8")));
+  }, "\u09B8\u0982\u09AF\u09CB\u0997 \u0995\u09B0\u09C1\u09A8"), React.createElement("button", {
+    className: "btn",
+    "data-setup-main": "1",
+    style: { marginTop: 10 },
+    onClick: () => onSave(HZ_FB_CFG)
+  }, "\u09B0\u09C2\u09AA\u09BE\u09B2\u09C0 \u09AB\u09BE\u09B0\u09CD\u09A8\u09BF\u099A\u09BE\u09B0\u09C7\u09B0 \u09AE\u09C2\u09B2 \u09AA\u09CD\u09B0\u099C\u09C7\u0995\u09CD\u099F\u09C7 \u09B8\u0982\u09AF\u09CB\u0997 (\u098F\u0995 \u099A\u09BE\u09AA\u09C7)")));
 }
 function AdvCutSheet({
   ctx,
@@ -15083,12 +15121,14 @@ function App() {
   const save = c => {
     try {
       localStorage.setItem(CFG_KEY, JSON.stringify(c));
+      localStorage.removeItem("rh_cfg_reset"); // v3.63
     } catch (e) {}
     setCfg(c);
   };
   const reset = () => {
     try {
       localStorage.removeItem(CFG_KEY);
+      localStorage.setItem("rh_cfg_reset", "1"); // v3.63: নিজে মুছলে সেটআপ পাতা (মূল প্রজেক্টে নিজে থেকে ফেরে না)
     } catch (e) {}
     location.reload();
   };
